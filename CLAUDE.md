@@ -7,8 +7,10 @@
 ## 무엇이 어디에
 | 경로 | 무엇 |
 |---|---|
-| `index.html` | **실제 사이트 첫 판**(한 파일). 한 페이지 세 화면: 처음(`#home`, 클라우드·월드 큰 버튼 두 개 + 채널 버튼 다섯) · 클라우드(`#cloud`, 책과 자료) · 월드(`#world`, 이야기와 월드). 주소 뒤 `#`으로 화면을 고른다. 900px 넘으면 PC 배치. 글꼴은 Google Fonts |
+| `index.html` | **화면**(2026-10-21 개편판). 주소 뒤 `#`으로 화면을 고른다: `#/` 처음(인사 · 클라우드/앱/월드 썸네일 카드 · 채널 다섯, 로고까지 눌림) · `#/cloud`·`#/app`·`#/world` 카드 목록 · `#/<칸>/<slug>` 소개 페이지(바로 들어가기·소개·화면). 옛 주소 `#cloud`·`#world`도 열린다. 720px·1040px에서 넓어짐. 글꼴 Google Fonts |
+| `data.js` | **내용 전부**(채널 다섯, 칸 셋의 카드). 카드를 더하거나 고칠 때는 이 파일만 고친다. 맨 위 주석에 카드 한 장의 칸 설명 |
 | `assets/humanssam.png` | 휴먼쌤 캐릭터 그림(옛 시안의 `MARK` base64를 꺼낸 것) |
+| `assets/thumbs/` · `assets/shots/` · `assets/ch/` | 카드 그림(800x500) · 소개 페이지 화면 그림 · 채널 로고(96px). 그림은 노션 예비 사이트(hot-spur-030.notion.site)와 같은 것 |
 | `drafts/sian-2.html` | 옛 시안 2차(D·E·F·PC). 참고용, 사이트에 연결하지 않음 |
 
 - 휴먼쌤 결정(2026-10-15): 옛 시안 2차(`drafts/sian-2.html`)를 보고 "너무 좋다. 지금대로". 채널 버튼 다섯(네이버 프리미엄 콘텐츠·유튜브 등)과 유튜브 주소가 반영된 판이다. 실제 사이트로 만들 때 D·E·F 중 무엇을 기본 화면으로 할지는 휴먼쌤에게 묻는다(시안 이름 'D안'이 확정안으로 불린다).
@@ -16,7 +18,7 @@
 
 ## 배포
 - 공개 주소 **https://human-teacher.com**. 2026-10-19 GitHub Pages(`main`, 맨 위 폴더, `CNAME`)로 공개.
-- 2026-10-20 GitHub 계정이 정지되어 Pages가 멈춤 → **Cloudflare Pages 프로젝트 `human-teacher`**(직접 올리기)로 옮김. 올리는 파일은 `index.html`·`assets/` 둘뿐(`CLAUDE.md`·`CNAME`·`drafts/`는 올리지 않음). zip으로 올릴 때는 안의 경로 구분자가 `/`여야 한다(`\`이면 하위 폴더가 깨짐). 같은 날 도메인 DNS를 Cloudflare로 옮기고(네임서버 변경) `human-teacher.com`·`www.human-teacher.com`을 이 프로젝트의 사용자 지정 도메인으로 붙임(HTTPS 확인). 고칠 때는 두 파일을 다시 묶어 Pages에 새 배포로 올린다.
+- 2026-10-20 GitHub 계정이 정지되어 Pages가 멈춤 → **Cloudflare Pages 프로젝트 `human-teacher`**(직접 올리기)로 옮김. 올리는 파일은 `index.html`·`data.js`·`assets/` 셋뿐(`CLAUDE.md`·`CNAME`·`drafts/`·`_work/`는 올리지 않음). zip으로 올릴 때는 안의 경로 구분자가 `/`여야 한다(`\`이면 하위 폴더가 깨짐). 같은 날 도메인 DNS를 Cloudflare로 옮기고(네임서버 변경) `human-teacher.com`·`www.human-teacher.com`을 이 프로젝트의 사용자 지정 도메인으로 붙임(HTTPS 확인). 고칠 때는 두 파일을 다시 묶어 Pages에 새 배포로 올린다.
 - 지금 쓰는 링크 모음 리틀리(litt.ly/humanteacher)는 그대로 둔다. 이 사이트가 그것을 대신할지는 휴먼쌤이 정한다.
 - 화면 확인은 로컬로: `python3 -m http.server 8765` 뒤 `http://127.0.0.1:8765/`.
 
@@ -38,4 +40,5 @@
 - 이어서(2026-10-19, PC): 월드 네 곳(광장 `my-3d-world/` · AI가 지은 섬 `my-3d-world/ai/` · 가상융합교육 캠퍼스 `my-3d-world/xr/` · 프랑스 한글학교 로비 `hangul-france/`, 모두 humanteacher89-cell.github.io, 응답 200 확인)과 스레드(threads.net/@human_teacher_, 인스타와 같은 이름)를 링크로 바꿈. 375px 화면 가로 넘침 없음.
 - 휴먼쌤 확인: PR #1의 확인 질문 셋(① 부모백과 '준비 중' ② 인스타그램 ＠human_teacher_ ③ 월드 네 곳·스레드 주소)에 "3개 다 맞아". 워크북은 10-19에 4종으로 고침. 공개·도메인 연결은 10-19에 끝남.
 - 이어서(2026-10-20, PC): GitHub 정지로 github.io 주소가 모두 멈춰 월드 네 곳 링크를 Cloudflare 주소로 바꿈(광장 `humanssaem-world.pages.dev/` · AI가 지은 섬 `/ai/` · 가상융합교육 캠퍼스 `/xr/` · 프랑스 한글학교 로비 `humanssaem-hangul-france.pages.dev/`, 각 페이지 제목 확인). 스레드는 계정 페이지를 열어 휴먼쌤 계정임을 확인하고 주소를 `threads.com`으로(옛 `threads.net`은 넘어감). 사이트를 Cloudflare Pages로 옮기고 human-teacher.com·www를 다시 연결함(두 주소 HTTPS 200).
-- 남은 일: ① 책·워크북·강의노트가 나오면 '준비 중'을 '열림'+주소로 ② GitHub이 풀리면 이 커밋들을 올린다. 사이트를 Cloudflare에 둘지 GitHub Pages로 돌릴지는 그때 휴먼쌤이 정한다(지금 도메인은 Cloudflare로 가 있어 GitHub Pages 쪽 `CNAME`은 쓰이지 않음)
+- 이어서(2026-10-21, PC, 브랜치 `site/notion-like-rebuild`): 휴먼쌤 "노션처럼 이 사이트를 구축해야돼 … 단, '만든것한눈에보기'는 넣지 말고"·"소개 페이지 거치고, 노션은 예비로" → 노션 예비 사이트와 같은 짜임으로 개편. 화면 `index.html` + 내용 `data.js`로 나눔. 칸 셋(클라우드 7·앱 8·월드 10) 카드와 소개 페이지, 채널 로고. 슬로건 줄은 노션처럼 뺌. 링크 23개 200 확인, 375px 가로 넘침 없음. 월드 글·그림은 노션에서 그대로 옮김(월드 내용은 XR개발부 몫).
+- 남은 일: ⓪ 개편판 배포는 휴먼쌤 "올려" 뒤(Cloudflare Pages `human-teacher`에 `index.html`·`data.js`·`assets/`). 노션 예비 사이트와 내용이 갈리면 이 저장소(`data.js`)가 정본 ① 책·워크북·강의노트가 나오면 '준비 중'을 '열림'+주소로 ② GitHub이 풀리면 이 커밋들을 올린다. 사이트를 Cloudflare에 둘지 GitHub Pages로 돌릴지는 그때 휴먼쌤이 정한다(지금 도메인은 Cloudflare로 가 있어 GitHub Pages 쪽 `CNAME`은 쓰이지 않음)
