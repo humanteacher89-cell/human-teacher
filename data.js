@@ -134,7 +134,7 @@ window.SITE = {
                       "휴먼쌤이 어떤 선생님인지 이야기로 만나는 첫 월드예요. 3분쯤 선택지를 고르며 휴먼쌤의 어제·오늘·내일을 따라가요. 이야기가 끝나면 로봇 리니를 따라 광장으로 나가 직접 걸어 다니고, 섬 출발점에서 가상융합교육 섬·AI가 지은 섬·프랑스 한글학교 섬으로 떠날 수 있어요. 두 번째 방문부터는 \u0027광장으로 바로 가기\u0027로 곧장 들어가요."
                   ],
         "thumb":  "assets/thumbs/world-plaza.jpg",
-        "shot":  "assets/shots/world-plaza.jpg",
+        "shot":  "",
         "shotAlt":  "휴먼쌤이 누구인가 — 첫 화면"
     },
     {
@@ -149,7 +149,7 @@ window.SITE = {
                       "선생님들이 가상융합교육을 직접 걸으며 알아보는 캠퍼스예요. 개념관·장비관·수업 사례관·제작 공방·미래 전망대·안전·윤리 등대, 관 여섯 곳을 차례로 둘러봐요. 오른쪽 위 \u0027연수 수첩\u0027에 도장 여섯 칸을 모으면 수료증을 받을 수 있어요."
                   ],
         "thumb":  "assets/thumbs/world-xr.jpg",
-        "shot":  "assets/shots/world-xr.jpg",
+        "shot":  "",
         "shotAlt":  "가상융합교육 캠퍼스 — 융합 광장"
     },
     {
@@ -164,7 +164,7 @@ window.SITE = {
                       "사람처럼 말하는 AI가 아니라, AI가 실제로 일하는 방식대로 사는 마을이에요. 마을 주민의 부탁 하나를 따라가고, 마을·도서관·패턴·시장·꿈 공방·호수 여섯 구역을 돌며 도장을 모아요. 도장을 다 모으면 \u0027명예 주민증\u0027을 받아요."
                   ],
         "thumb":  "assets/thumbs/world-ai.jpg",
-        "shot":  "assets/shots/world-ai.jpg",
+        "shot":  "",
         "shotAlt":  "AI가 지은 섬 — 깨어나는 마을"
     },
     {
@@ -179,7 +179,7 @@ window.SITE = {
                       "프랑스에 있는 한글학교 17곳을 한 지도에 모은 온라인 로비예요. 지도에서 학교를 찾아 교실에 들어가면 교장 선생님과 한국어로 짧게 이야기를 나누고, 책·사진첩·TV를 둘러볼 수 있어요. 같은 시간에 들어온 사람들끼리 서로 모습이 보여요."
                   ],
         "thumb":  "assets/thumbs/world-hangul-france.jpg",
-        "shot":  "assets/shots/world-hangul-france.jpg",
+        "shot":  "",
         "shotAlt":  "프랑스 한글학교 로비 — 만남의 광장"
     },
     {
@@ -194,7 +194,7 @@ window.SITE = {
                       "첫 월드 \u0027휴먼쌤이 누구인가\u0027를 VR로 옮긴 판이에요. 3분쯤 휴먼쌤의 이야기를 따라가며 선택지를 골라요. 헤드셋에서는 손에서 나가는 빛줄기로 가리키고 방아쇠를 당겨 골라요."
                   ],
         "thumb":  "assets/thumbs/world-vr1.jpg",
-        "shot":  "assets/shots/world-vr1.jpg",
+        "shot":  "",
         "shotAlt":  "월드 1 VR — 안내자와 첫 만남"
     },
     {
@@ -209,7 +209,7 @@ window.SITE = {
                       "한국어를 처음 배우는 분을 위한 학습맵이에요. 한옥 부엌에서 물건을 눌러 이름을 듣고, 한복 입은 집주인 하나가 말하는 대로 밥상을 차려요. 상을 다 차리면 안방으로 옮겨 하나와 같이 먹어요. 낱말 10개와 인사말을 배우고, 한 번에 8분쯤 걸려요."
                   ],
         "thumb":  "assets/thumbs/world-hanok.jpg",
-        "shot":  "assets/shots/world-hanok.jpg",
+        "shot":  "",
         "shotAlt":  "한옥 부엌에서 하나를 만나는 첫 화면",
         "shotNote":  "3D 소품: 국가유산청(Korea Heritage Service) · CC BY 4.0"
     },
@@ -225,7 +225,7 @@ window.SITE = {
                       "현실의 학교와 가상 세계가 만나는 광장이에요. 왼쪽은 학교 교정, 오른쪽은 가상 구역이고, 가운데 고리는 두 세계를 잇는 문이에요. 걸어 다니며 둘러보고, 로봇 리니에게 말을 걸어 보세요."
                   ],
         "thumb":  "assets/thumbs/world-fusion-plaza.jpg",
-        "shot":  "assets/shots/world-fusion-plaza.jpg",
+        "shot":  "",
         "shotAlt":  "융합 광장 — 교정과 가운데 고리"
     },
     {
