@@ -203,7 +203,7 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
 </div>
 
 <!-- data.js를 고치면 아래 v= 숫자를 올린다(브라우저·CDN이 옛 내용을 기억하지 않게) -->
-<script src="data.js?v=20261024e"></script>
+<script src="data.js?v=20261024f"></script>
 <script>
 (function(){
   var S = window.SITE, main = document.getElementById('main'), ORDER = ['cloud','app','world'];
@@ -287,7 +287,7 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
     // 바로 갈 주소가 없고 영상이 이 페이지에 있으면, 버튼은 아래 영상 목록으로 내려 준다
     else if (it.videos) h += '<button class="enter" type="button" data-jump="vids">영상 ' + it.videos.length + '편 보기 <span aria-hidden="true">›</span></button>';
     else h += '<div class="wait">' + esc(it.status) + '</div>';
-    if (it.worksheet) h += '<a class="sheet" href="' + esc(it.worksheet) + '" download="' + esc(it.name.split(' — ')[0]) + ' 활동지.pdf">' + SHEET + '학생 활동지 내려받기 <small>A4 1쪽 · PDF</small></a>';
+    if (it.worksheet) h += '<a class="sheet" href="' + esc(it.worksheet) + '" download="' + esc(it.name.split(' — ')[0]) + ' 활동지.pdf">' + SHEET + '학생 활동지 내려받기 <small>' + esc(it.sheetNote || 'A4 1쪽 · PDF') + '</small></a>';
     if (it.note) h += '<div class="info">' + INFO + '<span>' + esc(it.note) + '</span></div>';
     h += '</div></article>';
     if (it.shotNote) h += '<p class="fnote">' + esc(it.shotNote) + '</p>';
