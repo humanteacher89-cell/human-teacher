@@ -203,7 +203,7 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
 </div>
 
 <!-- data.js를 고치면 아래 v= 숫자를 올린다(브라우저·CDN이 옛 내용을 기억하지 않게) -->
-<script src="data.js?v=20261024d"></script>
+<script src="data.js?v=20261024e"></script>
 <script>
 (function(){
   var S = window.SITE, main = document.getElementById('main'), ORDER = ['cloud','app','world'];
@@ -283,7 +283,7 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
       h += '</div>';
     }
     // 바로 갈 주소가 없고 묶음이면 아래 목록으로 내려 주는 버튼
-    else if (it.children) h += '<button class="enter" type="button" data-jump="kids">' + esc(it.name) + ' ' + it.children.length + '곳 고르기 <span aria-hidden="true">›</span></button>';
+    else if (it.children) h += '<button class="enter" type="button" data-jump="kids">들어갈 곳 고르기 <span aria-hidden="true">›</span></button>';
     // 바로 갈 주소가 없고 영상이 이 페이지에 있으면, 버튼은 아래 영상 목록으로 내려 준다
     else if (it.videos) h += '<button class="enter" type="button" data-jump="vids">영상 ' + it.videos.length + '편 보기 <span aria-hidden="true">›</span></button>';
     else h += '<div class="wait">' + esc(it.status) + '</div>';
@@ -298,7 +298,7 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
     h += '</section>';
 
     if (it.children) {
-      h += '<section class="block" id="kids"><h2>' + esc(it.name) + ' ' + it.children.length + '곳</h2><ul class="grid kids">';
+      h += '<section class="block" id="kids"><h2>' + esc(it.name) + '</h2><ul class="grid kids">';
       it.children.forEach(function(c){ var ch = byslug(s, c); if (ch) h += card(k, ch); });
       h += '</ul></section>';
     }
