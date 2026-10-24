@@ -85,6 +85,9 @@ main{padding:6px 0 40px}
 .card p{margin:0;font-size:13px;color:var(--soft);word-break:keep-all}
 .st{justify-self:start;font-size:11px;border-radius:999px;padding:1px 9px;background:var(--tint);color:var(--soft)}
 .st.ok{background:var(--okbg);color:var(--ok)}
+.st.grp{background:#fff;border:1.5px solid var(--brown);color:var(--brown)}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.block .kids{margin-top:4px}
 .more{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;color:var(--soft);border-top:2px dashed var(--line);padding-top:14px}
 .more a{font-family:"Jua",sans-serif;font-size:16px;color:var(--brown);text-decoration:none;border:2px solid var(--brown);border-radius:999px;padding:4px 14px}
 
@@ -200,7 +203,7 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
 </div>
 
 <!-- data.js를 고치면 아래 v= 숫자를 올린다(브라우저·CDN이 옛 내용을 기억하지 않게) -->
-<script src="data.js?v=20261024c"></script>
+<script src="data.js?v=20261024d"></script>
 <script>
 (function(){
   var S = window.SITE, main = document.getElementById('main'), ORDER = ['cloud','app','world'];
@@ -238,13 +241,19 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
       + '<div class="head ' + s.color + '"><h1>' + esc(s.title) + '</h1><div class="sub">' + esc(s.sub) + '</div><p>' + esc(s.lead) + '</p></div>';
     if (s.story) h += '<h2 class="h2">이야기</h2><div class="story">' + chip(s.story.status) + ' <b>' + esc(s.story.name) + '</b><br>' + esc(s.story.one) + '</div><h2 class="h2">3D 월드와 체험</h2>';
     h += '<p class="hint">' + esc(s.hint) + '</p><ul class="grid">';
-    s.items.forEach(function(it){
-      h += '<li><a class="card" href="#/' + k + '/' + esc(it.slug) + '">'
-        + (it.thumb ? '<img src="' + esc(it.thumb) + '" alt="" loading="lazy" width="800" height="500">' : '<img alt="">')
-        + '<span class="tx"><b>' + esc(it.name) + '</b>' + chip(it.status) + '<p>' + esc(it.one) + '</p></span></a></li>';
-    });
+    s.items.forEach(function(it){ if (!it.parent) h += card(k, it); });
     return h + '</ul>' + others(k) + '</div>';
   }
+
+  // 카드 한 장. 묶음(children)이 있으면 '모음 · N곳' 표시를 더한다. 묶음에 속한 것(parent)은 목록에서 숨기고 묶음 페이지에서 보여 준다.
+  function card(k, it){
+    return '<li><a class="card" href="#/' + k + '/' + esc(it.slug) + '">'
+      + (it.thumb ? '<img src="' + esc(it.thumb) + '" alt="" loading="lazy" width="800" height="500">' : '<img alt="">')
+      + '<span class="tx"><b>' + esc(it.name) + '</b><span class="chips">' + chip(it.status)
+      + (it.children ? '<span class="st grp">모음 · ' + it.children.length + '곳</span>' : '') + '</span>'
+      + '<p>' + esc(it.one) + '</p></span></a></li>';
+  }
+  function byslug(s, slug){ return s.items.filter(function(x){ return x.slug === slug; })[0]; }
 
   // 브라우저 창 모양 액자. 주소 칸에는 그 앱·월드의 도메인을 보여 준다.
   function frame(img, url, alt){
@@ -259,10 +268,12 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
   function detail(k, it){
     var s = S.sections[k], tags = (S.tags || {})[it.slug] || [];
     var firstUrl = it.url || (it.enterLinks && it.enterLinks[0].url) || '';
-    var h = '<div class="view dv"><a class="back" href="#/' + k + '">‹ ' + esc(s.title) + ' 목록</a>'
+    var par = it.parent ? byslug(s, it.parent) : null;
+    var h = '<div class="view dv">'
+      + (par ? '<a class="back" href="#/' + k + '/' + esc(par.slug) + '">‹ ' + esc(par.name) + '</a>' : '<a class="back" href="#/' + k + '">‹ ' + esc(s.title) + ' 목록</a>')
       + '<article class="hero ' + s.color + '">'
       + (it.thumb ? frame(it.thumb, firstUrl, it.name) : '')
-      + '<div class="htx"><div class="kind">' + chip(it.status) + esc(s.title) + ' · ' + esc(s.sub) + '</div>'
+      + '<div class="htx"><div class="kind">' + chip(it.status) + esc(s.title) + ' · ' + esc(par ? par.name : s.sub) + '</div>'
       + '<h1>' + esc(it.name) + '</h1><p class="one">' + esc(it.one) + '</p>';
     if (tags.length) h += '<ul class="tags">' + tags.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
     if (it.url) h += '<a class="enter"' + ext(it.url) + '>바로 들어가기 <span aria-hidden="true">›</span></a>';
@@ -271,6 +282,8 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
       it.enterLinks.forEach(function(l){ h += '<a class="enter sm"' + ext(l.url) + '>' + esc(l.label) + ' <span aria-hidden="true">›</span></a>'; });
       h += '</div>';
     }
+    // 바로 갈 주소가 없고 묶음이면 아래 목록으로 내려 주는 버튼
+    else if (it.children) h += '<button class="enter" type="button" data-jump="kids">' + esc(it.name) + ' ' + it.children.length + '곳 고르기 <span aria-hidden="true">›</span></button>';
     // 바로 갈 주소가 없고 영상이 이 페이지에 있으면, 버튼은 아래 영상 목록으로 내려 준다
     else if (it.videos) h += '<button class="enter" type="button" data-jump="vids">영상 ' + it.videos.length + '편 보기 <span aria-hidden="true">›</span></button>';
     else h += '<div class="wait">' + esc(it.status) + '</div>';
@@ -283,6 +296,12 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
     (it.intro || []).forEach(function(p){ h += '<p>' + esc(p) + '</p>'; });
     (it.links || []).forEach(function(l){ h += '<p><a class="ln"' + ext(l.url) + '>' + esc(l.label) + ' <span aria-hidden="true">›</span></a></p>'; });
     h += '</section>';
+
+    if (it.children) {
+      h += '<section class="block" id="kids"><h2>' + esc(it.name) + ' ' + it.children.length + '곳</h2><ul class="grid kids">';
+      it.children.forEach(function(c){ var ch = byslug(s, c); if (ch) h += card(k, ch); });
+      h += '</ul></section>';
+    }
 
     if (it.videos) {
       h += '<section class="block" id="vids"><h2>영상 ' + it.videos.length + '편</h2>';
@@ -306,9 +325,12 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
       h += '<section class="block"><h2>화면</h2>' + frame(it.shot, firstUrl, it.shotAlt || it.name + ' 화면') + '</section>';
     }
 
-    var rest = s.items.filter(function(x){ return x.slug !== it.slug; });
+    // 묶음 안의 것이면 같은 묶음의 다른 곳을, 아니면 칸의 다른 것(묶음 안의 것은 빼고)을 넘겨 본다
+    var rest = par
+      ? par.children.filter(function(c){ return c !== it.slug; }).map(function(c){ return byslug(s, c); }).filter(Boolean)
+      : s.items.filter(function(x){ return x.slug !== it.slug && !x.parent; });
     if (rest.length) {
-      h += '<section class="rel"><h2>' + esc(s.title) + '의 다른 것</h2><ul class="rail">';
+      h += '<section class="rel"><h2>' + esc(par ? par.name + '의 다른 곳' : s.title + '의 다른 것') + '</h2><ul class="rail">';
       rest.forEach(function(x){
         h += '<li><a class="card" href="#/' + k + '/' + esc(x.slug) + '"><img src="' + esc(x.thumb) + '" alt="" loading="lazy" width="800" height="500"><span class="tx"><b>' + esc(x.name) + '</b>' + chip(x.status) + '</span></a></li>';
       });
