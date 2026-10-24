@@ -1,7 +1,9 @@
 /* 휴먼티처닷컴 내용. 카드를 더하거나 고칠 때는 이 파일만 고친다.
    카드 한 장: slug(주소 이름, 영어 소문자) · name · status('열림' | '준비 중') · one(카드 한 줄)
    · url(바로 들어가기 주소, 준비 중이면 '') · note(들어가기 아래 회색 글) · intro(소개 문단 배열)
-   · thumb(카드 그림 800x500) · shot(화면 그림, 없으면 '') · links(덧붙일 링크, 없어도 됨) */
+   · thumb(카드 그림 800x500) · shot(화면 그림, 없으면 '') · links(덧붙일 링크, 없어도 됨)
+   · videos(소개 페이지에서 바로 재생할 영상 목록, 없어도 됨) · warn(영상 위 안내 문단 배열, 없어도 됨)
+   · worksheet(학생 활동지 PDF 주소, 없어도 됨) */
 window.SITE = {
   channels: [
     { name: '네프콘', desc: '실천 자료', url: 'https://contents.premium.naver.com/humanteacher/humanteacher89', icon: 'assets/ch/naver.png' },
@@ -14,8 +16,8 @@ window.SITE = {
   sections: {
     cloud: {
       title: '클라우드', sub: '책과 자료', color: 'cloud', thumb: 'assets/thumbs/home-cloud.jpg',
-      lead: '휴먼쌤의 글, 책, 워크북, 강의노트',
-      card: '책과 자료 · 부모백과, 책, 워크북, 강의노트',
+      lead: '휴먼쌤의 글, 책, 워크북, 강의노트, 한국어 영상',
+      card: '책과 자료 · 부모백과, 책, 워크북, 강의노트, 한국어 영상',
       hint: '카드를 누르면 소개가 나오고, 맨 위 \'바로 들어가기\'를 누르면 글과 채널이 열려요. 책·워크북·강의노트는 준비하고 있어요.',
       items: [
         { slug: 'parentbook', name: 'AI시대 부모백과', status: '열림',
@@ -31,6 +33,28 @@ window.SITE = {
           label: '부모백과 웹 열기', note: '설치 없이 휴대폰·PC 브라우저에서 열려요.',
           intro: ['부모백과를 한 화면으로 보는 웹이에요. 질문과 결론, 오늘 해 볼 한 가지를 먼저 보여 주고, 휴먼쌤 ACT(질문하기·확인하기·실천하기)로 이어져요. 곧 올라올 질문도 미리 볼 수 있어요.'],
           thumb: 'assets/thumbs/cloud-parentbook.jpg', shot: 'assets/thumbs/cloud-parentbook.jpg' },
+        { slug: 'korean-drama', name: '한국어 상황극 11편', status: '열림',
+          one: '편의점·카페·식당·택시에서 쓰는 한국어를 40초 영상으로',
+          url: '', note: '휴대폰·PC 브라우저에서 바로 재생돼요. 소리를 켜고 보세요.',
+          intro: ['프랑스 한글학교 학생들을 위해 만든 짧은 한국어 상황극이에요. 한 편은 40초쯤이에요.',
+                  '바깥 풍경으로 장소를 먼저 보여 주고, 같은 장면을 프랑스어로 본 다음 한국어로 다시 봐요. 한국어 장면에는 자막과 발음, 프랑스어 뜻이 함께 나와요. 이어서 따라 말하기를 세 번 하고, 오늘의 표현으로 정리해요.',
+                  '편의점(견본)부터 카페, 식당, 길 묻기, 택시, 옷가게, 시장, 약국, 호텔, 처음 만남, 계산까지 모두 11편이에요.'],
+          warn: ['AI로 만든 영상이에요. 사람과 장소는 실제가 아니고, 간판이나 차 유리에 보이는 한글 중에는 AI가 잘못 그린 글자가 있어요.',
+                 '대사와 프랑스어 번역은 아직 확인 전이에요.'],
+          videos: [
+            { no: '00', title: '편의점', ex: '봉투 필요하세요?', tip: '견본', file: 'assets/videos/00-store.mp4', poster: 'assets/videos/posters/00-store.jpg' },
+            { no: '01', title: '카페', ex: '아이스 아메리카노 한 잔 주세요', tip: '~ 주세요', file: 'assets/videos/01-cafe.mp4', poster: 'assets/videos/posters/01-cafe.jpg' },
+            { no: '02', title: '식당', ex: '몇 분이세요?', tip: '한 명·두 명', file: 'assets/videos/02-restaurant.mp4', poster: 'assets/videos/posters/02-restaurant.jpg' },
+            { no: '03', title: '길 묻기', ex: '지하철역이 어디예요?', tip: '~이/가 어디예요?', file: 'assets/videos/03-directions.mp4', poster: 'assets/videos/posters/03-directions.jpg' },
+            { no: '04', title: '택시', ex: '명동으로 가 주세요', tip: '~(으)로 가 주세요', file: 'assets/videos/04-taxi.mp4', poster: 'assets/videos/posters/04-taxi.jpg' },
+            { no: '05', title: '옷가게', ex: '이거 입어 봐도 돼요?', tip: '~아/어 봐도 돼요?', file: 'assets/videos/05-fitting.mp4', poster: 'assets/videos/posters/05-fitting.jpg' },
+            { no: '06', title: '시장', ex: '이거 얼마예요?', tip: '깎아 주세요', file: 'assets/videos/06-market.mp4', poster: 'assets/videos/posters/06-market.jpg' },
+            { no: '07', title: '약국', ex: '머리가 아파요', tip: '~이/가 아파요', file: 'assets/videos/07-pharmacy.mp4', poster: 'assets/videos/posters/07-pharmacy.jpg' },
+            { no: '08', title: '호텔', ex: '체크인하려고요', tip: '~(으)려고요', file: 'assets/videos/08-hotel.mp4', poster: 'assets/videos/posters/08-hotel.jpg' },
+            { no: '09', title: '처음 만남', ex: '프랑스에서 왔어요', tip: '~에서 왔어요', file: 'assets/videos/09-greeting.mp4', poster: 'assets/videos/posters/09-greeting.jpg' },
+            { no: '10', title: '계산', ex: '계산해 주세요', tip: '~(으)로 할게요', file: 'assets/videos/10-bill.mp4', poster: 'assets/videos/posters/10-bill.jpg' }
+          ],
+          thumb: 'assets/thumbs/cloud-korean-drama.jpg', shot: '' },
         { slug: 'parent-note', name: 'AI시대 부모노트', status: '열림',
           one: '부모백과의 질문을 이미지 카드와 짧은 영상으로 · 인스타그램',
           url: 'https://www.instagram.com/human_teacher_/',
@@ -211,32 +235,33 @@ window.SITE = {
         "thumb":  "assets/thumbs/world-hanok.jpg",
         "shot":  "",
         "shotAlt":  "한옥 부엌에서 하나를 만나는 첫 화면",
-        "shotNote":  "3D 소품: 국가유산청(Korea Heritage Service) · CC BY 4.0"
+        "shotNote":  "3D 소품: 국가유산청(Korea Heritage Service) · CC BY 4.0",
+        "worksheet":  "assets/worksheets/hanok.pdf"
     },
     { "slug": "store", "name": "편의점에 가요 — 한국어 학습맵", "status": "열림", "one": "편의점에서 물건을 찾아 담고 계산하며 한국어를 배워요",
       "url": "https://humanssaem-world.pages.dev/store/", "label": "편의점에 가기",
       "note": "휴대폰·PC 화면으로 보거나, 안드로이드 휴대폰·퀘스트 3에서 내 방에 띄워 볼 수 있어요.",
       "intro": ["한국어를 처음 배우는 분을 위한 학습맵 2판이에요. 동네 편의점에서 물건 이름과 값을 듣고, 점원 하나에게 \"어디 있어요?\" 물어 바구니에 담은 뒤 계산까지 해 봐요. 낱말 10개와 천 원 단위 값을 배우고, 약 10분 걸려요."],
       "shotNote": "점원 하나는 Tripo로 만들었어요 · 하나 목소리는 AI 음성 합성(Qwen3-TTS) · 가게와 상품은 코드로 그린 가상 가게(실제 상표 없음)",
-      "thumb": "assets/thumbs/world-store.jpg", "shot": "", "shotAlt": "편의점에 가요 — 첫 화면" },
+      "thumb": "assets/thumbs/world-store.jpg", "shot": "", "shotAlt": "편의점에 가요 — 첫 화면", "worksheet": "assets/worksheets/store.pdf" },
     { "slug": "bunsik", "name": "분식집에 가요 — 한국어 학습맵", "status": "열림", "one": "분식집에서 떡볶이·김밥을 주문하며 한국어를 배워요",
       "url": "https://humanssaem-world.pages.dev/bunsik/", "label": "분식집에 가기",
       "note": "휴대폰·PC 화면으로 보거나, 안드로이드 휴대폰·퀘스트 3에서 내 방에 띄워 볼 수 있어요.",
       "intro": ["한국어 학습맵 3판이에요. 분식집에서 떡볶이·김밥·라면 같은 메뉴 이름과 값을 듣고, 점원 하나에게 \"떡볶이 하나 주세요\" 하고 주문해서 먹어 봐요. 맵게·안 맵게, 여기서 먹을게요·포장해 주세요, 얼마예요?도 함께 배워요. 낱말 10개, 약 10분 걸려요."],
       "shotNote": "점원 하나는 Tripo로 만들었어요 · 하나 목소리는 AI 음성 합성(Qwen3-TTS) · 가게와 음식은 코드로 그린 가상 가게, 돈은 연습용 그림",
-      "thumb": "assets/thumbs/world-bunsik.jpg", "shot": "", "shotAlt": "분식집에 가요 — 첫 화면" },
+      "thumb": "assets/thumbs/world-bunsik.jpg", "shot": "", "shotAlt": "분식집에 가요 — 첫 화면", "worksheet": "assets/worksheets/bunsik.pdf" },
     { "slug": "subway", "name": "지하철을 타요 — 한국어 학습맵", "status": "열림", "one": "교통카드를 충전하고 지하철을 갈아타며 한국어를 배워요",
       "url": "https://humanssaem-world.pages.dev/subway/", "label": "지하철 타러 가기",
       "note": "휴대폰·PC 화면으로 보거나, 안드로이드 휴대폰·퀘스트 3에서 내 방에 띄워 볼 수 있어요.",
       "intro": ["한국어 학습맵 4판이에요. 교통카드를 충전하고, 역무원 하나에게 \"바다역 어떻게 가요?\" 물어 1호선에서 2호선으로 갈아탄 뒤, 바다역 출구까지 가 봐요. 낱말 10개, 약 12분 걸려요."],
       "shotNote": "역무원 하나는 Tripo로 만들었어요 · 하나 목소리는 AI 음성 합성(Qwen3-TTS) · 역·노선도·교통카드는 코드로 그린 가상(실제 회사·로고 없음)",
-      "thumb": "assets/thumbs/world-subway.jpg", "shot": "", "shotAlt": "지하철을 타요 — 첫 화면" },
+      "thumb": "assets/thumbs/world-subway.jpg", "shot": "", "shotAlt": "지하철을 타요 — 첫 화면", "worksheet": "assets/worksheets/subway.pdf" },
     { "slug": "pharmacy", "name": "약국에 가요 — 한국어 학습맵", "status": "열림", "one": "약국에서 아픈 곳을 말하고 약을 받으며 한국어를 배워요",
       "url": "https://humanssaem-world.pages.dev/pharmacy/", "label": "약국에 가기",
       "note": "휴대폰·PC 화면으로 보거나, 안드로이드 휴대폰·퀘스트 3에서 내 방에 띄워 볼 수 있어요.",
       "intro": ["한국어 학습맵 5판이에요. 동네 약국에서 몸 이름(머리·눈·코·이·목·배·손)을 듣고, 약사 하나에게 \"머리가 아파요\"처럼 어디가 아픈지 말한 뒤 \"하루에 세 번 드세요\"를 듣고 약을 받아 봐요. 낱말 10개, 약 10분 걸려요.", "한국어 연습용이라 의학 정보가 아니에요. 실제로 아플 때는 약사나 의사에게 물어보세요."],
       "shotNote": "약사 하나는 Tripo로 만들었어요 · 하나 목소리는 AI 음성 합성(Qwen3-TTS) · 약국과 약 상자는 코드로 그린 연습용 가상 상품(실제 약 아님)",
-      "thumb": "assets/thumbs/world-pharmacy.jpg", "shot": "", "shotAlt": "약국에 가요 — 첫 화면" },
+      "thumb": "assets/thumbs/world-pharmacy.jpg", "shot": "", "shotAlt": "약국에 가요 — 첫 화면", "worksheet": "assets/worksheets/pharmacy.pdf" },
     {
         "slug":  "fusion-plaza",
         "name":  "융합 광장",
@@ -360,6 +385,7 @@ window.SITE = {
 window.SITE.tags = {
   'parentbook': ['네이버 프리미엄 콘텐츠', '질문 → 결론 → 근거 → 제안', '당분간 무료'],
   'parentbook-web': ['한 화면에 질문·결론', '휴먼쌤 ACT', '설치 없음'],
+  'korean-drama': ['11편', '한 편 40초쯤', '프랑스어 자막', '따라 말하기', 'AI로 만든 영상'],
   'parent-note': ['인스타그램', '이미지 카드', '짧은 영상'],
   'philosophy': ['스레드', '짧은 글'],
   'book': ['개론서', '종이책', '전자책'],
@@ -378,11 +404,11 @@ window.SITE.tags = {
   'ai': ['여섯 구역', '도장 모으기', '명예 주민증'],
   'hangul-france': ['한글학교 17곳', '교실 둘러보기', '함께 접속'],
   'vr1': ['약 3분', 'VR', '메타 퀘스트 3'],
-  'hanok': ['한국어 처음', '낱말 10개', '약 8분', 'VR·AR'],
-  'store': ['한국어 초급', '낱말 10개', '약 10분', 'VR·AR'],
-  'bunsik': ['한국어 초급', '낱말 10개', '약 10분', 'VR·AR'],
-  'subway': ['한국어 초급', '낱말 10개', '약 12분', 'VR·AR'],
-  'pharmacy': ['한국어 초급', '낱말 10개', '약 10분', 'VR·AR', '연습용 · 의학 정보 아님'],
+  'hanok': ['한국어 처음', '낱말 10개', '약 8분', 'VR·AR', '활동지 PDF'],
+  'store': ['한국어 초급', '낱말 10개', '약 10분', 'VR·AR', '활동지 PDF'],
+  'bunsik': ['한국어 초급', '낱말 10개', '약 10분', 'VR·AR', '활동지 PDF'],
+  'subway': ['한국어 초급', '낱말 10개', '약 12분', 'VR·AR', '활동지 PDF'],
+  'pharmacy': ['한국어 초급', '낱말 10개', '약 10분', 'VR·AR', '활동지 PDF', '연습용 · 의학 정보 아님'],
   'fusion-plaza': ['학교 교정', '가상 구역', 'VR'],
   'science': ['실험실 다섯', '5~6분씩', '휴대폰·PC·퀘스트'],
   'robot-classroom': ['Delightex Edu', '시범판', 'PC 브라우저'],
