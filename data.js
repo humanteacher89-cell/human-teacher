@@ -181,7 +181,7 @@ window.SITE = {
         "label":  "휴먼티처월드 들어가기",
         "note":  "휴대폰·PC 브라우저에서 열려요. 휴대폰은 화면 조이스틱으로, PC는 키보드로 걸어요.",
         "intro":  [
-                      "휴먼쌤이 어떤 선생님인지 이야기로 만나는 첫 월드예요. 3분쯤 선택지를 고르며 휴먼쌤의 어제·오늘·내일을 따라가요. 이야기가 끝나면 로봇 리니를 따라 광장으로 나가 직접 걸어 다니고, 섬 출발점에서 가상융합교육 섬·AI가 지은 섬·프랑스 한글학교 섬으로 떠날 수 있어요. 두 번째 방문부터는 \u0027광장으로 바로 가기\u0027로 곧장 들어가요."
+                      "휴먼쌤이 어떤 선생님인지 이야기로 만나는 첫 월드예요. 3분쯤 선택지를 고르며 휴먼쌤의 어제·오늘·내일을 따라가요. 이야기가 끝나면 로봇 리니를 따라 광장으로 나가 직접 걸어 다니고, 섬 출발점에서 가상융합교육 섬·AI타운·프랑스 한글학교 섬으로 떠날 수 있어요. 두 번째 방문부터는 \u0027광장으로 바로 가기\u0027로 곧장 들어가요."
                   ],
         "thumb":  "assets/thumbs/world-plaza.jpg",
         "shot":  "",
@@ -204,18 +204,18 @@ window.SITE = {
     },
     {
         "slug":  "ai",
-        "name":  "AI가 지은 섬",
+        "name":  "AI타운",
         "status":  "열림",
         "one":  "AI가 일하는 방식대로 사는 마을을 돌아요",
         "url":  "https://humanssaem-world.pages.dev/ai/",
-        "label":  "AI가 지은 섬 들어가기",
+        "label":  "AI타운 들어가기",
         "note":  "휴대폰·PC 브라우저에서 열려요.",
         "intro":  [
                       "사람처럼 말하는 AI가 아니라, AI가 실제로 일하는 방식대로 사는 마을이에요. 마을 주민의 부탁 하나를 따라가고, 마을·도서관·패턴·시장·꿈 공방·호수 여섯 구역을 돌며 도장을 모아요. 도장을 다 모으면 \u0027명예 주민증\u0027을 받아요."
                   ],
         "thumb":  "assets/thumbs/world-ai.jpg",
         "shot":  "",
-        "shotAlt":  "AI가 지은 섬 — 깨어나는 마을"
+        "shotAlt":  "AI타운 — 깨어나는 마을"
     },
     {
         "slug":  "hangul-france",
@@ -232,8 +232,16 @@ window.SITE = {
         "shot":  "",
         "shotAlt":  "프랑스 한글학교 로비 — 만남의 광장"
     },
+    { "slug": "xr-lab", "name": "휴먼쌤 XR실험실", "status": "열림",
+      "one": "VR·3D로 만든 월드 셋을 한곳에",
+      "url": "", "label": null,
+      "note": "셋 모두 휴대폰·PC에서 열려요. 월드 1 VR과 융합 광장은 VR 기기에서 안으로 들어갈 수 있고, 로봇 학교 교실은 PC 브라우저나 Delightex Edu 앱에서 열려요.",
+      "intro": ["휴먼쌤이 VR과 3D로 만든 월드를 모은 실험실이에요. 첫 월드 '휴먼쌤이 누구인가'를 VR로 옮긴 판, 학교 교정과 가상 구역이 만나는 융합 광장, 로봇 리니가 휴먼쌤에게 수업을 받는 로봇 학교 교실이 들어 있어요."],
+      "thumb": "assets/thumbs/world-xr-lab.jpg", "shot": "",
+      "children": ["vr1", "fusion-plaza", "robot-classroom"] },
     {
         "slug":  "vr1",
+        "parent":  "xr-lab",
         "name":  "월드 1 VR — 휴먼쌤이 누구인가",
         "status":  "열림",
         "one":  "휴먼쌤의 이야기를 VR로 따라가요",
@@ -297,6 +305,7 @@ window.SITE = {
       "thumb": "assets/thumbs/world-pharmacy-scene.jpg", "shot": "", "shotAlt": "약국에 가요 — 약국 안", "worksheet": "assets/worksheets/pharmacy.pdf", "parent": "korean-maps" },
     {
         "slug":  "fusion-plaza",
+        "parent":  "xr-lab",
         "name":  "융합 광장",
         "status":  "열림",
         "one":  "학교 교정과 가상 구역이 만나는 광장",
@@ -381,6 +390,7 @@ window.SITE = {
     },
     {
         "slug":  "robot-classroom",
+        "parent":  "xr-lab",
         "name":  "로봇 학교 교실",
         "status":  "열림",
         "one":  "리니가 휴먼쌤에게 수업을 받는 교실을 걸어 봐요",
@@ -439,6 +449,7 @@ window.SITE.tags = {
   'xr': ['교사 연수', '관 여섯 곳', '수료증'],
   'ai': ['여섯 구역', '도장 모으기', '명예 주민증'],
   'hangul-france': ['한글학교 17곳', '교실 둘러보기', '함께 접속'],
+  'xr-lab': ['월드 셋', 'VR·3D', '휴대폰·PC·VR'],
   'vr1': ['약 3분', 'VR', '메타 퀘스트 3'],
   'korean-maps': ['한국어 초급', '학습맵 5곳', '낱말 10개씩', '8~12분', 'VR·AR', '활동지 PDF'],
   'hanok': ['한국어 처음', '낱말 10개', '약 8분', 'VR·AR', '활동지 PDF'],
