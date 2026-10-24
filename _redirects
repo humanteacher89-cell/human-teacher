@@ -1,0 +1,4 @@
+# 짧은 주소: human-teacher.com/<이름> → 긴 주소. 한 줄 = 하나. 302 = 나중에 목적지를 바꿔도 브라우저가 옛것을 기억하지 않음.
+# 더할 때는 줄을 더하고 다시 올린다(Cloudflare Pages 무료 한도 2,000줄). 이름은 사이트가 쓰는 assets·index.html을 피한다.
+/hangeuloneshot   https://humanssaem-hangeul-oneshot.pages.dev/   302
+/hangeuloneshot/  https://humanssaem-hangeul-oneshot.pages.dev/   302
