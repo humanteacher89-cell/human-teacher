@@ -2,3 +2,5 @@
 # 더할 때는 줄을 더하고 다시 올린다(Cloudflare Pages 무료 한도 2,000줄). 이름은 사이트가 쓰는 assets·index.html을 피한다.
 /hangeuloneshot   https://humanssaem-hangeul-oneshot.pages.dev/   302
 /hangeuloneshot/  https://humanssaem-hangeul-oneshot.pages.dev/   302
+/hangeulworld     https://humanssaem-hangul-france.pages.dev/     302
+/hangeulworld/    https://humanssaem-hangul-france.pages.dev/     302
