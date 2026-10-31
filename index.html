@@ -151,6 +151,9 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
 .block h2{display:flex;align-items:center;gap:10px;margin:0;font-family:"Jua",sans-serif;font-weight:400;font-size:21px;color:var(--brown)}
 .block h2::before{content:"";width:6px;height:22px;border-radius:3px;background:var(--brown)}
 .block p{margin:0;font-size:16px;line-height:1.75;word-break:keep-all}
+.exp{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin:0;border:2px solid var(--line);border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.65}
+.exp dt{font-weight:700;color:var(--brown);white-space:nowrap}
+.exp dd{margin:0;word-break:keep-all}
 .block a.ln{display:inline-flex;gap:6px;align-items:center;color:var(--brown);font-weight:700;text-decoration:none;border-bottom:2px solid var(--line)}
 .labs{display:grid;gap:14px;margin:0;padding:0;list-style:none}
 .lab{display:grid;gap:8px;text-decoration:none;color:var(--ink)}
@@ -203,7 +206,7 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
 </div>
 
 <!-- data.js를 고치면 아래 v= 숫자를 올린다(브라우저·CDN이 옛 내용을 기억하지 않게) -->
-<script src="data.js?v=20261031d"></script>
+<script src="data.js?v=20261031e"></script>
 <script>
 (function(){
   var S = window.SITE, main = document.getElementById('main'), ORDER = ['cloud','app','world'];
@@ -293,6 +296,8 @@ button.enter{width:100%;border:0;font-weight:400;cursor:pointer}
     if (it.shotNote) h += '<p class="fnote">' + esc(it.shotNote) + '</p>';
 
     h += '<section class="block"><h2>소개</h2>';
+    // 실험 개요(플랫폼·실험한 것). XR실험실 콘텐츠처럼 무엇을 시험하려던 것인지 먼저 보여 준다
+    if (it.exp) h += '<dl class="exp">' + it.exp.map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>';
     (it.intro || []).forEach(function(p){ h += '<p>' + esc(p) + '</p>'; });
     (it.links || []).forEach(function(l){ h += '<p><a class="ln"' + ext(l.url) + '>' + esc(l.label) + ' <span aria-hidden="true">›</span></a></p>'; });
     h += '</section>';
