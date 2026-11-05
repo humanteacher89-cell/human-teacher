@@ -425,11 +425,11 @@ window.SITE = {
     },
     {
         "slug":  "think-island",
-        "name":  "생각놀이섬",
+        "name":  "띵킹버스",
         "status":  "열림",
         "one":  "리니와 섬을 걸으며 오늘의 수수께끼를 질문하고 · 확인하고 · 직접 해 봐요",
         "url":  "https://humanssaem-world.pages.dev/think/",
-        "label":  "생각놀이섬 들어가기",
+        "label":  "띵킹버스 들어가기",
         "note":  "휴대폰·PC 브라우저에서 열려요. 수수께끼 하나에 10분쯤 걸려요. 별명과 기록은 그 기기에만 저장돼요.",
         "intro":  [
                       "초등학생이 리니와 함께 섬을 걸으며 휴먼쌤 ACT(질문하기 · 확인하기 · 실천하기)를 놀이로 겪는 학생용 3D 월드예요. 질문의 숲에서 내 생각을 먼저 고르고 리니에게 자세히 부탁해 본 뒤, 확인 다리에서 리니의 말이 진짜인지 확인 방법을 골라요.",
@@ -437,7 +437,7 @@ window.SITE = {
                   ],
         "thumb":  "assets/thumbs/world-think-island.jpg",
         "shot":  "assets/shots/world-think-island.jpg",
-        "shotAlt":  "생각놀이섬 — 시내 · 확인 다리 · 해 보기 공방 쪽에서 본 섬"
+        "shotAlt":  "띵킹버스 — 시내 · 확인 다리 · 해 보기 공방 쪽에서 본 섬"
     }
 ]
     }
