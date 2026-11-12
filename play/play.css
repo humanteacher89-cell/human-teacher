@@ -119,3 +119,11 @@ a.card.gm:active .btn,a.btn:active{transform:translateY(4px);box-shadow:0 2px 0 
   .gblk .rini{height:190px;right:36px}
   .card{padding:26px 28px}
 }
+
+/* 11-13 휴먼쌤 "학년버튼 안에 있는 이 2줄들 다 빼고": 블록에는 학년만, 가운데에 */
+.blk{justify-content:center}
+.gblk.bare{margin-top:26px}
+@media(min-width:960px){
+  .gblk .blk{justify-content:center}
+  .gblk.bare{margin-top:34px}
+}
