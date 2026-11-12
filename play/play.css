@@ -2,7 +2,8 @@
    모양은 /play 시안 B '장난감 블록': 노란 바탕 · 두툼한 학년 블록 · 블록 위에 선 로봇 리니.
    /play/ = 학년 고르기(.home), /play/1-2/ · /play/3-4/ · /play/5-6/ = 학년 주소(.sub).
    3·4 · 5·6학년은 게임 메이커(미리 보기판)를 먼저 해 볼 수 있다. */
-:root{--ink:#1b1b3a;--soft:#4a4a68;--y:#ffd43b;--y2:#fcc419;
+/* 11-13 삼성 인터넷 다크 모드가 색을 바꾸지 않게: 다크를 스스로 다룬다고 알리고(meta도 같음), 바탕 · 글자는 body에 적어 다크에서도 그대로 */
+:root{color-scheme:light dark;--ink:#1b1b3a;--soft:#4a4a68;--y:#ffd43b;--y2:#fcc419;
   --r:#ff6b6b;--rd:#c92a2a;--b:#4d7cfe;--bd:#2f4fc8;--gr:#20c997;--gd:#0b8f6a;
   --a:#f08c00;--ad:#c06d00;--c:#2f9e44;--cd:#237032;--t:#7048e8;--td:#5232b5;
   --disp:'Bagel Fat One','Jua','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;

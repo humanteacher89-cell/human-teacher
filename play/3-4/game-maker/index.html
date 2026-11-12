@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1f2a44">
-<meta name="color-scheme" content="only light">
+<meta name="color-scheme" content="light dark">
 <title>게임 메이커 — 3-4학년</title>
 <link rel="icon" href="data:,">
 <script>
@@ -30,7 +30,7 @@ try { performance.setResourceTimingBufferSize(800); } catch (e) {}
    PC(html.pc): 왼쪽 차례 칸 · 가운데 무대(질문 위, 이전 · 다음 아래). 기준 무대 1280×720.
    무대(.app)는 화면에 맞춰 통째로 커지고 작아진다(app.js의 layout). 아래로 밀어 내리는 화면은 없다. */
 :root{
-  color-scheme:only light;
+  color-scheme:light dark;   /* 11-13: 'only light'는 삼성 인터넷이 따르지 않았다. 다크를 스스로 다룬다고 알리고, 다크에서도 밝은 색을 그대로 쓴다(맨 아래 다크 규칙) */
   --ink:#1d2433;--soft:#4a5568;--mute:#6b7486;--line:#cbd8ee;--line2:#dde6f4;--navy:#1f2a44;--sky2:#eaf3ff;
   --cta:#ffcc33;--cta-d:#dba400;--cta-soft:#fff3c4;--blue:#2f62c9;--royal:#3f5efb;--teal:#0e9e90;--teal-soft:#dff3ef;--pop:#d9481f;--pop-soft:#ffe8dd;--night:#1f2a44;
   --disp:'Jua','Gowun Dodum','Apple SD Gothic Neo','Noto Sans KR','Noto Sans CJK KR','Malgun Gothic',sans-serif;
@@ -988,11 +988,11 @@ svg.ico{display:block;width:1em;height:1em}
 .dgb button{margin-left:.5em;border:1px solid #cbd8ee;border-radius:.8em;background:#fff;color:#1f2a44;font-size:1em;line-height:1.2;padding:.4em .9em;white-space:nowrap}
 .dgback{position:fixed;left:8px;top:8px;z-index:150;border:0;border-radius:999px;background:#1f2a44;color:#fff;font-family:var(--disp);font-size:14px;line-height:1.2;padding:8px 14px}
 
-/* 11-13 삼성 인터넷 다크 모드(폰 캡처: 바탕이 어두워지고 색이 바뀜 — color-scheme만으로는 막히지 않았다):
-   이 화면이 다크 모드를 스스로 다룬다고 알리면(prefers-color-scheme: dark 규칙) 삼성 인터넷이 색을 뒤집지 않는다고 알려져 있다.
-   다크 모드에서도 밝은 화면 그대로 쓴다(종이 활동지와 같은 색). 실제로 되는지는 다크 모드 캡처로 확인한다. */
+/* 11-13 삼성 인터넷 다크 모드(휴먼쌤 폰 캡처 두 번: 바탕 · 카드가 어두워지고 색이 바뀜 — 'only light'와 다크 규칙만으로는 막히지 않았다):
+   삼성 인터넷은 화면이 color-scheme으로 다크를 지원한다고 알릴 때만 제 색 바꾸기 대신 화면의 다크 규칙을 쓴다(삼성 개발자 블로그 2020-12-15).
+   그래서 :root · meta를 'light dark'로 알리고, 다크에서도 밝은 화면 그대로 쓴다(종이 활동지와 같은 색).
+   다크에서 브라우저 기본색(입력 칸 · 단추 · 글자 안내)이 어두워지지 않게 밝을 때와 같은 값을 적는다(크롬으로 모든 화면의 계산된 색을 밝음 · 다크로 견줘 같게 맞춤). */
 @media (prefers-color-scheme: dark){
-  :root{color-scheme:only light}
   html,body{background:#e3f0ff;color:#1d2433}
 }
 
@@ -2997,7 +2997,7 @@ $('#devMenu').onclick = openDev;
    무대는 가려 둔 채 예시 답으로 모든 화면을 차례로 그려 재므로, fit-test.html · devices.html과 같은 잣대를 진짜 기기에서 쓴다.
    쓴 답(이어서 하기)은 건드리지 않는다(SHOT을 켜서 저장을 막는다). 결과는 화면과 window.DIAG(자동 점검 devtest.js가 읽는다)에 남는다.
    진단 화면 자체는 옛 브라우저에서도 보이게 gap · aspect-ratio 없이 짰다(style.css 맨 아래 .diag). */
-const BUILD = "20261113-0231";
+const BUILD = "20261113-0244";
 const dgSleep = ms => new Promise(r => setTimeout(r, ms));
 const dgRace = (p, ms) => Promise.race([p, dgSleep(ms).then(() => undefined)]);
 const dgEX = () => deepMerge(blank(), JSON.parse(JSON.stringify(EX)));
@@ -3067,11 +3067,14 @@ function dgFeat(){
     clipboard: !!(navigator.clipboard && window.isSecureContext), share: !!navigator.share,
     lock: !!(document.documentElement.requestFullscreen && window.screen && screen.orientation && screen.orientation.lock) };
 }
-/* 크롬 계열의 '사이트 강제로 어둡게': auto = 브라우저에 그 기능이 켜져 있는지(크롬이 알려 주는 방법), forced = 그래서 이 화면의 색이 실제로 뒤집히는지
-   (이 화면은 color-scheme: only light로 막아 두었다). 삼성 인터넷처럼 따로 뒤집는 브라우저는 아래 색 견본으로 본다 */
+/* 크롬 계열의 '사이트 강제로 어둡게': auto = 브라우저에 그 기능이 켜져 있는지(크롬이 알려 주는 방법), forced = 그래서 이 화면의 색이 실제로 뒤집히는지.
+   11-13부터 이 화면은 color-scheme: light dark로 '다크를 스스로 다룸'을 알린다. 그러면 브라우저는 다크라고 알려 주고(prefers-color-scheme: dark) 색을 뒤집지 않아야 한다.
+   강제 다크가 켜졌는데 다크라고 알려 주지 않으면 이 알림을 따르지 않고 뒤집는 것으로 본다. 삼성 인터넷처럼 이것으로도 안 잡히는 브라우저는 아래 색 견본을 눈으로 본다 */
 function dgForcedDark(){
   const probe = css => { try { const d = document.createElement('div'); d.style.cssText = 'display:none;background-color:canvas;' + css; document.body.appendChild(d); const c = getComputedStyle(d).backgroundColor; d.remove(); return c !== 'rgb(255, 255, 255)'; } catch (e) { return null; } };
-  return { auto: probe('color-scheme:light'), forced: probe('') };
+  const auto = probe('color-scheme:light');
+  let dark = false; try { dark = matchMedia('(prefers-color-scheme: dark)').matches; } catch (e) {}
+  return { auto, forced: auto === null ? null : (auto && !dark) };
 }
 async function dgFonts(){
   const SAMPLE = '게임 메이커 가나다라마바사 ABC abc 123', out = {};
@@ -3230,7 +3233,7 @@ function dgReport(R){
     ${note ? `<p class="dgn noemo">${esc(note)}</p>` : ''}
     <div class="dgc">${rows.map(([t, list]) => `<dl><dt class="dgt">${t}</dt>${list.map(([k, v, c]) => `<div class="${c || ''}"><dt>${esc(k)}</dt><dd class="noemo">${esc(v)}</dd></div>`).join('')}</dl>`).join('')}</div>
     <div class="dgf"><div class="dgs"><span class="dg1">Jua 게임 메이커 123</span><span class="dg2">Gowun Dodum 게임 메이커 123</span><span class="dg3">🎮🐰🏆⭐</span><span class="dg4">${ARW('l')}${ARW('r')}${HEART}</span>
-      <span class="dgsw"><i style="background:#fff"></i><i style="background:#1f2a44"></i><i style="background:#ffcc33"></i><i style="background:#0e9e90"></i><i style="background:#d9481f"></i><small>흰 · 남 · 노랑 · 청록 · 주황</small></span></div>
+      <span class="dgsw"><i style="background:#fff"></i><i style="background:#1f2a44"></i><i style="background:#ffcc33"></i><i style="background:#0e9e90"></i><i style="background:#d9481f"></i><small>흰 · 남 · 노랑 · 청록 · 주황 — 다르게 보이면 브라우저가 색을 바꾼 것</small></span></div>
       <div class="dgb"><span>이 화면을 캡처해서 보내 주세요</span><button type="button" id="dgCopy">결과 글 복사</button><button type="button" id="dgSave">그림 저장 해 보기</button><button type="button" id="dgOpen">게임 메이커 열기</button></div></div>`;
 }
 function dgText(R){
