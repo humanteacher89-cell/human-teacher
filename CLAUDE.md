@@ -22,7 +22,7 @@
 
 ## 배포
 - 공개 주소 **https://human-teacher.com**. 2026-10-19 GitHub Pages(`main`, 맨 위 폴더, `CNAME`)로 공개.
-- 2026-10-20 GitHub 계정이 정지되어 Pages가 멈춤 → **Cloudflare Pages 프로젝트 `human-teacher`**(직접 올리기)로 옮김. 올리는 파일은 `index.html`·`data.js`·`assets/`·`_redirects` 넷뿐(`CLAUDE.md`·`CNAME`·`drafts/`·`_work/`는 올리지 않음). zip으로 올릴 때는 안의 경로 구분자가 `/`여야 한다(`\`이면 하위 폴더가 깨짐). 같은 날 도메인 DNS를 Cloudflare로 옮기고(네임서버 변경) `human-teacher.com`·`www.human-teacher.com`을 이 프로젝트의 사용자 지정 도메인으로 붙임(HTTPS 확인). 고칠 때는 파일을 다시 묶어 Pages에 새 배포로 올린다. **`data.js`를 고쳤으면 `index.html`의 `<script src="data.js?v=…">` 숫자도 올린다**(브라우저와 CDN이 옛 내용을 기억해 새 index와 옛 data가 섞이는 것을 막음). 올리기 명령: `tools\cf-wrangler\wrangler.ps1 pages deploy <배포묶음 폴더> --project-name human-teacher --branch main`.
+- 2026-10-20 GitHub 계정이 정지되어 Pages가 멈춤 → **Cloudflare Pages 프로젝트 `human-teacher`**(직접 올리기)로 옮김. 올리는 파일은 `index.html`·`data.js`·`assets/`·`_redirects`·`play/` 다섯뿐(`play/`는 2026-11-12부터 — 휴먼쌤 플레이 열리기 전 자리: `/play/` 세 학년 첫 화면, `/play/1-2/`·`/play/3-4/`·`/play/5-6/` 학년 주소)(`CLAUDE.md`·`CNAME`·`drafts/`·`_work/`는 올리지 않음). zip으로 올릴 때는 안의 경로 구분자가 `/`여야 한다(`\`이면 하위 폴더가 깨짐). 같은 날 도메인 DNS를 Cloudflare로 옮기고(네임서버 변경) `human-teacher.com`·`www.human-teacher.com`을 이 프로젝트의 사용자 지정 도메인으로 붙임(HTTPS 확인). 고칠 때는 파일을 다시 묶어 Pages에 새 배포로 올린다. **`data.js`를 고쳤으면 `index.html`의 `<script src="data.js?v=…">` 숫자도 올린다**(브라우저와 CDN이 옛 내용을 기억해 새 index와 옛 data가 섞이는 것을 막음). 올리기 명령: `tools\cf-wrangler\wrangler.ps1 pages deploy <배포묶음 폴더> --project-name human-teacher --branch main`.
 - 지금 쓰는 링크 모음 리틀리(litt.ly/humanteacher)는 그대로 둔다. 이 사이트가 그것을 대신할지는 휴먼쌤이 정한다.
 - 화면 확인은 로컬로: `python3 -m http.server 8765` 뒤 `http://127.0.0.1:8765/`.
 
