@@ -1,11 +1,11 @@
-/* 휴먼쌤 플레이 — 열리기 전 자리 (2026-11-13 휴먼쌤 "시안B로 하고 연결판 올려")
-   모양은 /play 시안 B '장난감 블록': 노란 바탕 · 두툼한 학년 블록 · 블록 위에 선 로봇 리니.
+/* 휴플(휴먼쌤 플레이) — 열리기 전 자리 (2026-11-13 휴먼쌤 "시안B로 하고 연결판 올려")
+   모양은 /play 시안 B '장난감 블록': 노란 바탕 · 두툼한 학년 블록 · 블록 뒤에서 빼꼼 인사하는 로봇 리니.
    /play/ = 학년 고르기(.home), /play/1-2/ · /play/3-4/ · /play/5-6/ = 학년 주소(.sub).
-   3·4 · 5·6학년은 게임 메이커(미리 보기판)를 먼저 해 볼 수 있다. */
+   학년 주소에는 놀이 카드를 둔다: 3·4 · 5·6은 게임 메이커(미리 보기판), 1·2는 준비중 틀.
+   11-13 휴먼쌤 "이거 손좀볼게": 로고 '휴플' · 작은 글 'AI주도력 길잡이' · ACT 칸 뺌 · 리니 상반신 빼꼼 · 블록 위 게임 메이커 뱃지 뺌 */
 /* 11-13 삼성 인터넷 다크 모드가 색을 바꾸지 않게: 다크를 스스로 다룬다고 알리고(meta도 같음), 바탕 · 글자는 body에 적어 다크에서도 그대로 */
 :root{color-scheme:light dark;--ink:#1b1b3a;--soft:#4a4a68;--y:#ffd43b;--y2:#fcc419;
   --r:#ff6b6b;--rd:#c92a2a;--b:#4d7cfe;--bd:#2f4fc8;--gr:#20c997;--gd:#0b8f6a;
-  --a:#f08c00;--ad:#c06d00;--c:#2f9e44;--cd:#237032;--t:#7048e8;--td:#5232b5;
   --disp:'Bagel Fat One','Jua','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
   --jua:'Jua','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
   --body:'Gowun Dodum','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif}
@@ -18,30 +18,33 @@ a:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:14
 img,svg{display:block}
 .wrap{max-width:1100px;margin:0 auto;padding:14px 18px calc(30px + env(safe-area-inset-bottom,0px))}
 
-/* 위: 브랜드 알약 (학년 주소에는 뒤로 단추) */
-.top{display:flex;align-items:center;gap:10px}
-.brand{display:flex;align-items:center;gap:10px;min-width:0;background:#fff;border-radius:999px;padding:6px 18px 6px 6px;box-shadow:0 6px 0 rgba(27,27,58,.16)}
-.brand img{width:42px;height:42px;border-radius:50%;background:#fff;object-fit:contain}
-.brand b{display:block;font-weight:400;font-size:19px;line-height:1.1;white-space:nowrap}
-.brand small{display:block;font-size:12px;color:#7a5c00;white-space:nowrap}
+/* 위: 로고(11-13 "그냥 가로버전으로 맨첨껄로 할게" · 상자 시안 "1번" · "왼쪽 위로 다시 변경하고 대신 로고랑 그 아래 내용들 사이 간격을 더 많이 벌려 지금의 4배정도"):
+   가로 한 줄 글자 블록 '휴먼쌤 플레이'를 상자 없이 왼쪽 위에, 블록 아래 옅은 그림자만. 휴플 아이콘은 탭 아이콘에만. 학년 주소에는 왼쪽에 뒤로 단추 */
+.top{display:flex;align-items:center;gap:10px;min-height:56px}
+.brand{display:flex;align-items:center;min-width:0;padding:2px 0}
+.brand svg{display:block;overflow:visible;filter:drop-shadow(0 4px 0 rgba(27,27,58,.13))}
+.brand .bw2{width:196px;height:48px}
+.brand:active{transform:translateY(2px)}
 .back{flex:none;width:50px;height:50px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 6px 0 rgba(27,27,58,.16)}
 .back svg{width:24px;height:24px}
-.back:active,.brand:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(27,27,58,.16)}
+.back:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(27,27,58,.16)}
+/* 로고와 아래 내용 사이(보이는 틈): 폰 학년 고르기 26 → 104px, 학년 쪽 17 → 68px. PC는 아래 @media.
+   아래 칸의 위 여백과 겹쳐(큰 쪽만 남음) 더해지지 않으므로 전체 여백으로 적는다 */
+.home .top{margin-bottom:102px}
+.sub .top{margin-bottom:77px}
 
-/* 인사와 리니 */
+/* 인사 */
 .hero{position:relative;margin:24px 0 8px}
 .tag{display:inline-block;background:var(--ink);color:#fff;font-size:17px;border-radius:12px;padding:5px 12px;transform:rotate(-3deg)}
 h1{font-family:var(--disp);font-weight:400;font-size:clamp(32px,10.4vw,44px);line-height:1.15;margin-top:12px;
   text-shadow:3px 3px 0 #fff,-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff,6px 8px 0 rgba(27,27,58,.18)}
-.rini{width:auto;filter:drop-shadow(0 8px 0 rgba(27,27,58,.18))}
-.home .hero{min-height:236px}
 .home h1{white-space:nowrap}
-.home .hero .rini{position:absolute;right:4px;bottom:-34px;height:clamp(132px,40vw,160px);z-index:3}
 
 /* 학년 블록 */
-.blocks{display:flex;flex-direction:column;gap:32px;margin-top:30px}
-.bw{position:relative}
-.blk{position:relative;display:flex;align-items:center;gap:14px;min-height:112px;border-radius:24px;padding:16px 18px;color:#fff;
+.blocks{position:relative;display:flex;flex-direction:column;gap:32px;margin-top:30px}
+.home .blocks{margin-top:140px}   /* 폰: 첫 블록(1·2) 오른쪽 위로 리니 상반신이 올라올 자리 */
+.bw{position:relative;z-index:2}
+.blk{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;min-height:112px;border-radius:24px;padding:16px 18px;color:#fff;
   box-shadow:inset 0 3px 0 rgba(255,255,255,.35),inset 0 -5px 0 rgba(0,0,0,.08),0 10px 0 var(--sd)}
 .blk::before{content:"";position:absolute;top:-13px;left:26px;width:30px;height:16px;border-radius:9px 9px 3px 3px;background:var(--st);box-shadow:44px 0 0 var(--st),88px 0 0 var(--st)}
 .k12{background:var(--r);--st:var(--r);--sd:var(--rd)}
@@ -50,24 +53,20 @@ h1{font-family:var(--disp);font-weight:400;font-size:clamp(32px,10.4vw,44px);lin
 a.blk:active{transform:translateY(6px);box-shadow:inset 0 3px 0 rgba(255,255,255,.35),0 4px 0 var(--sd)}
 .num{font-family:var(--disp);font-size:52px;line-height:1;letter-spacing:-.02em;text-shadow:0 5px 0 rgba(0,0,0,.18)}
 .yr{font-size:21px;margin-left:-6px;align-self:flex-end;padding-bottom:10px}
-.info{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:7px;text-align:right}
-.act{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--ink);font-size:15px;border-radius:999px;padding:4px 11px 4px 4px;box-shadow:0 3px 0 rgba(0,0,0,.15);white-space:nowrap}
-.act i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:14px}
-.ia i{background:var(--a)}.ic i{background:var(--c)}.it i{background:var(--t)}
-.when{font-size:14px;color:rgba(255,255,255,.95)}
-/* 게임 메이커 스티커(블록 위에 붙은 따로 누르는 단추) */
-.stk{position:absolute;right:-6px;top:-24px;z-index:4;display:inline-flex;align-items:center;gap:6px;background:#fff6bf;color:var(--ink);border:3px solid var(--ink);border-radius:14px;padding:5px 11px;font-size:16px;transform:rotate(5deg);box-shadow:0 4px 0 var(--ink);white-space:nowrap}
-.stk svg{width:16px;height:16px}
-.stk:active{transform:rotate(5deg) translateY(3px);box-shadow:0 1px 0 var(--ink)}
 
-/* 학년 주소 쪽 */
-.sub h1{font-size:clamp(28px,8.6vw,40px)}
-.sub .hero{padding-right:36%}   /* 폰: 제목은 왼쪽 두 줄, 오른쪽 자리는 블록 위에 선 리니 */
-.gblk{position:relative;margin-top:100px}
-.gblk .rini{position:absolute;right:10px;bottom:calc(100% - 22px);height:clamp(120px,36vw,150px);z-index:3}
+/* 빼꼼 리니: 몸(.pb)은 블록 뒤, 모서리를 잡은 손(.ph)은 블록 앞. 두 그림은 같은 상자이고, 그림 높이의 404/448 줄이 블록 윗면이다.
+   .peek에는 z-index를 주지 않는다(주면 손이 블록 앞으로 못 나온다) */
+.peek{position:absolute;--pw:140px;width:var(--pw);height:calc(var(--pw) * 474 / 448);top:calc(var(--pw) * -404 / 448);right:30px;pointer-events:none}
+.peek img{position:absolute;left:0;top:0;width:100%;height:auto}
+.peek .pb{z-index:1;filter:drop-shadow(0 6px 0 rgba(27,27,58,.12))}
+.peek .ph{z-index:3;filter:drop-shadow(0 3px 0 rgba(27,27,58,.18))}
+
+/* 학년 주소 쪽: 블록 + 놀이 카드 */
+.gblk{position:relative;margin-top:26px}
 .card{position:relative;display:flex;flex-direction:column;gap:8px;margin-top:30px;background:#fff;border-radius:26px;padding:20px 18px;box-shadow:0 8px 0 rgba(27,27,58,.16)}
 .card.gm{border:4px solid var(--ink);box-shadow:0 8px 0 var(--ink)}
 .stk2{align-self:flex-start;background:#fff6bf;border:3px solid var(--ink);border-radius:12px;padding:3px 10px;font-size:15px;transform:rotate(-2deg)}
+.soon{align-self:flex-start;background:var(--ink);color:var(--y);border-radius:12px;padding:5px 13px;font-size:15px;transform:rotate(-2deg)}
 .nm{font-family:var(--disp);font-weight:400;font-size:clamp(28px,8vw,36px);line-height:1.15}
 .nm em{font-style:normal;font-family:var(--jua);font-size:.55em;color:var(--bd);margin-left:6px}
 .ds{font-family:var(--body);font-size:17px;color:var(--soft);line-height:1.5}
@@ -77,54 +76,33 @@ a.blk:active{transform:translateY(6px);box-shadow:inset 0 3px 0 rgba(255,255,255
 .card.gm .btn{align-self:flex-start;margin-top:6px}
 a.card.gm:active .btn,a.btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
 .btn.ghost{background:#fff;font-size:18px;min-height:52px}
-.soon{align-self:flex-start;background:var(--ink);color:var(--y);border-radius:999px;padding:4px 12px;font-size:15px}
-.lead{font-size:19px;line-height:1.35}
-.ticks{list-style:none;display:flex;flex-direction:column;gap:6px;font-family:var(--body);font-size:16px;color:var(--soft)}
-.ticks li{position:relative;padding-left:30px}
-.ticks li::before{content:"";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:#e6fcf5;border:2px solid var(--c)}
-.ticks li::after{content:"";position:absolute;left:7px;top:6px;width:6px;height:10px;border:solid var(--cd);border-width:0 2.5px 2.5px 0;transform:rotate(40deg)}
+/* 준비중 틀: 게임 메이커 카드와 같은 모양, 단추만 흐리게(누를 수 없음) */
+.card.wait .nm{color:#55557a}
+.btn.off{background:#ececf3;color:#8a8aa6;border-color:#b8b8cc;box-shadow:0 6px 0 #b8b8cc;cursor:default}
+.btn.off svg path{fill:#8a8aa6}
 .row{display:flex;justify-content:center;margin-top:28px}
-
-/* 아래: 휴먼쌤 ACT */
-.actbox{margin-top:36px;background:#fff;border-radius:26px;padding:16px 16px 20px;box-shadow:0 8px 0 rgba(27,27,58,.16)}
-.actbox h2{font-weight:400;font-size:17px;text-align:center}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.tile{border-radius:18px;padding:12px 4px 10px;text-align:center;font-size:16px;color:#fff}
-.tile b{display:block;font-family:var(--disp);font-weight:400;font-size:32px;line-height:1;margin-bottom:4px;text-shadow:0 3px 0 rgba(0,0,0,.15)}
-.ta{background:var(--a);box-shadow:0 6px 0 var(--ad)}.tc{background:var(--c);box-shadow:0 6px 0 var(--cd)}.tt{background:var(--t);box-shadow:0 6px 0 var(--td)}
-.foot{text-align:center;margin-top:24px;font-size:15px}
+.foot{text-align:center;margin-top:30px;font-size:15px}
 .foot a{border-bottom:2px solid var(--ink)}
 
 @media(min-width:960px){
   .wrap{padding:22px 40px 48px}
+  .brand .bw2{width:245px;height:60px}   /* PC: 로고를 조금 크게 */
+  .home .top{margin-bottom:117px}        /* PC 틈: 학년 고르기 29 → 116px, 학년 쪽 23 → 92px */
+  .sub .top{margin-bottom:103px}
   .tag{font-size:22px}
-  .home .hero{text-align:center;min-height:0;margin-top:30px}
+  .home .hero{text-align:center;margin-top:30px}
   .home h1{font-size:72px}
-  .home .hero .rini{position:relative;right:auto;bottom:auto;display:block;margin:14px auto -46px;height:236px}
   .blocks{flex-direction:row;gap:28px;margin-top:40px}
+  .home .blocks{margin-top:236px}   /* PC: 가운데 블록(3·4) 위로 리니 상반신 */
+  .peek{--pw:236px;right:auto;left:calc(50% - 118px)}
   .bw{flex:1;display:flex}
   .blk{flex:1;flex-direction:column;align-items:center;justify-content:center;min-height:230px;padding:28px 18px}
   .num{font-size:84px}
   .yr{margin:0;align-self:center;padding:0;font-size:26px}
-  .info{margin:10px 0 0;align-items:center;text-align:center}
-  .act{font-size:17px}.when{font-size:16px}.stk{font-size:18px}
-  .actbox{max-width:620px;margin:44px auto 0}
   .sub{max-width:820px}
-  .sub h1{font-size:50px}
-  .sub .hero{padding-right:0}
-  .gblk{margin-top:120px}
-  .gblk .blk{min-height:150px;flex-direction:row;justify-content:flex-start}
+  .gblk{margin-top:34px}
+  .gblk .blk{min-height:150px;flex-direction:row;justify-content:center}
   .gblk .num{font-size:72px}
   .gblk .yr{align-self:flex-end;padding-bottom:14px}
-  .gblk .info{margin-left:auto;align-items:flex-end;text-align:right}
-  .gblk .rini{height:190px;right:36px}
   .card{padding:26px 28px}
-}
-
-/* 11-13 휴먼쌤 "학년버튼 안에 있는 이 2줄들 다 빼고": 블록에는 학년만, 가운데에 */
-.blk{justify-content:center}
-.gblk.bare{margin-top:26px}
-@media(min-width:960px){
-  .gblk .blk{justify-content:center}
-  .gblk.bare{margin-top:34px}
 }
