@@ -84,6 +84,28 @@ a.card.gm:active .btn,a.btn:active{transform:translateY(4px);box-shadow:0 2px 0 
 .foot{text-align:center;margin-top:30px;font-size:15px}
 .foot a{border-bottom:2px solid var(--ink)}
 
+/* 위 오른쪽 '담벼락' 단추와 창(11-13 휴먼쌤: 학생은 학급 코드, 선생님은 비밀번호) — assets/wall.js */
+.wbtn{margin-left:auto;flex:none;display:inline-flex;align-items:center;min-height:48px;padding:6px 18px;border-radius:16px;background:#fff;border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink);font-family:var(--jua);font-size:19px;color:var(--ink);cursor:pointer}
+.wbtn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+.wmask{position:fixed;inset:0;background:rgba(27,27,58,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.wmask[hidden]{display:none}
+.wbox{position:relative;width:100%;max-width:420px;background:#fff;border:4px solid var(--ink);border-radius:26px;box-shadow:0 8px 0 var(--ink);padding:24px 20px 22px;display:flex;flex-direction:column;gap:14px}
+.wbox h2{font-family:var(--disp);font-weight:400;font-size:30px;line-height:1.2}
+.wbox .x{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:3px solid var(--ink);background:#fff;font-size:22px;line-height:1;cursor:pointer;color:var(--ink)}
+.who{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.who button{font-family:var(--jua);font-size:22px;padding:16px 8px;border-radius:18px;border:3px solid var(--ink);background:#fffbe6;color:var(--ink);box-shadow:0 5px 0 var(--ink);cursor:pointer}
+.who button.on.s{background:var(--gr);color:#fff}
+.who button.on.t{background:var(--b);color:#fff}
+.wbox form{display:flex;flex-direction:column;gap:10px}
+.wbox form[hidden],.wbox .err[hidden]{display:none}
+.wbox label{font-size:17px}
+.wbox input{font-family:var(--jua);font-size:26px;width:100%;padding:10px 14px;border:3px solid var(--ink);border-radius:16px;background:#fffbe6;color:var(--ink)}
+.wbox input.code{letter-spacing:8px;text-align:center}
+.wbox .hint{font-family:var(--body);font-size:15px;color:var(--soft);margin-top:-4px}
+.wbox .err{font-size:16px;color:var(--rd)}
+.wbox .go{font-family:var(--jua);font-size:22px;padding:12px;border-radius:16px;border:3px solid var(--ink);background:var(--y);color:var(--ink);box-shadow:0 5px 0 var(--ink);cursor:pointer}
+.wbox .go:disabled{opacity:.6;cursor:default}
+
 @media(min-width:960px){
   .wrap{padding:22px 40px 48px}
   .brand .bw2{width:245px;height:60px}   /* PC: 로고를 조금 크게 */
