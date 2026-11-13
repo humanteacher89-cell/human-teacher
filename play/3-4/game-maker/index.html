@@ -1024,6 +1024,27 @@ svg.ico{display:block;width:1em;height:1em}
 .why.on{background:#fff6cc;border-color:#e0a800}
 .app.cmp .an{justify-content:flex-start}
 
+/* 11-14 한 줄 → 자세한 부탁(up) */
+.upwrap{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,.9fr) auto minmax(0,1.7fr);gap:10px;align-items:stretch;width:100%}
+.upl,.upr{min-height:0;display:flex;flex-direction:column;gap:6px;border-radius:18px;padding:8px 12px}
+.upl{background:#f3f4f7;border:2px dashed #b8c0cc}
+.upl b{margin:auto 0}
+.upl em{align-self:flex-end;font-family:var(--disp);font-size:13.5px;color:#7a8291}
+.upl small,.upr small{font-family:var(--disp);font-size:14px;color:var(--soft)}
+.upl b{font-family:var(--body);font-weight:700;font-size:19px;line-height:1.4;color:#4a5568}
+.upl em,.upr em{font-style:normal;font-family:var(--disp);font-size:13.5px;color:var(--mute)}
+.upr{background:#fff;border:3px solid #20c997;box-shadow:0 4px 0 #b2f2e3}
+.upr ul{list-style:none;margin:0;padding:0;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:2px}
+.upr li{display:flex;align-items:center;gap:6px;font-size:14px;line-height:1.3;min-width:0}
+.upr li i{font-style:normal;flex:none;width:20px;text-align:center}
+.upr li .k{flex:none;font-family:var(--disp);color:#0b7a5c;min-width:5.2em}
+.upr li .v{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upr em{color:#0b7a5c;align-self:flex-end}
+.uparr{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center}
+.uparr span{font-size:34px;line-height:1;color:#20c997}
+.uparr small{font-family:var(--disp);font-size:12.5px;color:var(--soft);line-height:1.25}
+
+
 </style>
 </head>
 <body>
@@ -1115,7 +1136,7 @@ const colorHex = name => { const c = COLORS.find(x => x[0] === name); return c ?
    그 주소의 대답은 계속 기다렸다가 오면 다시 그 주소를 쓴다(글자로 돌려 둔 것도 그림으로 되돌린다 — emoRevive). 느린 망을 막힌 망으로 굳히지 않는다. */
 const EMO_OWN = true;     // build.py가 넣는다: 우리 주소에 둘 그림 폴더(emo/)가 있을 때 true
 const OWN_ASSETS = EMO_OWN && true;   // 그림과 글꼴(fonts/)을 모두 우리 주소에 두었을 때(보호자용 가이드의 허가 표시 글이 바뀐다)
-const EMO_ALL = ["1f430","1f996","1f916","1f431","1f422","1f427","2604-fe0f","1f9e9","1f998","1f64b","1f9d1-200d-1f91d-200d-1f9d1","1f9f8","1f60e","1f4d6","26a1","1f3c6","1f3c1","1f525","1f648","1f4aa","1f61c","1f917","1f9d0","1f319","2600-fe0f","1f307","2744-fe0f","1f308","1f32b-fe0f","1f514","1f3bc","1f32c-fe0f","1f4a7","1f941","1f493","1f606","1f3c5","1f60c","1f632","1f389","1f30c","1f420","1f36d","1f333","1f47e","1f58d-fe0f","1f3b5","1f507","1f4bb","1f4f1","1f500","2795","1f5fa-fe0f","1f195","1f4a8","1f3a4","1f45f","1f3a9","1f36c","1f642","2b50","1f3af","1f0cf","2753","270f-fe0f","1f436","1f43b","1f98a","1f43c","1f438","1f419","1f984","1f47b","1f47d","1f9da","1f359","1f335","2601-fe0f","1f344","1f680","1f41d","1f989","1f329-fe0f","1f6aa","1faa8","1f3ae","1f4ad","1f9f5","1f914","2764-fe0f","23f1-fe0f","1f64a","1f527"];
+const EMO_ALL = ["1f430","1f996","1f916","1f431","1f422","1f427","2604-fe0f","1f9e9","1f998","1f64b","1f9d1-200d-1f91d-200d-1f9d1","1f9f8","1f60e","1f4d6","26a1","1f3c6","1f3c1","1f525","1f648","1f4aa","1f61c","1f917","1f9d0","1f319","2600-fe0f","1f307","2744-fe0f","1f308","1f32b-fe0f","1f514","1f3bc","1f32c-fe0f","1f4a7","1f941","1f493","1f606","1f3c5","1f60c","1f632","1f389","1f30c","1f420","1f36d","1f333","1f47e","1f58d-fe0f","1f3b5","1f507","1f4bb","1f4f1","1f500","2795","1f5fa-fe0f","1f195","1f4a8","1f3a4","1f45f","1f3a9","1f36c","1f642","2b50","1f3af","1f0cf","2753","270f-fe0f","1f436","1f43b","1f98a","1f43c","1f438","1f419","1f984","1f47b","1f47d","1f9da","1f359","1f335","2601-fe0f","1f344","1f680","1f41d","1f989","1f329-fe0f","1f6aa","1faa8","1f3ae","1f4ad","1f9f5","1f914","2764-fe0f","23f1-fe0f","1f30d","1f522","1f3a8","1f4dd","2728","1f64a","1f527"];
 /* 이름 · 주소 · 되는지 알아볼 때 기다리는 시간 · 주소 끝에 붙일 것.
    우리 주소의 그림은 오래 캐시하게 올린다(_headers: 다시 열 때 망을 타지 않는다). 그림 묶음의 판을 바꾸면 ?v= 도 바꿔야 옛 그림이 남지 않는다 */
 const EMO_ST = [['우리 주소', 'emo/', 8000, '?v=1.1.0'], ['jsDelivr', 'https://cdn.jsdelivr.net/npm/@lobehub/fluent-emoji-3d@1.1.0/assets/', 4000, '']]
@@ -1991,6 +2012,7 @@ const STEPS = [];
   qs(STORY_Q); either('goal');
   qs(['feel1', 'feel2']); add('msg', { type:'my', k:'msg' }); add('c_msg', { type:'cmp', k:'msg' }); either('hard');
   qs(['rule3', 'rule3b']); add('lab', { type:'lab' }); qs(['rule4']);
+  add('up', { type:'up' });   // 11-14 휴먼쌤 "3-4학년에도 넣어주고": 엮기 맨 앞 '한 줄 → 자세한 부탁'
   add('title', { type:'my', k:'title' }); add('c_title', { type:'cmp', k:'title' }); add('weave', { type:'weave' }); add('result', { type:'result' });
   add('done', { type:'done' });   // 11-12 휴먼쌤: 복사하기 옆 '완료'를 누르면 엔딩
 })();
@@ -2022,7 +2044,7 @@ const PHASES = [
     IT('이야기', [...STORY_Q, 'e_goal']),
     IT('느낌과 꾸미기', ['feel1', 'feel2', 'msg', 'c_msg', 'e_hard'], S => (S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · ')),
     IT('규칙', ['rule3', 'rule3b', 'lab', 'rule4'], S => (LEVEL34[S.rule.diff] || {}).label || '')] },
-  { no:'엮기', icon:'🧵', items:[IT('게임 이름', ['title', 'c_title'], S => S.title), IT('엮은 글 읽기', ['weave']), IT('프롬프트 완성', ['result'])] },
+  { no:'엮기', icon:'🧵', items:[IT('한 줄 → 자세한 부탁', ['up']), IT('게임 이름', ['title', 'c_title'], S => S.title), IT('엮은 글 읽기', ['weave']), IT('프롬프트 완성', ['result'])] },
   { no:'완성', icon:'🏆', items:[IT('게임 완성', ['done'])] },
 ];
 const firstOf = p => p.items[0].steps[0];
@@ -2192,7 +2214,7 @@ function render(){
   if (idxOf(st.id) > idxOf('bone') && !BONES[S.bone]) S.bone = 'maze';
   drawRail(st);
   ({ start:rStart, goals:rGoals, pledge:rPledge, seed:rSeed, tintro:rTIntro, tplay:rTPlay, bone:rBone, sure:rSure, card:rCard, either:rEither, q:rQ,
-     pintro:rPIntro, pplay:rPPlay, lab:rLab, gap:rGap, title:rTitle, my:rMy, cmp:rCmp, mine:rMine, weave:rWeave, more:rMore, result:rResult,
+     pintro:rPIntro, pplay:rPPlay, lab:rLab, gap:rGap, title:rTitle, my:rMy, cmp:rCmp, up:rUp, mine:rMine, weave:rWeave, more:rMore, result:rResult,
      check:rCheck, redo:rRedo, redo2:rRedo2, judge:rJudge, judge2:rJudge2, judge3:rJudge3, done:rDone })[st.type](st);
   fitSoon();
 }
@@ -2651,6 +2673,31 @@ function cmpSummary(S){
   const n = p => list.filter(c => (p === 'r' ? /^r/.test(c.pick) : c.pick === p)).length;
   return `<span class="pcx"> · 리니와 비교한 곳 ${list.length}: 내 생각 ${n('mine')} · 리니 생각 ${n('r')} · 섞음 ${n('mix')}</span>`;
 }
+/* 11-14 한 줄 → 자세한 부탁(5-6학년과 같은 화면): 왼쪽은 처음 쓴 한 줄 '…만들어 줘', 오른쪽은 지금까지 상상으로 채운 부탁 요약. 확인하고 넘어간다 */
+function rUp(st){
+  const h = S.hero, w = S.world, r = S.rule, b = BONES[S.bone];
+  const one = S.seed ? `‘${S.seed}’${josa(S.seed, '을/를')} 만들어 줘.` : '재미있는 게임 하나 만들어 줘.';
+  const nums = [r.lives ? `목숨 ${r.lives}개` : '', r.time ? `${r.time}초` : '', r.point ? `한 개에 ${r.point}점` : ''].filter(Boolean).join(' · ');
+  const rows = [
+    ['🎮', '게임', b ? b.name : S.boneText],
+    [h.emoji || '🙂', '주인공', [h.look, h.name ? `‘${h.name}’` : ''].filter(Boolean).join(' ')],
+    ['🌍', '세계', [w.place, w.time].filter(Boolean).join(', ')],
+    ['📖', '이야기', S.story.begin],
+    ['🎯', '모으고 피하기', [r.collect || h.like, r.enemy || h.fear].filter(Boolean).join(' 모으기 · ') + ((r.enemy || h.fear) ? ' 피하기' : '')],
+    ['⭐', '특별 규칙', r.twist],
+    ['🔢', '숫자', nums],
+    ['🎨', '느낌', [(S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · '), S.feel.art].filter(Boolean).join(' · ')],
+  ].filter(x => x[2]);
+  const len = promptText(S).length;
+  paint({ cls:'up', hd: head(st, '한 줄 부탁이 이렇게 멋지게 자랐어요', '', '한 줄 → 자세한 부탁'),
+    an:`<div class="upwrap">
+      <div class="upl"><small>📝 처음 한 줄</small><b>${esc(one)}</b><em>짧은 ${one.length}자</em></div>
+      <div class="uparr" aria-hidden="true"><span>➜</span><small>내 상상<br>${materialCount(S)}개</small></div>
+      <div class="upr"><small>✨ 지금 내 부탁(요약)</small><ul>${rows.map(([ic, k, v]) => `<li><i aria-hidden="true">${ic}</i><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></li>`).join('')}</ul><em>프롬프트 ${len.toLocaleString('ko-KR')}자</em></div>
+    </div>`,
+    act: act('좋아요! 다음으로', { go:{ long:'좋아요! 다음으로', short:'좋아요!', cls:'sm' } }) });
+  $('#nextBtn').onclick = next;
+}
 function rTitle(st){
   const ideas = titleIdeas(S);
   paint({ hd: head(st, '게임 이름을 지어 주세요', ''), anCls:'mid',
@@ -3100,7 +3147,7 @@ $('#devMenu').onclick = openDev;
    무대는 가려 둔 채 예시 답으로 모든 화면을 차례로 그려 재므로, fit-test.html · devices.html과 같은 잣대를 진짜 기기에서 쓴다.
    쓴 답(이어서 하기)은 건드리지 않는다(SHOT을 켜서 저장을 막는다). 결과는 화면과 window.DIAG(자동 점검 devtest.js가 읽는다)에 남는다.
    진단 화면 자체는 옛 브라우저에서도 보이게 gap · aspect-ratio 없이 짰다(style.css 맨 아래 .diag). */
-const BUILD = "20261114-0005";
+const BUILD = "20261114-0131";
 const dgSleep = ms => new Promise(r => setTimeout(r, ms));
 const dgRace = (p, ms) => Promise.race([p, dgSleep(ms).then(() => undefined)]);
 const dgEX = () => deepMerge(blank(), JSON.parse(JSON.stringify(EX)));

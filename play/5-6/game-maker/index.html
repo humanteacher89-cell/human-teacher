@@ -1000,6 +1000,40 @@ svg.ico{display:block;width:1em;height:1em}
 .pc .an.mixon .tiles.pics .tile{min-height:min(250px,calc((var(--lh,720px) - 300px) / 2))}
 .pc .an.mixon .tile .pic{width:88px;height:88px}
 
+/* 11-14 5-6학년 중점 T: 리니 프롬프트와 비교해 고쳐 쓰기(how2) */
+.rewcols{flex:1;min-height:0;display:grid;grid-template-columns:1.25fr 1fr;gap:10px;width:100%}
+.rewcols .fieldblk{min-height:0;display:flex;flex-direction:column}
+.rewcols .fieldblk textarea{flex:1;min-height:0}
+.rcard{min-height:0;display:flex;flex-direction:column;gap:4px;background:#f4f8ff;border:2px dashed var(--line);border-radius:16px;padding:6px 11px}
+.rcard small{display:flex;align-items:center;gap:5px;font-family:var(--disp);font-size:14px;color:var(--soft)}
+.rcard small i{font-style:normal;font-size:18px;line-height:1}
+.rcard .rtext{margin:0;flex:1;min-height:0;overflow:auto;font-size:14px;line-height:1.45;color:var(--ink)}
+.missrow{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:6px}
+.missrow .ml{font-family:var(--disp);font-size:14.5px;color:#a61e1e}
+.missrow #miss{display:contents}
+.missrow .matchip{border-color:#ffb3b3;background:#fff5f5}
+.missrow .mstat{margin-left:auto;font-family:var(--disp);font-size:14px;color:#0b6b46}
+
+/* 11-14 한 줄 → 자세한 부탁(up) */
+.upwrap{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,.9fr) auto minmax(0,1.7fr);gap:10px;align-items:stretch;width:100%}
+.upl,.upr{min-height:0;display:flex;flex-direction:column;gap:6px;border-radius:18px;padding:8px 12px}
+.upl{background:#f3f4f7;border:2px dashed #b8c0cc}
+.upl b{margin:auto 0}
+.upl em{align-self:flex-end;font-family:var(--disp);font-size:13.5px;color:#7a8291}
+.upl small,.upr small{font-family:var(--disp);font-size:14px;color:var(--soft)}
+.upl b{font-family:var(--body);font-weight:700;font-size:19px;line-height:1.4;color:#4a5568}
+.upl em,.upr em{font-style:normal;font-family:var(--disp);font-size:13.5px;color:var(--mute)}
+.upr{background:#fff;border:3px solid #20c997;box-shadow:0 4px 0 #b2f2e3}
+.upr ul{list-style:none;margin:0;padding:0;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:2px}
+.upr li{display:flex;align-items:center;gap:6px;font-size:14px;line-height:1.3;min-width:0}
+.upr li i{font-style:normal;flex:none;width:20px;text-align:center}
+.upr li .k{flex:none;font-family:var(--disp);color:#0b7a5c;min-width:5.2em}
+.upr li .v{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upr em{color:#0b7a5c;align-self:flex-end}
+.uparr{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center}
+.uparr span{font-size:34px;line-height:1;color:#20c997}
+.uparr small{font-family:var(--disp);font-size:12.5px;color:var(--soft);line-height:1.25}
+
 </style>
 </head>
 <body>
@@ -1091,7 +1125,7 @@ const colorHex = name => { const c = COLORS.find(x => x[0] === name); return c ?
    그 주소의 대답은 계속 기다렸다가 오면 다시 그 주소를 쓴다(글자로 돌려 둔 것도 그림으로 되돌린다 — emoRevive). 느린 망을 막힌 망으로 굳히지 않는다. */
 const EMO_OWN = true;     // build.py가 넣는다: 우리 주소에 둘 그림 폴더(emo/)가 있을 때 true
 const OWN_ASSETS = EMO_OWN && true;   // 그림과 글꼴(fonts/)을 모두 우리 주소에 두었을 때(보호자용 가이드의 허가 표시 글이 바뀐다)
-const EMO_ALL = ["2604-fe0f","1f9e9","1f998","1f64b","1f9d1-200d-1f91d-200d-1f9d1","1f422","1f525","1f9f8","1f60e","1f4d6","26a1","1f381","1f343","1f3c6","1f3c1","1f9ed","1f50d","23f1-fe0f","1f5fa-fe0f","1f501","23ee-fe0f","1f648","1f4aa","1f61c","1f917","1f9d0","1f319","2600-fe0f","1f307","2744-fe0f","1f308","1f32b-fe0f","1f514","1f3bc","1f32c-fe0f","1f4a7","1f941","1f493","1f606","1f3c5","1f60c","1f632","1f389","1f30c","1f420","1f36d","1f333","1f47e","1f58d-fe0f","1f3b5","1f507","1f4bb","1f4f1","1f500","2795","1f195","2b50","1f3af","1f0cf","2753","270f-fe0f","1f431","1f436","1f430","1f43b","1f98a","1f43c","1f438","1f427","1f996","1f419","1f984","1f916","1f47b","1f47d","1f9da","1f359","1f335","2601-fe0f","1f344","1f680","1f41d","1f989","1f642","1f329-fe0f","1f6aa","1faa8","1f3ae","1f4ad","1f9f5","1f914","2764-fe0f","1f64a","1f527"];
+const EMO_ALL = ["2604-fe0f","1f9e9","1f998","1f64b","1f9d1-200d-1f91d-200d-1f9d1","1f422","1f525","1f9f8","1f60e","1f4d6","26a1","1f381","1f343","1f3c6","1f3c1","1f9ed","1f50d","23f1-fe0f","1f5fa-fe0f","1f501","23ee-fe0f","1f648","1f4aa","1f61c","1f917","1f9d0","1f319","2600-fe0f","1f307","2744-fe0f","1f308","1f32b-fe0f","1f514","1f3bc","1f32c-fe0f","1f4a7","1f941","1f493","1f606","1f3c5","1f60c","1f632","1f389","1f30c","1f420","1f36d","1f333","1f47e","1f58d-fe0f","1f3b5","1f507","1f4bb","1f4f1","1f500","2795","1f195","2b50","1f3af","1f0cf","2753","270f-fe0f","1f431","1f436","1f430","1f43b","1f98a","1f43c","1f438","1f427","1f996","1f419","1f984","1f916","1f47b","1f47d","1f9da","1f359","1f335","2601-fe0f","1f344","1f680","1f41d","1f989","1f642","1f329-fe0f","1f6aa","1faa8","1f3ae","1f4ad","1f9f5","1f914","2764-fe0f","1f30d","1f522","1f3a8","1f4dd","2728","1f64a","1f527"];
 /* 이름 · 주소 · 되는지 알아볼 때 기다리는 시간 · 주소 끝에 붙일 것.
    우리 주소의 그림은 오래 캐시하게 올린다(_headers: 다시 열 때 망을 타지 않는다). 그림 묶음의 판을 바꾸면 ?v= 도 바꿔야 옛 그림이 남지 않는다 */
 const EMO_ST = [['우리 주소', 'emo/', 8000, '?v=1.1.0'], ['jsDelivr', 'https://cdn.jsdelivr.net/npm/@lobehub/fluent-emoji-3d@1.1.0/assets/', 4000, '']]
@@ -1387,7 +1421,7 @@ const Q = {
   world5: { sec:'world', type:'text', path:'world.secret', max:36, optional:true, q:'이 세계에는 비밀이 하나 있어요. 무엇일까요?', help:'AI에게 말하듯이 써요. 생각나지 않으면 건너뛰어도 돼요.', ph:'예) 별사탕을 다 모으면 별이 다시 빛나',
     chips:['밤이 되면 길이 바뀌어','가장 작은 것이 가장 힘이 세','웃음소리가 나면 꽃이 피어'] },
 
-  twist: { sec:'play', type:'twist', path:'rule.twist', max:70, q:'방금 한 판에 무엇을 더하면 더 재미있을까요?', help:'만약에 카드를 뽑아 보고, 내 게임에 맞게 고쳐 써요. 이것이 다른 게임에는 없는 나만의 특별 규칙이 돼요.', ph:'예) 처음에는 어두워서 주인공 둘레만 보여' },
+  twist: { sec:'play', type:'twist', path:'rule.twist', max:70, q:'만약에 카드를 뽑아 나만의 특별 규칙을 만들어요', help:'카드를 뽑아 보고, 내 게임에 맞게 고쳐 써요. 이것이 다른 게임에는 없는 나만의 특별 규칙이 돼요.', ph:'예) 처음에는 어두워서 주인공 둘레만 보여' },
 
   story1: { sec:'story', type:'text', path:'story.begin', max:44, area:true, q:'만약 주인공에게 무슨 일이 생겼다면, 그건 무슨 일이면 좋겠어요?', help:S => { const f = S.hero.fear || '그것'; return `AI에게 말하듯이 써요. ${nm(S)}${josa(nm(S),'이/가')} 무서워하는 ‘${f}’${josa(f,'과/와')} 이어 보면 재미있어요.`; }, ph:'예) 우주 청소기가 별사탕을 모두 빨아들여서 별이 어두워졌어',
     chips:S => [`${j(S.hero.fear || '심술쟁이 바람','이/가')} 나타나서 ${j(S.hero.like || '보물','을/를')} 모두 가져가 버렸어`, `${j(S.world.place || '마을','의')} 불빛이 갑자기 모두 꺼졌어`, `${j(S.hero.like || '보물','이/가')} 바람에 날려 여기저기 흩어졌어`] },
@@ -2052,7 +2086,10 @@ const STEPS = [];
   qs(['rule3', 'rule3b']); add('lab', { type:'lab' });
   either('length'); either('retry');
   qs(['rule4', 'rule5']);
-  add('key', { type:'q' }); add('title', { type:'title' }); add('how', { type:'mine' }); add('weave', { type:'weave' }); add('result', { type:'result' });
+  /* 11-14 5-6학년 중점 T '(내 생각을 프롬프트로) 표현하기' 시안: 엮기 맨 앞에 '한 줄 → 자세한 부탁'(up, 휴먼쌤 "좌측에는 한줄로 간단하게 '~~해줘'
+     … 오른쪽에는 자세한 프롬프트 요약본 … 멋지게 업그레이드되었다는걸 보여주고 확인"), 게임 방법을 쓴 뒤 '리니 프롬프트와 비교해 고쳐 쓰기'(how2) */
+  add('up', { type:'up' });
+  add('key', { type:'q' }); add('title', { type:'title' }); add('how', { type:'mine' }); add('how2', { type:'rew' }); add('weave', { type:'weave' }); add('result', { type:'result' });
   add('done', { type:'done' });   // 휴먼쌤: 복사하기 옆 '완료'를 누르면 엔딩
 })();
 const STEP = Object.fromEntries(STEPS.map(s => [s.id, s]));
@@ -2083,7 +2120,7 @@ const PHASES = [
     IT('이야기', [...STORY_Q, 'e_goal']),
     IT('느낌과 꾸미기', [...FEEL_Q, 'e_hint'], S => (S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · ')),
     IT('규칙', ['rule3', 'rule3b', 'lab', 'e_length', 'e_retry', 'rule4', 'rule5'], S => SPEED_LABEL[S.rule.speed] || '')] },
-  { no:'엮기', icon:'🧵', items:[IT('이름과 중요한 것', ['key', 'title'], S => S.title), IT('게임 방법 쓰기', ['how']), IT('설계도 다듬기', ['weave']), IT('프롬프트 완성', ['result'])] },
+  { no:'엮기', icon:'🧵', items:[IT('한 줄 → 자세한 부탁', ['up']), IT('이름과 중요한 것', ['key', 'title'], S => S.title), IT('게임 방법 쓰기', ['how', 'how2']), IT('설계도 다듬기', ['weave']), IT('프롬프트 완성', ['result'])] },
   { no:'완성', icon:'🏆', items:[IT('게임 완성', ['done'])] },
 ];
 const firstOf = p => p.items[0].steps[0];
@@ -2252,7 +2289,7 @@ function render(){
   if (idxOf(st.id) > idxOf('bone') && !BONES[S.bone]) S.bone = 'maze';
   drawRail(st);
   ({ start:rStart, goals:rGoals, pledge:rPledge, seed:rSeed, tintro:rTIntro, tplay:rTPlay, bone:rBone, sure:rSure, card:rCard, either:rEither, q:rQ,
-     pintro:rPIntro, pplay:rPPlay, lab:rLab, gap:rGap, title:rTitle, mine:rMine, weave:rWeave, more:rMore, result:rResult,
+     pintro:rPIntro, pplay:rPPlay, lab:rLab, gap:rGap, title:rTitle, mine:rMine, rew:rRew, up:rUp, weave:rWeave, more:rMore, result:rResult,
      check:rCheck, redo:rRedo, redo2:rRedo2, judge:rJudge, judge2:rJudge2, judge3:rJudge3, done:rDone })[st.type](st);
   fitSoon();
 }
@@ -2692,6 +2729,71 @@ function rMine(st){
   $('#nextBtn').onclick = () => { S.wv = 0; save(); next(); };
   check();
 }
+/* 11-14 한 줄 → 자세한 부탁: 왼쪽은 처음 쓴 한 줄 '…만들어 줘', 오른쪽은 지금까지 상상으로 채운 부탁 요약. 확인하고 다듬으러 간다 */
+function rUp(st){
+  const h = S.hero, w = S.world, r = S.rule, b = BONES[S.bone];
+  const one = S.seed ? `‘${S.seed}’${josa(S.seed, '을/를')} 만들어 줘.` : '재미있는 게임 하나 만들어 줘.';
+  const nums = [r.lives ? `목숨 ${r.lives}개` : '', r.time ? `${r.time}초` : '', r.point ? `한 개에 ${r.point}점` : ''].filter(Boolean).join(' · ');
+  const rows = [
+    ['🎮', '게임', b ? b.name + (S.bone2 && BONES[S.bone2] ? ' + ' + BONES[S.bone2].name : '') : S.boneText],
+    [h.emoji || '🙂', '주인공', [h.look, h.name ? `‘${h.name}’` : ''].filter(Boolean).join(' ')],
+    ['🌍', '세계', [w.place, w.time].filter(Boolean).join(', ')],
+    ['📖', '이야기', S.story.begin],
+    ['🎯', '모으고 피하기', [r.collect || h.like, r.enemy || h.fear].filter(Boolean).join(' 모으기 · ') + ((r.enemy || h.fear) ? ' 피하기' : '')],
+    ['⭐', '특별 규칙', r.twist],
+    ['🔢', '숫자', nums],
+    ['🎨', '느낌', [(S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · '), S.feel.art].filter(Boolean).join(' · ')],
+  ].filter(x => x[2]);
+  const len = promptText(S).length;
+  paint({ cls:'up', hd: head(st, '한 줄 부탁이 이렇게 멋지게 자랐어요', '', '한 줄 → 자세한 부탁'),
+    an:`<div class="upwrap">
+      <div class="upl"><small>📝 처음 한 줄</small><b>${esc(one)}</b><em>짧은 ${one.length}자</em></div>
+      <div class="uparr" aria-hidden="true"><span>➜</span><small>내 상상<br>${materialCount(S)}개</small></div>
+      <div class="upr"><small>✨ 지금 내 부탁(요약)</small><ul>${rows.map(([ic, k, v]) => `<li><i aria-hidden="true">${ic}</i><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></li>`).join('')}</ul><em>프롬프트 ${len.toLocaleString('ko-KR')}자</em></div>
+    </div>`,
+    act: act('좋아요! 다듬으러 가기', { go:{ long:'좋아요! 다듬으러 가기', short:'좋아요!', cls:'sm' } }) });
+  $('#nextBtn').onclick = next;
+}
+/* 11-14 5-6학년 중점 T '(내 생각을 프롬프트로) 표현하기': 리니 프롬프트와 비교해 고쳐 쓰기.
+   내가 쓴 '게임 방법'(왼쪽, 고쳐 쓰는 칸)과 리니가 같은 재료로 쓴 글(오른쪽)을 나란히 → 리니 글에만 있는 재료를 눌러 내 글에 더한다.
+   고르기로 끝내지 않고 결과물은 늘 내 프롬프트다. 리니 글은 메이커가 지은 견본(앱 안에 진짜 AI는 없다). */
+function rRew(st){
+  const mats = howMaterials(S), model = autoParts(S)._howCore, flat = t => String(t).replace(/\s+/g, '');
+  const has = (t, m) => m.keys.some(k => flat(t).includes(flat(k)));
+  if (!S.rew || S.rew.base == null) S.rew = { base:S.howMine, added:0 };
+  const rini = mats.map(m => has(model, m));
+  paint({ cls:'rew', hd: head(st, '리니도 게임 방법을 써 봤어요. 내 글에 빠진 것을 더해 고쳐 써요', '', '게임 방법 · 리니와 비교해 고쳐 쓰기'),
+    an:`<div class="rewcols">
+      ${fieldBlock({ id:'fh', value:S.howMine, max:320, area:true, cls:'grow', label:'🙂 내 게임 방법(고쳐 써요)', showLabel:true, q:'내 게임 방법' })}
+      <div class="rcard"><small><i aria-hidden="true">🤖</i>리니의 게임 방법</small><p class="rtext">${esc(model)}</p></div>
+    </div>
+    <div class="missrow"><span class="ml" id="mlab"></span><span id="miss"></span><span class="mstat" id="mstat"></span></div>`,
+    act: act('다음') });
+  const ta = $('#fh');
+  const check = () => {
+    const v = tidy(ta.value, 320), c = v ? checkText(v) : null;
+    S.howMine = v; S.howBy = v ? 'self' : '';
+    const miss = mats.map((m, i) => i).filter(i => rini[i] && !has(v, mats[i]));
+    const before = mats.filter(m => has(S.rew.base, m)).length, now = mats.filter(m => has(v, m)).length;
+    S.rew.added = Math.max(0, now - before);
+    $('#mlab').textContent = miss.length ? '리니 글에만 있는 것' : '리니 글에 있는 재료가 내 글에 다 들어 있어요';
+    $('#miss').innerHTML = miss.map(i => `<button type="button" class="matchip" data-i="${i}"><small>${esc(mats[i].label)}</small><b>${esc(mats[i].word)}</b></button>`).join('');
+    $('#mstat').textContent = S.rew.added ? `내가 더한 재료 ${S.rew.added}` : '';
+    const w = $('#fh_w'); w.hidden = !c; if (c) w.textContent = c.msg;
+    save(); updateNext(); drawMat(); fitSoon();
+  };
+  ta.addEventListener('input', check);
+  $('.kbok', anEl).onclick = () => ta.blur();
+  $('#miss').addEventListener('click', e => {
+    const b = e.target.closest('.matchip'); if (!b) return;
+    const word = (ta.value && !/\s$/.test(ta.value) ? ' ' : '') + mats[+b.dataset.i].word;
+    ta.value = (ta.value + word).slice(0, 320); check();
+    try { ta.focus({ preventScroll:true }); ta.setSelectionRange(ta.value.length, ta.value.length); } catch (err) {}
+  });
+  extraValid = () => S.howMine.length >= 25 && !(checkText(S.howMine) || {}).block;
+  $('#nextBtn').onclick = () => { S.wv = 0; save(); next(); };
+  check();
+}
 const textSize = t => { const n = (t || '').length; return n > 340 ? 's3' : n > 250 ? 's2' : n > 170 ? 's1' : ''; };
 function rWeave(st){
   const parts = partsOf(S), i = Math.max(0, Math.min(parts.length - 1, S.wv || 0)), p = parts[i], mine = mineCount(S), all = materialCount(S);
@@ -3096,7 +3198,7 @@ $('#devMenu').onclick = openDev;
    무대는 가려 둔 채 예시 답으로 모든 화면을 차례로 그려 재므로, fit-test.html · devices.html과 같은 잣대를 진짜 기기에서 쓴다.
    쓴 답(이어서 하기)은 건드리지 않는다(SHOT을 켜서 저장을 막는다). 결과는 화면과 window.DIAG(자동 점검 devtest.js가 읽는다)에 남는다.
    진단 화면 자체는 옛 브라우저에서도 보이게 gap · aspect-ratio 없이 짰다(style.css 맨 아래 .diag). */
-const BUILD = "20261113-0257";
+const BUILD = "20261114-0137";
 const dgSleep = ms => new Promise(r => setTimeout(r, ms));
 const dgRace = (p, ms) => Promise.race([p, dgSleep(ms).then(() => undefined)]);
 const dgEX = () => deepMerge(blank(), JSON.parse(JSON.stringify(EX)));
