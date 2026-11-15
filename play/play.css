@@ -83,6 +83,15 @@ a.card.gm:active .btn,a.btn:active{transform:translateY(4px);box-shadow:0 2px 0 
 .card.wait .nm{color:#55557a}
 .btn.off{background:#ececf3;color:#8a8aa6;border-color:#b8b8cc;box-shadow:0 6px 0 #b8b8cc;cursor:default}
 .btn.off svg path{fill:#8a8aa6}
+/* 11-16 놀이 카드는 격자 한 칸(휴먼쌤 "나중에 추가될 버튼 자리를 고려해서 좌우폭 조절"): 폰 2칸, 넓은 화면 3칸. 놀이가 늘면 옆 칸에 들어간다 */
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:30px}
+.cards .card{margin-top:0;padding:16px 14px 18px;gap:6px}
+.cards .nm{font-size:clamp(22px,6.4vw,28px);display:flex;flex-direction:column}
+.cards .nm em{margin:2px 0 0;font-size:16px}
+.cards .ds{font-size:14.5px;line-height:1.45}
+.cards .ds2{font-size:13px}
+.cards .btn{font-size:18px;min-height:48px;padding:8px 16px;margin-top:auto}
+.cards .card.gm .btn{margin-top:8px}
 .row{display:flex;justify-content:center;margin-top:28px}
 .foot{text-align:center;margin-top:30px;font-size:15px}
 .foot a{border-bottom:2px solid var(--ink)}
@@ -151,4 +160,7 @@ a.card.gm:active .btn,a.btn:active{transform:translateY(4px);box-shadow:0 2px 0 
   .gblk .num{font-size:72px}
   .gblk .yr{align-self:flex-end;padding-bottom:14px}
   .card{padding:26px 28px}
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .cards .card{padding:20px 20px 22px}
 }
+@media(min-width:640px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
