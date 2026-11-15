@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#1f2a44">
 <meta name="color-scheme" content="light dark">
 <title>게임 메이커 — 3-4학년</title>
@@ -38,8 +38,9 @@ try { performance.setResourceTimingBufferSize(800); } catch (e) {}
 }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html,body{height:100%;margin:0;overflow:hidden}
-body{background:#e3f0ff;color:var(--ink);font-family:var(--body);word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+/* 11-15 앱처럼 고정: 페이지가 밀리거나 튕기지 않게 · 두 손가락 확대와 두 번 눌러 확대를 막는다(아이폰은 app.js에서 한 번 더) */
+html,body{height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
+body{background:#e3f0ff;color:var(--ink);font-family:var(--body);word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent;touch-action:pan-x pan-y}
 button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer;-webkit-user-select:none;user-select:none;appearance:none;-webkit-appearance:none}
 b,strong{font-family:var(--disp);font-weight:400}
@@ -286,7 +287,7 @@ button.tile:active{transform:translateY(2px);box-shadow:0 2px 0 var(--line)}
 .dpad [data-m="-1,0"]{grid-area:up}.dpad [data-m="0,-1"]{grid-area:left}.dpad [data-m="1,0"]{grid-area:down}.dpad [data-m="0,1"]{grid-area:right}
 .padbtn.jump{width:112px;height:112px;font-family:var(--disp);font-size:23px}
 /* 빠르기 실험 */
-.app.lab .gscreen{grid-template-rows:auto auto auto minmax(0,1fr) auto;grid-template-areas:"top arena pad" "ttl arena pad" "seg arena pad" ". arena pad" "go arena pad"}
+.app.lab .gscreen{grid-template-rows:auto auto auto minmax(0,1fr) auto;grid-template-areas:"top arena pad" "ttl arena pad" "seg arena pad" "lh arena pad" "go arena pad"}
 .app.lab .gscreen h1{font-size:17px;line-height:1.3}
 .app.lab .hud,.app.lab .gmsg,.app.lab .glegend{display:none}
 .seg{grid-area:seg;display:flex;flex-direction:column;gap:6px}
@@ -1000,7 +1001,7 @@ svg.ico{display:block;width:1em;height:1em}
 .pc .an.mixon .tiles.pics .tile{min-height:min(250px,calc((var(--lh,720px) - 300px) / 2))}
 .pc .an.mixon .tile .pic{width:88px;height:88px}
 
-/* 11-13 생각하기(3-4학년 중점 C): 내 생각 · 리니 생각 카드 나란히, 같은 점 · 다른 점, 까닭 */
+/* 11-13 생각하기(3-4학년 중점 C Consider): 내 생각 · 리니 생각 카드 나란히, 같은 점 · 다른 점, 까닭 */
 .mythink{display:flex;align-items:flex-start;gap:12px;width:100%}
 .mythink .who{flex:none;font-size:40px;line-height:1;margin-top:26px}
 .mythink .fieldblk{flex:1;min-width:0}
@@ -1044,6 +1045,85 @@ svg.ico{display:block;width:1em;height:1em}
 .uparr span{font-size:34px;line-height:1;color:#20c997}
 .uparr small{font-family:var(--disp);font-size:12.5px;color:var(--soft);line-height:1.25}
 
+
+/* 11-15 달리기 놀이: 왼쪽을 보는 주인공 그림(공룡 · 거북이)은 뒤집어 앞(오른쪽)을 보게 */
+.rhero .pe.flip{display:inline-block;transform:scaleX(-1)}
+
+/* 11-15 '한 줄 → 기획' 둘째 판(휴먼쌤 "점검 첫페이지에서 이건 UI가 너무 이상해 좀 더 잘보이게"): 위 = 그냥 부탁하면, 아래 = 기획해서 부탁하면. 막대 길이로 글자 수를 견준다 */
+.upv{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;width:100%}
+.upa{flex:none;display:grid;grid-template-columns:auto minmax(0,1fr) 22% auto;align-items:center;gap:10px;background:#f3f4f7;border:2px dashed #b8c0cc;border-radius:16px;padding:6px 14px}
+.upk{font-family:var(--disp);font-size:14px;color:var(--soft);white-space:nowrap}
+.upq{min-width:0;font-size:16px;color:#4a5568;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upbar{display:block;height:12px;background:#e3e8f0;border-radius:6px;overflow:hidden}
+.upbar i{display:block;height:100%;border-radius:6px;background:#9aa5b8}
+.upa b{font-family:var(--disp);font-size:19px;color:#5b6577;white-space:nowrap}
+.upb{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;background:#fff;border:3px solid #20c997;box-shadow:0 4px 0 #b2f2e3;border-radius:18px;padding:7px 14px 8px}
+.uph{flex:none;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px}
+.uph .upk{color:#0b7a5c}
+.uph .upbar i{background:#20c997}
+.uph b{font-family:var(--disp);font-size:23px;color:#0b7a5c;white-space:nowrap}
+.upgrid{list-style:none;margin:0;padding:0;flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:min-content;align-content:start;gap:3px 16px;overflow:hidden}
+.upgrid li{display:flex;align-items:center;gap:6px;font-size:14px;line-height:1.35;min-width:0}
+.upgrid li i{font-style:normal;flex:none;width:20px;text-align:center}
+.upgrid li .k{flex:none;font-family:var(--disp);color:#0b7a5c}
+.upgrid li .v{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc .upv{gap:16px}
+.pc .upa{padding:14px 22px;border-radius:22px;gap:16px}
+.pc .upk{font-size:19px}
+.pc .upq{font-size:23px}
+.pc .upbar{height:18px;border-radius:9px}
+.pc .upa b{font-size:28px}
+.pc .upb{padding:16px 24px 18px;border-radius:24px;gap:14px}
+.pc .uph{gap:16px}
+.pc .uph b{font-size:38px}
+.pc .upgrid{gap:12px 32px}
+.pc .upgrid li{font-size:20px;gap:10px}
+.pc .upgrid li i{width:28px}
+
+/* 11-15 묶음 점검: 한 쪽에 한 묶음 상자를 화면 폭 가득(휴먼쌤 "왜 오른쪽으로 박스가 치우쳐져잇는지") */
+.app.chk .an{display:flex;flex-direction:column}
+.app.chk .paper{width:100%}
+.pc .app.chk .an{padding-top:6px}
+.pc .upgrid{grid-template-columns:1fr;gap:10px}
+.pc .upgrid li .k{min-width:7.5em}
+
+/* 11-15 생각하기: '왜요?' 대신 'AI의 답을 참고해서 새로 쓰기' 칸 */
+.app.cmp .fieldblk.cnew{flex:none;width:100%;margin-top:6px}
+html:not(.pc) .app.cmp .fieldblk.cnew .flabel{font-size:14px;margin-bottom:2px}
+html:not(.pc) .app.cmp .fieldblk.cnew input{padding-top:6px;padding-bottom:6px}
+
+/* 11-16 빠르기 실험 도움말 시안(?labhint=a 말풍선 · b 화살표): 처음에는 단추 셋 아래에서 위를, 하나를 누르면 '이 빠르기로 할래요' 위에서 아래를 가리킨다 */
+.labhint{grid-area:lh;align-self:start;position:relative;font-family:var(--disp);color:var(--navy);pointer-events:none}
+.labhint.down{align-self:end}
+.lh-a{margin-top:12px;background:#fff;border:2.5px solid #ff9f1c;border-radius:14px;box-shadow:0 3px 0 #ffd28a;padding:7px 10px 8px;animation:lhBob 1.6s ease-in-out infinite}
+.lh-a::before,.lh-a::after{content:'';position:absolute;left:50%;border-style:solid;border-color:transparent}
+.lh-a::before{top:-12px;margin-left:-11px;border-width:0 11px 12px;border-bottom-color:#ff9f1c}
+.lh-a::after{top:-8px;margin-left:-8px;border-width:0 8px 9px;border-bottom-color:#fff}
+.lh-a.down{margin:0 0 12px}
+.lh-a.down::before{top:auto;bottom:-12px;border-width:12px 11px 0;border-color:#ff9f1c transparent transparent}
+.lh-a.down::after{top:auto;bottom:-8px;border-width:9px 8px 0;border-color:#fff transparent transparent}
+.lh-a b{display:block;font-weight:400;font-size:15.5px;line-height:1.3}
+.lh-a span{display:block;font-family:var(--body);font-size:12.5px;line-height:1.38;color:var(--soft);margin-top:3px}
+.lh-b{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;margin-top:4px}
+.lh-b.down{margin:0 0 4px}
+.lh-b span{font-size:15px;line-height:1.3;color:#c2410c}
+.lharr{width:30px;height:35px;fill:#ff7a45;stroke:#c2410c;stroke-width:3;stroke-linejoin:round;animation:lhUp .9s ease-in-out infinite}
+.lh-b.down .lharr{transform:rotate(180deg);animation-name:lhDown}
+@keyframes lhBob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@keyframes lhUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes lhDown{0%,100%{transform:rotate(180deg) translateY(0)}50%{transform:rotate(180deg) translateY(-7px)}}
+.seg.glow{border-radius:13px;animation:lhGlow 1.3s ease-in-out infinite}
+.gconfirm.glow{animation:lhGlow2 1.3s ease-in-out infinite}
+@keyframes lhGlow{0%,100%{box-shadow:0 0 0 2px rgba(255,159,28,.35)}50%{box-shadow:0 0 0 6px rgba(255,159,28,.75)}}
+@keyframes lhGlow2{0%,100%{box-shadow:0 4px 0 var(--cta-d),0 0 0 2px rgba(255,159,28,.35)}50%{box-shadow:0 4px 0 var(--cta-d),0 0 0 7px rgba(255,159,28,.75)}}
+.pc .app.lab.lhon .gscreen{grid-template-rows:auto auto auto auto auto auto auto;grid-template-areas:"arena top" "arena ttl" "arena seg" "arena lh" "arena pad" "arena hint" "arena go"}
+.pc .labhint{justify-self:start;max-width:440px}
+.pc .lh-a b{font-size:21px}
+.pc .lh-a span{font-size:16px}
+.pc .lh-a::before{left:90px}.pc .lh-a::after{left:90px}
+.pc .lh-b span{font-size:19px}
+.pc .lharr{width:40px;height:46px}
+@media (prefers-reduced-motion:reduce){.labhint,.lharr,.seg.glow,.gconfirm.glow{animation:none}}
 
 </style>
 </head>
@@ -1136,7 +1216,7 @@ const colorHex = name => { const c = COLORS.find(x => x[0] === name); return c ?
    그 주소의 대답은 계속 기다렸다가 오면 다시 그 주소를 쓴다(글자로 돌려 둔 것도 그림으로 되돌린다 — emoRevive). 느린 망을 막힌 망으로 굳히지 않는다. */
 const EMO_OWN = true;     // build.py가 넣는다: 우리 주소에 둘 그림 폴더(emo/)가 있을 때 true
 const OWN_ASSETS = EMO_OWN && true;   // 그림과 글꼴(fonts/)을 모두 우리 주소에 두었을 때(보호자용 가이드의 허가 표시 글이 바뀐다)
-const EMO_ALL = ["1f430","1f996","1f916","1f431","1f422","1f427","2604-fe0f","1f9e9","1f998","1f64b","1f9d1-200d-1f91d-200d-1f9d1","1f9f8","1f60e","1f4d6","26a1","1f3c6","1f3c1","1f525","1f648","1f4aa","1f61c","1f917","1f9d0","1f319","2600-fe0f","1f307","2744-fe0f","1f308","1f32b-fe0f","1f514","1f3bc","1f32c-fe0f","1f4a7","1f941","1f493","1f606","1f3c5","1f60c","1f632","1f389","1f30c","1f420","1f36d","1f333","1f47e","1f58d-fe0f","1f3b5","1f507","1f4bb","1f4f1","1f500","2795","1f5fa-fe0f","1f195","1f4a8","1f3a4","1f45f","1f3a9","1f36c","1f642","2b50","1f3af","1f0cf","2753","270f-fe0f","1f436","1f43b","1f98a","1f43c","1f438","1f419","1f984","1f47b","1f47d","1f9da","1f359","1f335","2601-fe0f","1f344","1f680","1f41d","1f989","1f329-fe0f","1f6aa","1faa8","1f3ae","1f4ad","1f9f5","1f914","2764-fe0f","23f1-fe0f","1f30d","1f522","1f3a8","1f4dd","2728","1f64a","1f527"];
+const EMO_ALL = ["1f430","1f996","1f916","1f431","1f422","1f427","2604-fe0f","1f9e9","1f998","1f64b","1f9d1-200d-1f91d-200d-1f9d1","1f9f8","1f60e","1f4d6","26a1","1f3c6","1f3c1","1f525","1f648","1f4aa","1f61c","1f917","1f9d0","1f319","2600-fe0f","1f307","2744-fe0f","1f308","1f32b-fe0f","1f514","1f3bc","1f32c-fe0f","1f4a7","1f941","1f493","1f606","1f3c5","1f60c","1f632","1f389","1f30c","1f420","1f36d","1f333","1f47e","1f58d-fe0f","1f3b5","1f507","1f4bb","1f4f1","1f500","2795","1f5fa-fe0f","1f195","1f4a8","1f3a4","1f45f","1f3a9","1f36c","1f642","2b50","1f3af","1f0cf","2753","270f-fe0f","1f436","1f43b","1f98a","1f43c","1f438","1f419","1f984","1f47b","1f47d","1f9da","1f359","1f335","2601-fe0f","1f344","1f680","1f41d","1f989","1f329-fe0f","1f6aa","1faa8","1f4ad","1f4dd","1f914","1f3ae","2764-fe0f","23f1-fe0f","2728","1f30d","1f3a8","1f64a","1f527"];
 /* 이름 · 주소 · 되는지 알아볼 때 기다리는 시간 · 주소 끝에 붙일 것.
    우리 주소의 그림은 오래 캐시하게 올린다(_headers: 다시 열 때 망을 타지 않는다). 그림 묶음의 판을 바꾸면 ?v= 도 바꿔야 옛 그림이 남지 않는다 */
 const EMO_ST = [['우리 주소', 'emo/', 8000, '?v=1.1.0'], ['jsDelivr', 'https://cdn.jsdelivr.net/npm/@lobehub/fluent-emoji-3d@1.1.0/assets/', 4000, '']]
@@ -1324,8 +1404,8 @@ const MSG_LOSE = ['괜찮아, 다시 해 보자!'];
 const POWER_CHIPS = ['날개 신발', '번개 망토', '투명 모자', '용기 사탕'];
 /* 닿는 성취기준 후보(3-4학년군, 기획안 11절). 이 활동과의 연결은 출판부 대조 전 */
 const STANDARDS = [
-  ['4미02-01', '관찰과 상상으로 아이디어를 떠올려 표현 주제를 구체화할 수 있다.', '씨앗 한 줄 · 주인공 인터뷰 · 상상 뽑기 · 만약에 카드'],
-  ['4미02-04', '표현 의도를 가지고 작품을 제작하며 자기 작품을 소중히 여길 수 있다.', '확인하고 다시 부탁하기 · 마지막 판단'],
+  ['4미02-01', '관찰과 상상으로 아이디어를 떠올려 표현 주제를 구체화할 수 있다.', '처음 한 줄 · 주인공 인터뷰 · 장소 카드 뽑기 · 기분과 꾸미기'],
+  ['4미02-04', '표현 의도를 가지고 작품을 제작하며 자기 작품을 소중히 여길 수 있다.', '게임 이름 짓기 · 완성 그림 저장하기'],
   ['4국06-03', '매체 소통 윤리를 고려하여 매체 자료를 활용하고 공유한다.', 'AI 사용 약속(개인정보 · 남의 캐릭터)'],
 ];
 /* 3-4학년: 주인공은 그림 카드에서 고른다(고르면 게임 속 그림도 함께 정해진다) */
@@ -1410,8 +1490,9 @@ const TWISTS = [
 
 /* 질문 차례 */
 /* 6판: 한 화면에 들어오지 않던 것을 둘로 나눴다(주인공 모습 · 그림, 성공 · 실패 말, 아이템 이름 · 힘) */
-const HERO_Q = ['hero1','hero2','hero3','hero4','hero5','hero6'];
-const WORLD_Q = ['world1','world2','world3'];
+/* 쉬운 판(11-15): 주인공은 그림 · 이름 · 좋아하는 것 · 무서워하는 것 넷, 세계는 장소 카드 하나 */
+const HERO_Q = ['hero1','hero2','hero4','hero5'];
+const WORLD_Q = ['world1'];
 const STORY_Q = ['story1','story2'];
 const FEEL_Q = ['feel1','feel2','feel4'];   // 11-12 휴먼쌤: '무엇으로 게임을 할까요?'는 뺌(기기는 '둘 다'로 부탁)
 const nm = S => S.hero.name || '주인공';
@@ -1422,8 +1503,10 @@ const Q = {
   hero2: { sec:'hero', type:'text', path:'hero.name', max:8, q:'주인공의 이름을 지어 주세요', ph:'예) 솜이', chips:['솜이','콩콩','모모','번개'] },
   hero3: { sec:'hero', type:'pick', path:'hero.mind', q:S => `${nm(S)}${josa(nm(S),'은/는')} 어떤 성격인가요?`,
     opts:[['씩씩하고 용감해','씩씩해요'],['겁이 많지만 호기심도 많아','겁이 많아요'],['장난꾸러기야','장난꾸러기예요'],['느긋하고 다정해','다정해요']] },
-  hero4: { sec:'hero', type:'text', path:'hero.like', max:10, bq:'가장 좋아하는 것은?', q:S => `${nm(S)}에게 물어봐요. “가장 좋아하는 것은?”`, help:'이것을 게임에서 모아요', ph:'예) 당근 케이크', chips:['당근 케이크','별사탕','조약돌'] },
-  hero5: { sec:'hero', type:'text', path:'hero.fear', max:10, bq:'가장 무서워하는 것은?', q:S => `${nm(S)}에게 물어봐요. “가장 무서워하는 것은?”`, help:'이것이 방해꾼이 돼요', ph:'예) 천둥', chips:['천둥','먹구름','까마귀'] },
+  hero4: { sec:'hero', type:'text', path:'hero.like', max:10, bq:'가장 좋아하는 것은?', q:S => `${nm(S)}에게 물어봐요. “가장 좋아하는 것은?”`,
+    help:S => ({ whack:'게임에서 이것을 콕 잡아요', dodge:'게임에서 이것을 받으면 점수예요' })[S.bone] || '게임에서 이것을 모아요', ph:'예) 당근 케이크', chips:['당근 케이크','별사탕','조약돌'] },
+  hero5: { sec:'hero', type:'text', path:'hero.fear', max:10, bq:'가장 무서워하는 것은?', q:S => `${nm(S)}에게 물어봐요. “가장 무서워하는 것은?”`,
+    help:S => ({ run:'게임에서 이것을 폴짝 뛰어넘어요', dodge:'게임에서 이것을 요리조리 피해요' })[S.bone] || '이것이 게임의 방해꾼이 돼요', ph:'예) 먹구름', chips:['먹구름','까마귀','뾰족 가시'] },
   hero6: { sec:'hero', type:'pick', path:'hero.skill', q:S => `${nm(S)}${josa(nm(S),'이/가')} 가장 잘하는 것은?`,
     opts:[['높이 뛰기','높이 뛰기'],['빨리 달리기','빨리 달리기'],['꼭꼭 숨기','꼭꼭 숨기'],['노래하기','노래하기']] },
 
@@ -1515,6 +1598,9 @@ BONES.custom = { get name(){ return customName(); }, get kind(){ return customNa
   moves:[['천천히 움직여.','천천히 움직여요'],['주인공을 살금살금 따라와.','주인공을 따라와요'],['갑자기 나타나기도 해.','갑자기 나타나요']],
   bigger:['방해꾼이 늘어나고','방해꾼이 늘어나'], fx:['5초 동안 무엇에도 다치지 않아','5초 동안 무적이 돼요'],
   mix:c => '가끔 보너스 시간이 와서 점수를 두 배로 받아.' };
+/* 쉬운 판(11-15): 고르는 게임은 바로 해 볼 수 있는 넷(직접 입력하기는 휴먼쌤 "후보지에서 없애줘"로 뺌). 맛보기가 없으니 카드에 한 줄 설명을 단다 */
+const BONE_EASY = ['dodge','maze','run','whack'];
+const BONE_EASY_SUB = { dodge:'떨어지는 것을 피해요', maze:'길을 찾아 문으로 가요', run:'달리다가 폴짝 뛰어요', whack:'튀어나오면 콕 잡아요' };
 const BONE_TASTED = ['dodge','collect','maze','run'];   // 맛본 놀이로 만드는 뼈대
 const BONE_OTHER = ['whack','match','quiz'];            // 맛보기 없이 고르는 뼈대
 const BONE_ORDER = [...BONE_TASTED, ...BONE_OTHER];
@@ -1526,11 +1612,11 @@ const EX = {
   seed:'토끼가 달리는 게임',
   bone:'run', bone2:'', sure:'run',
   pick:{ players:'a', tone:'a', story:'a', goal:'a', hard:'a' },
-  hero:{ look:'분홍 토끼', emoji:'🐰', name:'솜이', mind:'겁이 많지만 호기심도 많아', like:'당근 케이크', fear:'천둥', skill:'높이 뛰기' },
+  hero:{ look:'분홍 토끼', emoji:'🐰', name:'솜이', mind:'', like:'당근 케이크', fear:'먹구름', skill:'' },
   world:{ place:'구름 위에 뜬 숲', pa:'구름 위에 뜬', pb:'숲', time:'비가 그치고 무지개가 뜬 날', colors:['하늘색','분홍','연두'], sound:'', secret:'' },
   story:{ begin:'당근 케이크가 바람에 날아갔어', goal:'', win:'모두 모여 잔치를 열어' },
   feel:{ mood:['fun'], mood1:'fun', art:'알록달록 사탕 나라', audio:['sfx'], winMsg:'솜이야, 잘했어!', loseMsg:'', device:'both' },
-  rule:{ collect:'당근', enemy:'먹구름', topic:'', move:0, power:'날개 신발', fx:'5초 동안 두 번 이어서 뛸 수 있어', speed:'slow', diff:'mid', lives:3, time:0, point:1, levels:['faster'], twist:'무지개를 먹으면 잠깐 동안 하늘을 날아' },
+  rule:{ collect:'', enemy:'', topic:'', move:0, power:'날개 신발', fx:'5초 동안 두 번 이어서 뛸 수 있어', speed:'slow', diff:'mid', lives:3, time:0, point:1, levels:['faster'], twist:'' },
   key:'', title:'솜이의 케이크 달리기', pitch:'', nick:'', more:'뛸 때 뿅 소리가 나게 해 줘',
   gap:['hero','world','speed'],
   check:{ hero:'o', world:'o', how:'x', foe:'o', twist:'x', msg:'o' },
@@ -1588,6 +1674,8 @@ function gameCore(root, o, onEnd, api){
   return { st, later, msg, start, add(n){ st.score += n; scoreEl.textContent = st.score; },
     handle:{ stop(){ st.done = true; st.running = false; cleanup(); }, setSpeed(s){ st.speed = s; if (api.onSpeed) api.onSpeed(s); } } };
 }
+/* 11-15 휴먼쌤 "공룡이 뒤를 보고 잇음": 옆모습 그림 가운데 왼쪽을 보는 것(공룡 · 거북이)은 달리기 놀이에서 좌우로 뒤집어 달리는 쪽(오른쪽)을 보게 한다 */
+const FACE_LEFT = ['🦖', '🐢'];
 function startGame(id, root, o, onEnd){
   return ({ dodge: gameDodge, maze: gameMaze, run: gameRun, whack: gameWhack })[id](root, o, onEnd);
 }
@@ -1726,7 +1814,7 @@ function gameMaze(root, o, onEnd){
 function gameRun(root, o, onEnd){
   const V = { slow:0.42, mid:0.6, fast:0.8 }, HX = 0.18;
   root.innerHTML = gameHud(o) +
-    `<div class="arena run" id="garena"><span class="rhero" id="ghero"><span class="pe">${o.hero || '🙂'}</span>${o.name ? `<span class="pn">${esc(o.name)}</span>` : ''}</span><i class="rground"></i><div class="count" id="gcount"></div></div>
+    `<div class="arena run" id="garena"><span class="rhero" id="ghero"><span class="pe${FACE_LEFT.includes(o.hero) ? ' flip' : ''}">${o.hero || '🙂'}</span>${o.name ? `<span class="pn">${esc(o.name)}</span>` : ''}</span><i class="rground"></i><div class="count" id="gcount"></div></div>
      <div class="pad"><button type="button" class="padbtn jump" id="gjump">폴짝!</button></div>
      ${gameLegend(o)}<p class="gmsg" id="gmsg" aria-live="polite">돌이 다가오면 눌러서 뛰어넘어요</p>`;
   const arena = $('#garena', root), heroEl = $('#ghero', root);
@@ -1820,52 +1908,55 @@ function stubArt(id, S){
   return `<div class="stub quiz" ${style}><span class="qh">${hero}</span><span class="qb">문제 1. …?</span><span class="qo">① ② ③ ④</span></div>`;
 }
 
-/* 답을 AI에게 부탁하는 글(프롬프트)로 엮기 — 3-4학년은 일곱 묶음(기획안 9절 견본 2).
-   방해꾼과 도우미 · 단계와 빠르기는 '게임 방법'에 합친다. 아이는 엮어 준 글을 읽고 빠진 것을 한마디 더한다(S.more). */
-const PART_TAGS = [['ask','부탁'],['hero','주인공'],['world','세계와 이야기'],['how','게임 방법'],['twist','나만의 특별 규칙'],['look','화면과 소리'],['must','꼭 지켜 줘']];
+/* 답을 AI에게 부탁하는 글(프롬프트)로 엮기 — 3-4학년 쉬운 판(2026-11-15).
+   둘째(11-15 휴먼쌤 "… 이거 추가해서 3-4학년꺼 다시"): 처음 쓴 한 줄 · 둘 중 하나 다섯 · 친구가 느낄 기분 · 화면 느낌 · 아이템과 효과 · 빠르기 실험 · 어렵기를
+   원래 판(시안\game-maker-34-20261112\의 prompt.js)과 같은 말로 다시 넣는다. 묻지 않는 것(기기 · 점수)은 3-4학년에게 알맞은 값으로 채운다.
+   여섯 묶음(특별 규칙은 11-15 휴먼쌤 "이 특별규칙은 뺄게"로 뺐다). */
+const PART_TAGS = [['ask','부탁'],['hero','주인공'],['world','장소'],['how','게임 방법'],['look','화면과 소리'],['must','꼭 지켜 줘']];
 
 function ctxOf(S){
   const b = BONES[S.bone] || BONES.run, r = S.rule;
   const mv = b.moves[r.move == null ? 0 : r.move] || b.moves[0];
   const T = b.tOpts ? b.tOpts[0] : 60;
   return { bone: BONES[S.bone] ? S.bone : 'run', N: S.hero.name || '주인공', C: r.collect || S.hero.like || '별', E: r.enemy || S.hero.fear || '방해꾼', M: mv[0],
-    dev: S.feel.device || 'both', PT: r.point || 1, T, L: r.lives || 3, topic: r.topic || S.hero.like || '내가 좋아하는 것' };
+    dev: 'both', PT: r.point || 1, T, L: r.lives || 3, topic: r.topic || S.hero.like || '내가 좋아하는 것' };
 }
-/* 빠르기 실험에서 고른 빠르기 · 어렵기 · 자신 있던 놀이 */
+/* 처음 쓴 한 줄(없으면 게임 종류로 지은 한 줄): '한 줄 → 기획' 쪽에서 길이를 견준다 */
+function oneLine(S){
+  if (S.seed) return `${j(S.seed, '을/를')} 만들어 줘.`;
+  const b = BONES[S.bone];
+  const kind = S.bone === 'custom' ? customName() : b ? b.kind : '재미있는';
+  return `${kind} 게임 만들어 줘.`;
+}
+/* 빠르기 실험에서 고른 빠르기와 어렵기(원래 판과 같은 말) */
 function speedLine(S){
   const b = BONES[S.bone] || BONES.run, sp = S.rule.speed;
   let t = { slow:'처음에는 천천히 시작해 줘.', mid:'처음에는 보통 빠르기로 시작해 줘.', fast:'처음부터 조금 빠르게 해도 돼.' }[sp] || '처음에는 천천히 시작해 줘.';
   if (sp && b.game) t += ' 내가 해 보고 고른 빠르기야.';
   t += S.rule.diff === 'hard' ? ' 갈수록 점점 빨라지게 해 줘.' : S.rule.diff === 'easy' ? ' 끝까지 쉽게 해 줘.' : ' 갈수록 조금씩 빨라져.';
-  if (S.sure && S.sure !== 'none' && b.taste !== S.sure) t += ' 나는 이런 놀이가 아직 서투르니까 처음은 아주 쉽게 해 줘.';
   return t;
 }
 function autoParts(S){
-  const b = BONES[S.bone] || BONES.run, c = ctxOf(S), r = S.rule, h = S.hero, w = S.world, st = S.story, f = S.feel, P = S.pick, out = {};
+  const b = BONES[S.bone] || BONES.run, c = ctxOf(S), h = S.hero, w = S.world, r = S.rule, f = S.feel, P = S.pick || {}, out = {};
 
   const title = S.title || '아직 이름 없는 게임';
-  let ask = `${b.kind} 게임 '${title}'${josa(title, '을/를')} 만들어 줘. 내가 직접 생각한 게임이야.`;
+  let ask = `${b.kind} 게임 '${title}'${josa(title, '을/를')} 만들어 줘. 초등학생인 내가 직접 생각한 게임이야.`;
   if (S.seed) ask += ` 처음 떠올린 것은 '${S.seed}'${josa(S.seed, '이었어/였어')}.`;
   out.ask = ask;
 
-  let who = (h.look || '내가 만든 주인공') + (h.name ? ` '${h.name}'` : '');
+  const who = (h.look || '내가 만든 주인공') + (h.name ? ` '${h.name}'` : '');
   let hero = who + josa(who, '이야/야') + '.';
   if (h.emoji) hero += ` 게임에서는 ${h.emoji} 이모지로 그려 줘.`;
-  if (h.mind) hero += ' ' + fin(h.mind);
   if (h.like && h.fear) hero += ` ${j(h.like, '을/를')} 좋아하고 ${j(h.fear, '을/를')} 무서워해.`;
   else if (h.like) hero += ` ${j(h.like, '을/를')} 좋아해.`;
   out.hero = hero;
 
-  const ws = [];
-  if (w.place && w.time) ws.push(`배경은 ${j(w.place, '이고/고')}, 때는 ${j(w.time, '이야/야')}.`);
-  else if (w.place) ws.push(`배경은 ${j(w.place, '이야/야')}.`);
-  if (w.colors && w.colors.length) ws.push(`색은 ${w.colors.join(', ')}${josa(w.colors[w.colors.length - 1], '을/를')} 써 줘.`);
-  if (st.begin) ws.push(`어느 날 ${fin(st.begin)}`);
-  if (st.win) ws.push(`성공하면 ${fin(st.win)}`);
-  if (st.begin) ws.push(P.story === 'b' ? '이야기는 한 줄만 보여 주고 바로 시작해.' : '시작 화면에서 이 이야기를 보여 줘.');
-  out.world = ws.join(' ');
+  let world = w.place ? `게임은 ${w.place}에서 벌어져. 배경을 이곳처럼 꾸며 줘.` : '';
+  if (P.story === 'a') world += (world ? ' ' : '') + '시작 화면에서 주인공과 이곳 이야기를 두세 줄로 보여 줘.';
+  if (P.story === 'b') world += (world ? ' ' : '') + '이야기는 한 줄만 보여 주고 바로 시작해.';
+  out.world = world;
 
-  /* 게임 방법: 뼈대 · 방해꾼 · 아이템 · 목숨 · 빠르기를 한 묶음에 */
+  /* 게임 방법: 뼈대 · 방해꾼 · 아이템 · 목숨 · 빠르기 · 취향을 한 묶음에 */
   let how = b.how(c) + ' ' + b.enemy(c);
   if (r.power) how += ` ${j(r.power, '을/를')} 얻으면 ${fin(r.fx || FX_COMMON[0][0])}`;
   how += ` 목숨은 ${c.L}개야. ${speedLine(S)}`;
@@ -1873,20 +1964,21 @@ function autoParts(S){
   if (P.hard === 'b') how += ' 잘하는 사람도 도전할 만하게 해 줘.';
   if (P.goal === 'a') how += ' 최고 점수를 기억해 줘.';
   if (P.goal === 'b') how += ' 끝까지 가면 축하 장면을 보여 줘.';
-  if (S.more) how += ' 그리고 ' + fin(S.more);
   out.how = how;
 
-  out.twist = fin(r.twist);
-
+  const win = winMsgOf(S, c);
   let look = `${f.art || '알록달록한'} 느낌으로 ${P.tone === 'b' ? '멋지게' : '귀엽게'} 꾸미고, 그림은 이모지로 그려 줘.`;
   const md = (f.mood || []).map(k => MOOD[k]).filter(Boolean);
-  if (md.length) look += ` 하는 사람이 ${md[0].b}면 좋겠어.`;
-  if (f.winMsg) look += ` 성공하면 "${f.winMsg}"${josa(f.winMsg, '이라고/라고')} 보여 줘.`;
+  if (md.length) look += ` 하는 사람이 ${md[0].b}면 좋겠어. ${md[0].fx}`;
+  else look += " 점수를 얻으면 반짝이가 터지고 '뿅' 소리가 나게 해 줘.";
+  look += ` 게임이 끝나면 "${win}"${josa(win, '이라고/라고')} 보여 줘.`;
   out.look = look;
 
-  out.must = "설치 없이 바로 되는 게임으로 만들어 줘. 글자는 한국어로 크게 써 줘. 게임 방법 설명과 '다시 하기' 단추를 넣어 줘. 무섭거나 나쁜 내용, 다른 게임이나 만화의 캐릭터는 넣지 마.";
+  out.must = "설치 없이 바로 되는 게임으로 만들어 줘. 키보드로도, 손가락으로도 할 수 있게 해 줘. 글자는 한국어로 크게 써 줘. 게임 방법 설명과 '다시 하기' 단추를 넣어 줘. 무섭거나 나쁜 내용, 다른 게임이나 만화의 캐릭터는 넣지 마.";
   return out;
 }
+/* 이겼을 때 뜨는 말: 생각하기에서 고른 말, 없으면 정해 둔 말 */
+function winMsgOf(S, c){ return (S.feel && S.feel.winMsg) || `${c.N}${josa(c.N, '아/야')}, 잘했어!`; }
 function partsOf(S){
   const auto = autoParts(S);
   return PART_TAGS.map(([k, tag]) => {
@@ -1896,8 +1988,7 @@ function partsOf(S){
 }
 /* 쓰지 않지만 app.js가 부르는 곳이 있어 남긴다 */
 function howMaterials(){ return []; }
-
-/* 확인하기 점검표(3-4학년은 다섯 가지 안팎) */
+/* 내가 부탁한 것(점검 목록): 담벼락의 '내 생각으로 다시 생각하기'가 이 목록으로 AI 게임과 견준다(maker-hook.js가 함께 보낸다) */
 function checkItems(S){
   const c = ctxOf(S), h = S.hero, w = S.world, r = S.rule, items = [];
   const whoBase = h.name || h.look || '주인공', who = `${h.emoji ? h.emoji + ' ' : ''}${whoBase}`;
@@ -1905,57 +1996,36 @@ function checkItems(S){
   if (w.place) items.push({ k:'world', q:`배경이 ‘${w.place}’ 같나요?`, redo:'배경이 내가 말한 곳과 달라.', fix:`배경을 ${w.place}${josa(w.place, '으로/로')} 바꿔 줘` });
   items.push({ k:'how', q:`${j(c.C, '을/를')} 모으고, 목숨이 ${c.L}개인가요?`, redo:'모으는 것과 목숨이 내가 말한 것과 달라.', fix:`${j(c.C, '을/를')} 모으게 하고 목숨은 ${c.L}개로 해 줘` });
   items.push({ k:'foe', q:`${j(c.E, '이/가')} 방해꾼으로 나오나요?`, redo:`${j(c.E, '이/가')} 안 나와.`, fix:`${j(c.E, '을/를')} 방해꾼으로 넣어 줘` });
-  if (r.twist) items.push({ k:'twist', q:'나만의 특별 규칙이 들어갔나요?', redo:'나만의 특별 규칙이 빠졌어.', fix:`이 규칙을 꼭 넣어 줘. ${fin(r.twist)}` });
-  if (S.feel.winMsg) items.push({ k:'msg', q:`성공하면 “${S.feel.winMsg}”가 나오나요?`, redo:'성공했을 때 나오는 말이 달라.', fix:`성공하면 "${S.feel.winMsg}"${josa(S.feel.winMsg, '이라고/라고')} 보여 줘` });
+  if (r.power) items.push({ k:'power', q:`${j(r.power, '을/를')} 얻으면 내가 고른 일이 생기나요?`, redo:`${r.power}의 힘이 내가 고른 것과 달라.`, fix:`${j(r.power, '을/를')} 얻으면 이렇게 되게 해 줘. ${fin(r.fx || FX_COMMON[0][0])}` });
+  const win = winMsgOf(S, c);
+  items.push({ k:'msg', q:`끝나면 “${win}”${josa(win, '이라는/라는')} 말이 나오나요?`, redo:'끝날 때 나오는 말이 달라.', fix:`게임이 끝나면 "${win}"${josa(win, '이라고/라고')} 보여 줘` });
   return items;
 }
-/* 다시 부탁하는 말은 하나만: 달랐던 것 가운데 아이가 고른 하나(redoK) */
-function redoItem(S){
-  const bad = checkItems(S).filter(it => S.check && S.check[it.k] === 'x');
-  return bad.find(it => it.k === S.redoK) || bad[0] || null;
-}
-function redoText(S){
-  const it = redoItem(S);
-  if (it){ const v = fin((S.redo || {})[it.k] || ''); return v ? `방금 만든 게임에서 내 부탁과 다른 곳이 있어. ${it.redo} ${v} 나머지는 그대로 둬 줘.` : ''; }
-  return S.redoMore ? `방금 만든 게임 마음에 들어! 하나만 더해 줘. ${fin(S.redoMore)} 나머지는 그대로 둬 줘.` : '';
-}
+function redoItem(){ return null; }
+function redoText(){ return ''; }
 function keyOptions(){ return []; }
-/* 내 말로 쓴 칸: 이름 · 좋아하는 것 · 무서워하는 것 · 게임 이름 · 한마디 더(+ 씨앗 한 줄, 재료 고쳐 쓰기) */
+/* 내 말로 쓴 칸: 처음 한 줄 · 이름 · 좋아하는 것 · 무서워하는 것 · 이겼을 때 말 · 게임 이름 */
 function mineCount(S){
-  let n = 0;
-  if (S.seed) n++;
-  if (S.hero.name) n++;
-  if (S.hero.like) n++;
-  if (S.hero.fear) n++;
-  if (S.title) n++;
-  if (S.more) n++;
-  if (S.rule.enemy && S.rule.enemy !== S.hero.fear) n++;
-  if (S.rule.collect && S.rule.collect !== S.hero.like) n++;
-  return n;
+  return [S.seed, S.hero.name, S.hero.like, S.hero.fear, S.feel.winMsg, S.title].filter(Boolean).length;
 }
 function promptText(S){ return partsOf(S).filter(p => p.text).map(p => `[${p.tag}] ${p.text}`).join('\n\n'); }
 
+/* 프롬프트에 들어간 내 답의 수 */
 function materialCount(S){
-  let n = 0;
-  const add = v => { if (Array.isArray(v) ? v.length : (v !== '' && v != null && v !== 0)) n++; };
-  add(S.seed); add(S.sure);
-  Object.keys(EITHER).forEach(k => add(S.pick[k]));
-  ['look','name','mind','like','fear','skill'].forEach(k => add(S.hero[k]));
-  ['place','time','colors'].forEach(k => add(S.world[k]));
-  ['begin','win'].forEach(k => add(S.story[k]));
-  ['mood','art','winMsg','device'].forEach(k => add(S.feel[k]));
-  add(S.bone);
-  ['collect','enemy','topic','power','fx','speed','diff','twist'].forEach(k => add(S.rule[k]));
-  if (S.rule.move != null) n++;
-  add(S.title); add(S.more);
-  return n;
+  const P = S.pick || {};
+  return [S.seed, S.bone, S.hero.look, S.hero.name, S.hero.like, S.hero.fear, S.world.place, S.feel.mood1 || (S.feel.mood || [])[0], S.feel.art,
+    S.rule.power, S.rule.fx, S.rule.speed, S.rule.diff, S.feel.winMsg, S.title].filter(Boolean).length + Object.keys(EITHER).filter(k => P[k]).length;
 }
+/* 리니가 지어 보는 게임 이름(리니와 같이 생각하기에서 둘을 고른다). 게임 종류에 맞춘 것을 앞에 둔다 */
 function titleIdeas(S){
-  const n = S.hero.name, c = S.rule.collect || S.hero.like, list = [];
+  const n = S.hero.name, c = S.hero.like, p = S.world.pb || '', list = [];
+  const byBone = { run: n && `달려라, ${n}!`, maze: n && `${n}의 미로 탈출`, dodge: n && `요리조리 ${n}`, whack: c && `콕콕 ${c} 잡기` }[S.bone];
+  if (byBone) list.push(byBone);
   if (n && c) list.push(`${n}의 ${c} 대작전`);
-  if (n) list.push(`달려라, ${n}!`);
+  if (p) list.push(`${p} 대모험`);
   if (c) list.push(`${j(c, '을/를')} 찾아라`);
-  return list.filter(x => x.length <= 16).slice(0, 3);
+  if (n) list.push(`${n}${josa(n, '과/와')} 친구들`);
+  return list.filter((x, i, a) => x && x.length <= 16 && a.indexOf(x) === i).slice(0, 4);
 }
 
 /* 화면 흐름과 그리기 — 6판 (2026-11-12 휴먼쌤 "이 꼴로 옮기기": 화면 꼴 시안 2판대로)
@@ -1963,11 +2033,16 @@ function titleIdeas(S){
    PC(마우스가 있고 넓은 화면): 왼쪽 차례 칸 · 가운데 무대(질문은 위, '이전 · 다음'은 아래) · 키보드(숫자 키 · Enter · 방향키 · O X).
    무대는 기준 크기(폰 760×300 이상, PC 1280×720)로 그린 뒤 화면에 맞춰 통째로 키우거나 줄인다(layout). 아래로 밀어 내리는 화면은 없다. */
 /* 3-4학년 시안 1판(2026-11-12): 5-6학년 6판의 틀 그대로, 글 · 문항 · 엮기 · 확인만 3-4학년 것으로 바꿨다 */
-const KEY = 'gm2-sian-34-v1';
+/* 3-4학년 쉬운 판(2026-11-15 휴먼쌤 "기존에꺼 단계가 너무 많고 복잡해서, 정말 핵심적인것만 남겨서 단계를 대폭 줄이고 난이도를 낮춘 버전"):
+   42개 화면 → 13개(PC 12개). 남긴 것: 약속 · 게임 종류 · 주인공(그림 · 이름 · 좋아하는 것 · 무서워하는 것) · 장소 카드 · 내 주인공으로 한 판 ·
+   게임 이름(내 생각 → 리니와 같이 생각하기, 3-4 중점 C) · 프롬프트 · 엔딩. 뺀 것: 씨앗 한 줄 · 맛보기 세 판 · 놀이 카드 · 둘 중 하나 다섯 · 성격 · 잘하는 것 ·
+   때 · 색 · 이야기 · 기분 · 꾸미기 · 특별 규칙 · 성공하면 뜨는 말 · 아이템 · 빠르기 실험 · 어렵기 · 한 줄 → 자세한 부탁 · 엮은 글 읽기. 뺀 것은 프롬프트에서 정해 둔 값으로 채운다(prompt.js) */
+const KEY = 'gm2-34easy-v1';
 const stageEl = $('#stage'), app = $('#app'), hdEl = $('#hd'), anEl = $('#an'), actEl = $('#act'), phEl = $('#ph'), matEl = $('#mat'), sheetEl = $('#sheet');
 let S = blank(), game = null, busy = false, toastT = 0, SHOT = false, extraValid = null;
 let PCMODE = false, FORCE = null, SCALE = 1, BOOTED = false, LAST = { w:0, h:0 }, CK = null, RD = 0, APP_TOP = 0, SAFE_TEST = null;
 let DIAG = false, CARDP = null;   // 기기 진단(?diag=1, diag.js) · 미리 만들어 둔 엔딩 그림
+let LABHINT = 'a';                // 빠르기 실험 도움말(11-16 휴먼쌤 "말풍선으로 하고"): 기본은 a 말풍선. 견주기용 ?labhint=b 화살표 · ?labhint=0 없음
 const FINE = (() => { try { return matchMedia('(pointer:fine)').matches; } catch (e) { return false; } })();
 
 function blank(){
@@ -2000,20 +2075,25 @@ const STEPS = [];
   const add = (id, o) => STEPS.push(Object.assign({ id }, o));
   const qs = list => list.forEach(q => add(q, { type:'q' }));
   const either = k => add('e_' + k, { type:'either', key:k });
-  add('start', { type:'start' }); add('goals', { type:'goals', mOnly:true }); add('pledge', { type:'pledge', mOnly:true }); add('seed', { type:'seed' });
-  add('tintro', { type:'tintro' });
-  TASTES.forEach((g, i) => add('t' + (i + 1), { type:'tplay', game:g.id, n:i + 1 }));
-  add('bone', { type:'bone' }); add('card', { type:'card' });
-  either('players');
+  /* 쉬운 판 둘째(11-15 휴먼쌤 "만들고 싶은 게임을 한 줄로 쓰기, 친구가 느낄 기분 · 화면 느낌, 아이템 · 아이템 효과 · 빠르기 실험 · 어렵기, 취향 다섯 가지 이거 추가해서 3-4학년꺼 다시"):
+     상상(한 줄 쓰기 → 게임 종류 · 누구와 → 주인공 넷 · 그림 느낌 → 장소 · 이야기 먼저? → 한 판 → 기분 · 화면 느낌) →
+     규칙(신나는 것 · 쉬운/어려운 → 아이템 · 효과 → 빠르기 실험 → 어렵기) → 생각(이겼을 때 말 · 게임 이름) → 점검 → 완성.
+     특별 규칙은 휴먼쌤 "이건 갑자기 쌩뚱맞고" → "이 특별규칙은 뺄게"로 뺐다(11-15) */
+  add('start', { type:'start' }); add('pledge', { type:'pledge', mOnly:true });
+  add('seed', { type:'seed' });
+  add('bone', { type:'bone' }); either('players');
   qs(HERO_Q); either('tone');
   qs(WORLD_Q); either('story');
-  /* 11-13 3-4학년 중점 C '(내 생각과 AI 답변을 견주어) 생각하기': 세 곳에서 내 생각 먼저 → 리니(AI) 생각과 같이 생각하기 */
-  add('twist', { type:'my', k:'twist' }); add('c_twist', { type:'cmp', k:'twist' });
-  qs(STORY_Q); either('goal');
-  qs(['feel1', 'feel2']); add('msg', { type:'my', k:'msg' }); add('c_msg', { type:'cmp', k:'msg' }); either('hard');
+  add('pplay', { type:'pplay' });
+  qs(['feel1', 'feel2']);
+  either('goal'); either('hard');
   qs(['rule3', 'rule3b']); add('lab', { type:'lab' }); qs(['rule4']);
-  add('up', { type:'up' });   // 11-14 휴먼쌤 "3-4학년에도 넣어주고": 엮기 맨 앞 '한 줄 → 자세한 부탁'
-  add('title', { type:'my', k:'title' }); add('c_title', { type:'cmp', k:'title' }); add('weave', { type:'weave' }); add('result', { type:'result' });
+  /* 3-4학년 중점 C '(내 생각과 AI 답변을 견주어) 생각하기' 두 곳: 이겼을 때 뜨는 말 · 게임 이름 — 내 생각 먼저 → 리니 생각과 같이 놓고 고르고 까닭 */
+  add('msg', { type:'my', k:'msg' }); add('c_msg', { type:'cmp', k:'msg' });
+  add('title', { type:'my', k:'title' }); add('c_title', { type:'cmp', k:'title' });
+  add('up', { type:'up' });   // 11-15: 한 줄 → 기획
+  PART_TAGS.forEach(([k]) => add('chk_' + k, { type:'chk', k }));   // 11-15: 묶음마다 한 쪽씩 점검
+  add('result', { type:'result' });
   add('done', { type:'done' });   // 11-12 휴먼쌤: 복사하기 옆 '완료'를 누르면 엔딩
 })();
 const STEP = Object.fromEntries(STEPS.map(s => [s.id, s]));
@@ -2021,9 +2101,11 @@ const idxOf = id => STEPS.findIndex(s => s.id === id);
 const isPlay = s => s.type === 'tplay' || s.type === 'pplay';
 
 function go(id){ S.step = id; save(); render(); }
+/* 11-15 휴먼쌤 "이건 뭐야?"(직접 입력한 게임의 '한 판' 화면에 퀴즈 그림이 나옴): 직접 입력한 게임은 미리 해 볼 놀이가 없어 '한 판 해 보기'를 건너뛴다 */
+const skipStep = s => s.type === 'pplay' && !(BONES[S.bone] && BONES[S.bone].game);
 function next(){
   let k = idxOf(S.step) + 1;
-  while (k < STEPS.length - 1 && PCMODE && STEPS[k].mOnly) k++;          // PC는 시작 화면에 배움 목표와 약속이 함께 있다
+  while (k < STEPS.length - 1 && ((PCMODE && STEPS[k].mOnly) || skipStep(STEPS[k]))) k++;          // PC는 시작 화면에 배움 목표와 약속이 함께 있다
   go(STEPS[Math.min(STEPS.length - 1, k)].id);
 }
 function back(){
@@ -2036,16 +2118,21 @@ function advance(){ if (busy) return; busy = true; save(); setTimeout(() => { bu
 /* ---------- 네 걸음과 그 안의 차례 ---------- */
 const IT = (name, steps, sum) => ({ name, steps, sum });
 const PHASES = [
-  { no:'맛보기', icon:'🎮', items:[IT('놀이 세 판', ['tintro', 't1', 't2', 't3']), IT('놀이 고르기', ['bone', 'card', 'e_players'], S => (BONES[S.bone] ? BONES[S.bone].name : ''))] },
   { no:'상상', icon:'💭', items:[
+    IT('한 줄 쓰기', ['seed'], S => S.seed),
+    IT('게임 고르기', ['bone', 'e_players'], S => (BONES[S.bone] ? BONES[S.bone].name : '')),
     IT('주인공', [...HERO_Q, 'e_tone'], S => [S.hero.emoji, S.hero.name].filter(Boolean).join(' ')),
-    IT('세계', [...WORLD_Q, 'e_story'], S => S.world.place),
-    IT('특별 규칙', ['twist', 'c_twist'], S => (S.rule.twist ? '특별 규칙' : '')),
-    IT('이야기', [...STORY_Q, 'e_goal']),
-    IT('느낌과 꾸미기', ['feel1', 'feel2', 'msg', 'c_msg', 'e_hard'], S => (S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · ')),
-    IT('규칙', ['rule3', 'rule3b', 'lab', 'rule4'], S => (LEVEL34[S.rule.diff] || {}).label || '')] },
-  { no:'엮기', icon:'🧵', items:[IT('한 줄 → 자세한 부탁', ['up']), IT('게임 이름', ['title', 'c_title'], S => S.title), IT('엮은 글 읽기', ['weave']), IT('프롬프트 완성', ['result'])] },
-  { no:'완성', icon:'🏆', items:[IT('게임 완성', ['done'])] },
+    IT('장소', [...WORLD_Q, 'e_story'], S => S.world.place),
+    IT('한 판 해 보기', ['pplay']),
+    IT('기분과 꾸미기', ['feel1', 'feel2'], S => (S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · '))] },
+  { no:'규칙', icon:'🎯', items:[
+    IT('취향', ['e_goal', 'e_hard']),
+    IT('아이템', ['rule3', 'rule3b'], S => S.rule.power),
+    IT('빠르기 실험', ['lab'], S => SPEED_LABEL[S.rule.speed] || ''),
+    IT('어렵기', ['rule4'], S => (LEVEL34[S.rule.diff] || {}).label || '')] },
+  { no:'생각', icon:'🤖', items:[IT('이겼을 때 말', ['msg', 'c_msg'], S => S.feel.winMsg), IT('게임 이름', ['title', 'c_title'], S => S.title)] },
+  { no:'점검', icon:'📝', items:[IT('한 줄 → 기획', ['up']), IT('묶음마다 점검', PART_TAGS.map(([k]) => 'chk_' + k))] },
+  { no:'완성', icon:'🏆', items:[IT('프롬프트 완성', ['result']), IT('게임 완성', ['done'])] },
 ];
 const firstOf = p => p.items[0].steps[0];
 const lastOf = p => { const it = p.items[p.items.length - 1]; return it.steps[it.steps.length - 1]; };
@@ -2159,7 +2246,7 @@ function bindInput(id, max, set, required, raw){
   check();
   return inp;
 }
-function focusIfDesktop(inp){ try { if (!SHOT && PCMODE && FINE) inp.focus({ preventScroll:true }); } catch (e) {} }
+function focusIfDesktop(inp){ try { if (!SHOT && FINE) inp.focus({ preventScroll:true }); } catch (e) {} }   // 마우스가 있는 기기면 글 칸에 바로 커서(11-15부터 PC도 같은 꼴)
 function toast(msg){
   const t = $('#toast'); t.textContent = msg; t.hidden = false;
   clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2300);
@@ -2193,8 +2280,8 @@ function openFlow(){
   $$('#sheetBody [data-go]').forEach(b => b.onclick = () => { closeSheet(); go(b.dataset.go); });
 }
 function openTeacher(){
-  openSheet('보호자용 가이드', '어른의 역할 · 배움 목표 · 성취기준 후보', `<p>아이가 만들고 싶은 게임을 상상해 AI에게 부탁하는 글(프롬프트)로 엮는 활동입니다. 3-4학년 판은 한 화면에 한 문장이고, 글자를 치는 곳은 처음 한 줄 · 이름 · 좋아하는 것 · 무서워하는 것 · 게임 이름뿐이며 나머지는 고르기와 뽑기입니다. 3-4학년의 중점은 '(내 생각과 AI 답변을 견주어) 생각하기'라서, 특별 규칙 · 성공하면 뜨는 말 · 게임 이름은 아이가 먼저 쓰고 리니(책 속 AI 친구, 미리 지어 둔 글)의 생각과 나란히 놓고 견주어 생각해 고르고 까닭을 정합니다. 프롬프트는 메이커가 엮고 아이는 읽습니다. 완성한 프롬프트는 어른과 함께 AI에 붙여 넣고, 만들어진 게임을 보며 고치고 싶은 곳을 다시 부탁합니다. 폰과 태블릿은 가로로 놓고 합니다.</p>
-    <h3>어른의 역할</h3><ul><li><b>시작 전</b> AI 사용 약속 네 가지를 아이와 함께 소리 내어 읽고, 아이가 하나씩 눌러 약속하게 해 주세요.</li><li><b>고르고 쓰는 동안</b> 답을 대신 고르거나 고쳐 주기보다 “왜 그걸 골랐어?”, “그러면 어떻게 될까?”처럼 물어 아이가 제 생각을 말하게 해 주세요. 정답은 없습니다.</li><li><b>붙여 넣기 전</b> 완성한 프롬프트를 아이와 함께 읽으며 이름 · 학교 · 전화번호처럼 아이를 알아볼 수 있는 내용이 없는지 확인해 주세요.</li><li><b>AI에 넣을 때</b> 프롬프트를 AI에 넣는 일은 어른의 기기와 계정으로 합니다.</li><li><b>게임이 나오면</b> 아이와 함께 해 보고, 처음 생각과 다른 곳을 아이가 스스로 찾아 말하게 해 주세요. AI가 만든 게임은 부탁과 다를 수 있고, 그것을 찾아 다시 부탁하는 일이 이 활동의 가운데입니다.</li><li><b>내용이 맞지 않으면</b> 무섭거나 아이에게 맞지 않는 내용이 나오면 바로 멈추고, 무엇이 문제였는지 아이와 이야기한 뒤 다시 부탁해 주세요.</li><li><b>나눠서 해도 돼요</b> 맛보기 · 상상 · 엮기를 여러 번에 나눠 해도 됩니다. 같은 기기에서 다시 열면 하던 곳부터 이어집니다. 교실에서는 두세 명의 것을 함께 보고, 나머지는 집에서 보호자와 이어 갈 수 있습니다.</li></ul>
+  openSheet('보호자용 가이드', '어른의 역할 · 배움 목표 · 성취기준 후보', `<p>아이가 만들고 싶은 게임을 상상해 AI에게 부탁하는 글(프롬프트)로 엮는 활동입니다. 3-4학년 판은 한 줄 쓰기 → 게임 종류 → 주인공(그림 고르기 · 이름 · 좋아하는 것 · 무서워하는 것) → 장소 카드 → 내 주인공으로 한 판 → 친구가 느낄 기분 · 화면 느낌 → 아이템 · 빠르기 실험 · 어렵기 → 생각하기 두 곳 → 한 줄과 기획 나란히 보기 → 묶음마다 점검 차례이고, 사이사이에 둘 중 하나 고르기 다섯 가지가 있습니다. 3-4학년의 중점은 '(내 생각과 AI 답변을 견주어) 생각하기'라서, 이겼을 때 뜨는 말 · 게임 이름은 아이가 먼저 쓰고 리니(책 속 AI 친구, 미리 지어 둔 글)의 생각 둘과 나란히 놓고 같은 점 · 다른 점을 본 뒤 고르고 까닭을 정합니다. 프롬프트가 엮이면 묶음마다 한 쪽씩 내 생각과 맞는지 점검하고 고쳐 씁니다. 프롬프트는 메이커가 엮습니다. 완성한 프롬프트는 어른과 함께 AI에 붙여 넣고, 만들어진 게임을 보며 고치고 싶은 곳을 다시 부탁합니다. 폰과 태블릿은 가로로 놓고 합니다.</p>
+    <h3>어른의 역할</h3><ul><li><b>시작 전</b> AI 사용 약속 네 가지를 아이와 함께 소리 내어 읽고, 아이가 하나씩 눌러 약속하게 해 주세요.</li><li><b>고르고 쓰는 동안</b> 답을 대신 고르거나 고쳐 주기보다 “왜 그걸 골랐어?”, “그러면 어떻게 될까?”처럼 물어 아이가 제 생각을 말하게 해 주세요. 정답은 없습니다.</li><li><b>붙여 넣기 전</b> 완성한 프롬프트를 아이와 함께 읽으며 이름 · 학교 · 전화번호처럼 아이를 알아볼 수 있는 내용이 없는지 확인해 주세요.</li><li><b>AI에 넣을 때</b> 프롬프트를 AI에 넣는 일은 어른의 기기와 계정으로 합니다.</li><li><b>게임이 나오면</b> 아이와 함께 해 보고, 처음 생각과 다른 곳을 아이가 스스로 찾아 말하게 해 주세요. AI가 만든 게임은 부탁과 다를 수 있고, 그것을 찾아 다시 부탁하는 일이 이 활동의 가운데입니다.</li><li><b>내용이 맞지 않으면</b> 무섭거나 아이에게 맞지 않는 내용이 나오면 바로 멈추고, 무엇이 문제였는지 아이와 이야기한 뒤 다시 부탁해 주세요.</li><li><b>나눠서 해도 돼요</b> 같은 기기에서 다시 열면 하던 곳부터 이어집니다. 교실에서는 두세 명의 것을 함께 보고, 나머지는 집에서 보호자와 이어 갈 수 있습니다.</li></ul>
     <h3>배움 목표</h3><ol>${GOALS.map(g => `<li>${g}</li>`).join('')}</ol>
     <h3>닿는 성취기준 (후보)</h3><p class="tn">2022 개정 교육과정 3~4학년군의 문장입니다(출판부 고시 원문 대조 전). 이 활동과의 연결은 아직 대조하기 전인 후보입니다.</p>
     <ul class="stds">${STANDARDS.map(([code, text, where]) => `<li><b>[${code}]</b> ${text}<small>${where}</small></li>`).join('')}</ul>
@@ -2206,7 +2293,6 @@ function openTeacher(){
 
 /* ---------- 그리기 ---------- */
 function render(){
-  if (S.step === 'feel4') S.step = 'msg';   // 11-14 생각하기 판: 전 판의 '성공하면 뜨는 말'(feel4)에 멈춰 있던 아이는 새 자리(msg)에서 잇는다
   let st = STEP[S.step] || STEP.start;
   if (game){ game.stop(); game = null; }
   busy = false; extraValid = null; closeSheet(); closeCardView(); CARDP = null;
@@ -2214,7 +2300,7 @@ function render(){
   if (idxOf(st.id) > idxOf('bone') && !BONES[S.bone]) S.bone = 'maze';
   drawRail(st);
   ({ start:rStart, goals:rGoals, pledge:rPledge, seed:rSeed, tintro:rTIntro, tplay:rTPlay, bone:rBone, sure:rSure, card:rCard, either:rEither, q:rQ,
-     pintro:rPIntro, pplay:rPPlay, lab:rLab, gap:rGap, title:rTitle, my:rMy, cmp:rCmp, up:rUp, mine:rMine, weave:rWeave, more:rMore, result:rResult,
+     pintro:rPIntro, pplay:rPPlay, lab:rLab, gap:rGap, title:rTitle, my:rMy, cmp:rCmp, up:rUp, chk:rChk, mine:rMine, weave:rWeave, more:rMore, result:rResult,
      check:rCheck, redo:rRedo, redo2:rRedo2, judge:rJudge, judge2:rJudge2, judge3:rJudge3, done:rDone })[st.type](st);
   fitSoon();
 }
@@ -2232,7 +2318,7 @@ let fitT = 0;
 function fitSoon(){ clearTimeout(fitT); fitT = setTimeout(fit, 30); }
 
 /* ---------- 시작 · 오늘 배우는 것 · 약속 · 씨앗 한 줄 ---------- */
-const ROAD = `<div class="road">${[['🎮', '맛보기', '놀이 세 판'], ['💭', '상상', '고르고 뽑기'], ['🧵', '엮기', '부탁하는 글'], ['🏆', '완성', 'AI에게 부탁하기']].map(([i, b, s]) => `<div><i aria-hidden="true">${i}</i><b>${b}</b><small>${s}</small></div>`).join('<em aria-hidden="true">›</em>')}</div>`;
+const ROAD = `<div class="road">${[['💭', '상상', '주인공 · 장소 · 기분'], ['🎯', '규칙', '아이템 · 빠르기'], ['🤖', '생각', '리니와 같이 생각하기'], ['📝', '점검', '묶음마다 살펴보기']].map(([i, b, s]) => `<div><i aria-hidden="true">${i}</i><b>${b}</b><small>${s}</small></div>`).join('<em aria-hidden="true">›</em>')}</div>`;
 const pledgeBtns = arr => `<div class="pledges">${PLEDGES.map((p, i) => `<button type="button" class="pl${arr[i] ? ' on' : ''}" data-i="${i}" aria-pressed="${!!arr[i]}"><i aria-hidden="true">✓</i><span>${esc(p)}</span></button>`).join('')}</div>`;
 function bindPledges(arr, keep){
   const sync = () => {
@@ -2253,13 +2339,13 @@ function rStart(){
   if (!PCMODE){
     /* 11-12 휴먼쌤: 보호자용 가이드는 오른쪽 위 정식 단추, 시작은 '완성' 바로 옆, 이어서 하기는 맨 아래 가로로 긴 단추 */
     paint({ cls:'start', an:`<button type="button" class="guideb" id="teachBtn2">보호자용 가이드</button><div class="eyebrow2">초등 3~4학년 · AI와 함께 나만의 게임 만들기</div><h1 class="title" id="qh" tabindex="-1">게임 메이커<span>3-4학년</span></h1>
-      <p class="lede">놀이를 해 보고, 상상하고, 내 생각과 AI 생각을 같이 놓고 생각해요.</p><div class="roadrow">${ROAD}<button type="button" class="startb" id="nextBtn">시작</button></div>
+      <p class="lede">한 줄로 시작해 상상하고, 규칙을 정하고, 리니와 같이 생각해요.</p><div class="roadrow">${ROAD}<button type="button" class="startb" id="nextBtn">시작</button></div>
       ${saved ? '<button type="button" class="resumeb" id="resumeBtn">이어서 하기</button>' : ''}`, act:'' });
-    $('#nextBtn').onclick = () => { S = blank(); go('goals'); };
+    $('#nextBtn').onclick = () => { S = blank(); go('pledge'); };
   } else {
     const arr = SHOT ? S.pledge.slice() : [0, 0, 0, 0];
     paint({ cls:'start', an:`<div class="pstartg"><div><div class="eyebrow2"><span class="gbadge">3-4학년</span>AI와 함께 나만의 게임 만들기</div><h1 class="title" id="qh" tabindex="-1">게임 메이커</h1>
-        <p class="lede">놀이를 해 보고, 상상하고, 내 생각과 AI 생각을 같이 놓고 생각해요.</p>${ROAD}</div>
+        <p class="lede">한 줄로 시작해 상상하고, 규칙을 정하고, 리니와 같이 생각해요.</p>${ROAD}</div>
       <div class="pcard"><h2>오늘 우리가 해볼 것</h2><ol>${GOALS.map(g => `<li>${g}</li>`).join('')}</ol><h2 class="pp">AI 사용 약속</h2>${pledgeBtns(arr)}</div></div>`,
       act: actHTML({ noPrev:true, sub: saved ? { label:'하던 곳부터 이어서 하기', id:'resumeBtn' } : null, note:'', go:{ long:'약속을 지킬게요! 시작하기', key:false } }) });
     bindPledges(arr, false);
@@ -2316,9 +2402,10 @@ const boneLabel = k => (k === 'run' ? BONES[k].name : BONES[k].name + ' 게임')
 const kindOf = () => (S.bone === 'custom' ? (S.boneText || '직접 정한 게임') : BONES[S.bone] ? boneLabel(S.bone) : '');
 function rBone(st){
   S.bone2 = '';   // 3-4학년은 놀이 하나(섞기 없음)
-  const all = [...BONE_TASTED, ...BONE_OTHER], isC = S.bone === 'custom';
-  const list = all.map((k, i) => tile(k, boneLabel(k), BONES[k].taste && TASTE[BONES[k].taste] ? TASTE[BONES[k].taste].name : '', S.bone === k, { pic:BONE_ICON[k], k:i + 1 }));
-  list.push(tile('custom', '직접 입력하기', '', isC, { pic:'✏️', k:all.length + 1 }));   // 11-12 휴먼쌤: 퀴즈 옆에 직접 입력하기
+  /* 쉬운 판: 바로 해 볼 수 있는 넷과 직접 입력하기(맛보기 없이 고르니 한 줄 설명을 붙인다) */
+  const all = BONE_EASY, isC = S.bone === 'custom';
+  const list = all.map((k, i) => tile(k, BONES[k].name, BONE_EASY_SUB[k], S.bone === k, { pic:BONE_ICON[k], k:i + 1 }));
+  /* 11-15 휴먼쌤 "직접 입력한 게임은 후보지에서 없애줘 그냥": 직접 입력하기 카드를 뺐다(바로 해 볼 수 있는 넷만) */
   paint({ hd: head(st, '어떤 게임을 만들고 싶어요?', ''), anCls: isC ? 'cust' : '',
     an: tilesBox(list, 4, 'pics') + `<div id="customBox"${isC ? '' : ' hidden'}>${fieldBlock({ id:'f', value:S.boneText, ph:'예) 로봇 축구', max:16, label:'만들고 싶은 게임', q:'어떤 게임을 만들고 싶어요?' })}</div>`,
     act: act('다음') });
@@ -2553,15 +2640,17 @@ function rPIntro(st){
   $('#nextBtn').onclick = next;
 }
 function rPPlay(st){
-  const b = BONES[S.bone];
+  const b = BONES[S.bone], n = nm(S);
   if (b.game){
-    paint({ cls:'game g-' + b.game, an: gameScreen({ tag:'내 주인공으로 한 판', title:esc(b.name), skip:'건너뛸래요', hint:GHINT[b.game] }) });
-    game = startGame(b.game, $('#groot'), gameOpts({ seconds:TASTE_SEC, speed:'mid' }), () => { game = null; toast('끝! 무엇을 더하면 더 재미있을까요?'); next(); });
-    $('#skipGame').onclick = next; $('#gBack').onclick = back;
+    /* 쉬운 판: 맛보기 없이 여기서 처음 놀아 본다. 내 주인공 · 좋아하는 것 · 무서워하는 것이 놀이판에 나온다 */
+    paint({ cls:'game g-' + b.game, an: gameScreen({ tag:'내 게임 미리 해 보기', title:`${esc(n)}${josa(n, '이/가')} 나타났어요!`, skip:'건너뛸래요', hint:GHINT[b.game] }) });
+    game = startGame(b.game, $('#groot'), gameOpts({ seconds:TASTE_SEC, speed:'slow' }), () => { game = null; toast('끝! 이제 게임 이름을 지어요'); next(); });
+    $('#skipGame').onclick = next; $('#gBack').onclick = back; $('#gPrev').onclick = back;
     return;
   }
-  paint({ hd: head(st, `${esc(b.name)} 놀이는 미리 해 볼 수 없어요`, ''),
-    an:`<div class="stubwrap">${stubArt(S.bone, S)}<div class="sianbox">내 주인공과 내가 고른 색이 들어간 그림을 보며 상상해요. 여기에 무엇을 더하면 더 재미있을까요?</div></div>`, act: act('다음') });
+  return go(STEPS[idxOf('pplay') + 1].id);   // 직접 입력한 게임: 미리 해 볼 놀이가 없으니 다음 화면으로(차례 칸에서 눌러 와도)
+  paint({ hd: head(st, `${esc(b.name)} 게임은 미리 해 볼 수 없어요`, ''),
+    an:`<div class="stubwrap">${stubArt(S.bone, S)}<div class="sianbox">내 주인공이 들어간 그림을 보며 상상해요. 진짜 게임은 AI가 만들어 줘요.</div></div>`, act: act('다음') });
   $('#nextBtn').onclick = next;
 }
 function rLab(st){
@@ -2570,12 +2659,30 @@ function rLab(st){
   const seg = cls => `<div class="seg${cls ? ' ' + cls : ''}" id="spSeg">${['slow', 'mid', 'fast'].map(v => `<button type="button" data-v="${v}" aria-pressed="${S.rule.speed === v}">${SPEED_LABEL[v]}</button>`).join('')}</div>`;
   /* 11-12 휴먼쌤 "pc버전에서는 왜 빠르기 테스트해보는게 없어?": 미리 해 볼 놀이가 없는 게임은 요리조리 피하기로 해 본다 */
   const g = b.game || 'dodge';
-  paint({ cls:'game lab g-' + g, an: gameScreen({ tag:'규칙 · 빠르기 실험', title: b.game ? '빠르기를 바꿔 가며 해 보고, 처음 빠르기를 골라요' : '비슷한 놀이로 빠르기를 바꿔 해 보고, 처음 빠르기를 골라요', extra:seg(''), confirm:'이 빠르기로 할래요', hint:GHINT[g] }) });
+  /* 11-16 휴먼쌤 "느리게/보통/빠르게 3개 중에 하나를 선택해서 실험해보라는 보조설명이 있어야될꺼 같아 화살표를 하던 말풍선을 하던 넣어줘 이거 시안만 빠르게 먼저":
+     시안 둘(?labhint=a 말풍선 · b 화살표). 처음에는 단추 셋을 가리키고, 하나를 누르면 아래 '이 빠르기로 할래요'를 가리킨다 */
+  const lh = LABHINT ? `<div class="labhint lh-${LABHINT}" id="labHint" aria-live="polite"></div>` : '';
+  paint({ cls:'game lab g-' + g + (LABHINT ? ' lhon' : ''), an: gameScreen({ tag:'규칙 · 빠르기 실험', title: b.game ? '빠르기를 바꿔 가며 해 보고, 처음 빠르기를 골라요' : '비슷한 놀이로 빠르기를 바꿔 해 보고, 처음 빠르기를 골라요', extra:seg('') + lh, confirm:'이 빠르기로 할래요', hint:GHINT[g] }) });
   game = startGame(g, $('#groot'), gameOpts({ seconds:0, speed:S.rule.speed, g }), () => {});
   $('#gBack').onclick = back;
+  const ARR = '<svg class="lharr" viewBox="0 0 40 46" aria-hidden="true"><path d="M20 3 37 21H27v22H13V21H3Z"/></svg>';
+  const hintAt = pressed => {
+    const el = $('#labHint'); if (!el) return;
+    const v = SPEED_LABEL[S.rule.speed] || '보통';
+    el.classList.toggle('down', pressed);
+    $('#spSeg').classList.toggle('glow', !pressed); $('#nextBtn').classList.toggle('glow', pressed);
+    el.innerHTML = LABHINT === 'a'
+      ? (pressed ? `<b>‘${v}’${josa(v, '으로/로')} 바뀌었어요!</b><span>다른 것도 해 보고, 마음에 들면 아래 단추를 눌러요.</span>`
+                 : `<b>🤖 셋 중 하나를 눌러 봐요!</b><span>누르면 바로 그 빠르기로 바뀌어요.</span>`)
+      : (pressed ? `<span>다른 것도 눌러 보고,<br>마음에 들면 이 단추!</span>${ARR}`
+                 : `${ARR}<span>하나를 눌러<br>빠르기를 바꿔 봐요</span>`);
+    fitSoon();
+  };
+  hintAt(false);
   $$('#spSeg button').forEach(bt => bt.onclick = () => {
     S.rule.speed = bt.dataset.v; $$('#spSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === bt)));
     if (game) game.setSpeed(S.rule.speed);
+    hintAt(true);
     save(); drawMat();
   });
   $('#nextBtn').onclick = next; save(); drawMat();
@@ -2599,17 +2706,20 @@ function rGap(st){
   extraValid = () => cur().length >= 3;
   $('#nextBtn').onclick = next; paintG();
 }
-/* ---------- 11-13 생각하기(3-4학년 중점 C '(내 생각과 AI 답변을 견주어) 생각하기') ----------
+/* ---------- 11-13 생각하기(3-4학년 중점 C Consider '(내 생각과 AI 답변을 견주어) 생각하기', 11-15 이름 바뀜) ----------
    세 곳(특별 규칙 · 성공하면 뜨는 말 · 게임 이름)에서 ① 내 생각을 먼저 쓰고(보기 없음) ② 리니(책 속 AI)의 생각 둘과 나란히 놓고
    같은 점 · 다른 점을 보고 ③ 더 좋은 것을 고르고 까닭 하나. 리니의 생각은 아이 답으로 지은 글이다(앱 안에 진짜 AI는 없다). */
 const CMP = {
-  twist:{ name:'나만의 특별 규칙', h:'만약에 …라면? 특별 규칙을 먼저 내가 만들어요', help:'리니의 생각은 그다음에 봐요.', ph:'예) 만약에 비가 오면 길이 미끄러워진다면', max:60, area:true, skip:true,
+  twist:{ name:'나만의 특별 규칙', h:'규칙을 다 정했어요. 나만의 특별 규칙도 하나 만들어 볼까요?', help:'‘만약에 …라면?’ 하고 내 생각을 먼저 써요. 리니의 생각은 그다음에 봐요. 생각나지 않으면 건너뛰어도 돼요.', ph:'예) 만약에 비가 오면 길이 미끄러워진다면', max:60, area:true, skip:true,
+    rh:'리니도 특별 규칙을 생각해 봤어요. 어느 규칙이 더 재미있을까요?', unit:'규칙',
     get:S => S.rule.twist, set:(S, v) => { S.rule.twist = v; }, rini:S => { const c = ctxOf(S); return TWISTS.map(f => f(c)); },
     why:['더 신나서', '주인공과 어울려서', '어렵지 않아서', '새로워서'] },
-  msg:{ name:'성공하면 뜨는 말', h:'성공하면 어떤 말이 뜰까요? 먼저 내가 써요', help:'리니의 생각은 그다음에 봐요.', ph:'예) 와, 해냈다!', max:24,
+  msg:{ name:'이겼을 때 뜨는 말', h:'게임에서 이기면 화면에 어떤 말이 뜰까요?', help:'게임을 한 친구에게 건네는 말이에요. 먼저 내가 쓰고, 리니의 생각은 그다음에 봐요.', ph:'예) 와, 해냈다!', max:24,
+    rh:'리니도 이겼을 때 뜨는 말을 생각해 봤어요. 어느 말이 더 좋아요?', unit:'말',
     get:S => S.feel.winMsg, set:(S, v) => { S.feel.winMsg = v; }, rini:S => [`${nm(S)}${josa(nm(S), '아/야')}, 잘했어!`, ...MSG_WIN, `${nm(S)} 최고! 한 번 더?`],
     why:['이름이 들어가서', '짧고 신나서', '기분 좋아져서', '내가 지어서'] },
   title:{ name:'게임 이름', h:'게임 이름을 먼저 내가 지어요', help:'리니의 생각은 그다음에 봐요.', ph:'예) 내 게임 이름', max:16,
+    rh:'리니도 게임 이름을 지어 봤어요. 어느 이름이 더 좋아요?', unit:'이름',
     get:S => S.title, set:(S, v) => { S.title = v; }, rini:S => titleIdeas(S),
     why:['게임이 잘 보여서', '기억하기 쉬워서', '재미있어서', '내가 지어서'] },
 };
@@ -2622,9 +2732,11 @@ function riniTwo(k){   // 리니의 생각 둘: 내 생각과 같은 것은 빼�
   const a = h % all.length, b = (a + 1 + (h >> 3) % (all.length - 1)) % all.length;
   return [all[a], all[b === a ? (a + 1) % all.length : b]];
 }
-function cmpKeys(){   // 같은 점 · 다른 점을 찾을 낱말: 내 주인공 이름 · 모을 것 · 장소 · 방해꾼
-  const r = S.rule, h = S.hero;
-  return [h.name, r.collect || h.like, S.world.pb || S.world.place, r.enemy || h.fear].filter(Boolean).filter((x, i, a) => a.indexOf(x) === i);
+/* 같은 점 · 다른 점을 찾을 낱말과 그 이름표(11-15 휴먼쌤 "이건 뭘 의미하는건지 모르겠어": 낱말만 보이면 무엇인지 몰라서 '주인공 이름 ‘번개’'처럼 이름표를 붙인다) */
+function cmpKeys(){
+  const r = S.rule, h = S.hero, seen = [];
+  return [['주인공 이름', h.name], ['좋아하는 것', r.collect || h.like], ['장소', S.world.pb || S.world.place], ['무서워하는 것', r.enemy || h.fear]]
+    .filter(([, w]) => w && !seen.includes(w) && seen.push(w)).map(([l, w]) => ({ l, w }));
 }
 const hasKey = (t, k) => flatT(t).includes(flatT(k)) || (k.length >= 3 && flatT(t).includes(flatT(k).slice(0, 2)));
 function rMy(st){
@@ -2639,33 +2751,35 @@ function rMy(st){
 }
 function rCmp(st){
   const k = st.k, C = CMP[k], c = cmpOf(k), two = riniTwo(k), keys = cmpKeys();
-  if (!c.pick) c.pick = 'mine';
   const cards = [['mine', '내 생각', '🙂', c.mine], ['r0', '리니 생각', '🤖', two[0]], ['r1', '리니 생각', '🤖', two[1]]].filter(x => x[3]);
   const val = p => (p === 'mine' ? c.mine : p === 'r0' ? two[0] : p === 'r1' ? two[1] : c.mix);
-  const kw = t => keys.filter(x => hasKey(t, x));
-  /* 같은 점 · 다른 점: 내 생각과 리니 생각에 든 낱말을 나란히 놓고 본다 */
-  const mineK = kw(c.mine), riniK = [...new Set([...kw(two[0] || ''), ...kw(two[1] || '')])];
+  const kw = t => keys.filter(x => hasKey(t, x.w));
+  /* 같은 점 · 다른 점: 내 이름과 리니 이름에 내 답(주인공 이름 · 좋아하는 것 · 장소 · 무서워하는 것)이 들어 있는지 나란히 본다.
+     11-15: 카드 아래 낱말 딱지는 뺐다(무엇인지 알 수 없어서). 문장에 이름표를 붙여 말한다 */
+  const mineK = kw(c.mine), riniK = keys.filter(x => hasKey(two[0] || '', x.w) || hasKey(two[1] || '', x.w));
   const same = mineK.filter(x => riniK.includes(x)), rOnly = riniK.filter(x => !mineK.includes(x)), mOnly = mineK.filter(x => !riniK.includes(x));
-  const q = x => `‘${esc(x)}’`;
-  const diff = [same.length ? `<span class="same">같은 점</span> 둘 다 ${same.map(q).join(' · ')}${josa(same[same.length - 1], '이/가')} 들어 있어요` : '',
-    rOnly.length ? `<span class="dif">다른 점</span> 리니는 ${rOnly.map(q).join(' · ')}${josa(rOnly[rOnly.length - 1], '을/를')} 넣었어요` : '',
-    mOnly.length ? `<span class="dif">다른 점</span> 나는 ${mOnly.map(q).join(' · ')}${josa(mOnly[mOnly.length - 1], '을/를')} 넣었어요` : ''].filter(Boolean);
+  const list = a => a.map(x => `${x.l} ‘${esc(x.w)}’`).join(', ') + josa(a[a.length - 1].w, '이/가');
+  const unit = C.unit || '생각';
+  const diff = [same.length ? `<span class="same">같은 점</span> 둘 다 ${list(same)} 들어 있어요` : '',
+    rOnly.length ? `<span class="dif">다른 점</span> 리니 ${unit}에는 ${list(rOnly)} 들어 있어요` : '',
+    mOnly.length ? `<span class="dif">다른 점</span> 내 ${unit}에는 ${list(mOnly)} 들어 있어요` : ''].filter(Boolean);
   if (!diff.length) diff.push(`<span class="dif">같이 생각해 봐요</span> 길이 · 느낌 · 재미가 어떻게 달라요?`);
-  paint({ cls:'cmp', hd: head(st, '리니도 생각해 봤어요. 어느 쪽이 더 좋아요?', '', C.name + ' · 생각하기'),
-    an:`<div class="ccards" style="--n:${cards.length + (c.mix ? 1 : 0)}">${cards.map(([v, lab, ic, t]) => `<button type="button" class="ccard${v === 'mine' ? ' mine' : ''}${c.pick === v ? ' on' : ''}" data-v="${v}" aria-pressed="${c.pick === v}"><small><i aria-hidden="true">${ic}</i>${lab}</small><b>${esc(t)}</b><span class="kws">${kw(t).map(x => `<em>${esc(x)}</em>`).join('')}</span></button>`).join('')}${c.mix ? `<button type="button" class="ccard mixc${c.pick === 'mix' ? ' on' : ''}" data-v="mix" aria-pressed="${c.pick === 'mix'}"><small><i aria-hidden="true">✏️</i>섞어서 새로</small><b>${esc(c.mix)}</b><span class="kws">${kw(c.mix).map(x => `<em>${esc(x)}</em>`).join('')}</span></button>` : ''}</div>
+  /* 11-15 휴먼쌤 "모든 생각단계에서 '왜요?'가 나오는데 이거 그냥 빼고 이 칸에다가 그냥 'AI의 답을 참고해서 새로쓰기'를 주관식으로 입력하게 해줘
+     그럼 자연스레 우측의 '섞어서 새로쓰기'버튼은 삭제가 되겠지?": 고르기 · 까닭 대신, 카드를 보고 아래 칸에 새로 쓴다.
+     카드를 누르면 그 글이 칸에 들어가 고쳐 쓸 수 있다. 칸에 쓴 글(c.mix)이 그대로 내 답이 된다 */
+  paint({ cls:'cmp', hd: head(st, C.rh || '리니도 생각해 봤어요. 어느 쪽이 더 좋아요?', '', C.name + ' · 리니와 같이 생각하기'),
+    an:`<div class="ccards" style="--n:${cards.length}">${cards.map(([v, lab, ic, t]) => `<button type="button" class="ccard${v === 'mine' ? ' mine' : ''}${c.mix && flatT(t) === flatT(c.mix) ? ' on' : ''}" data-v="${v}" aria-pressed="${!!c.mix && flatT(t) === flatT(c.mix)}"><small><i aria-hidden="true">${ic}</i>${lab}</small><b>${esc(t)}</b></button>`).join('')}</div>
       <p class="cdiff">${diff.join('<br>')}</p>
-      <div class="whyrow"><span class="wl">왜요?</span>${C.why.map(w => `<button type="button" class="why${c.why === w ? ' on' : ''}" data-w="${esc(w)}" aria-pressed="${c.why === w}">${esc(w)}</button>`).join('')}</div>`,
-    act: actHTML({ go:{ long:'이걸로 할래요', short:'다음' }, sub:{ label:'섞어서 <br>새로 쓰기', id:'mixBtn' } }) });
-  const apply = () => { C.set(S, val(c.pick) || c.mine); save(); };
-  $$('.ccard', anEl).forEach(b => b.onclick = () => { c.pick = b.dataset.v; apply(); $$('.ccard', anEl).forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', String(on)); }); updateNext(); });
-  $$('.why', anEl).forEach(b => b.onclick = () => { c.why = b.dataset.w; save(); $$('.why', anEl).forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', String(on)); }); updateNext(); });
-  $('#mixBtn').onclick = () => {
-    openSheet('섞어서 새로 쓰기', '내 생각과 리니 생각에서 좋은 것만 모아 새로 써요', fieldBlock({ id:'mixF', value:c.mix || c.mine, ph:C.ph, max:C.max, area:C.area, label:C.name, q:C.name }) + '<div class="srow"><button type="button" class="ghostb on" id="mixOk">이걸로 할래요</button></div>');
-    const mi = $('#mixF'); try { mi.focus(); } catch (e) {}
-    $('#mixOk').onclick = () => { const v = clean(mi.value, C.max); if (!v) return; c.mix = v; c.pick = 'mix'; apply(); render(); };
-  };
-  extraValid = () => !!c.pick && !!c.why;
-  apply(); $('#nextBtn').onclick = next; updateNext();
+      ${fieldBlock({ id:'fn', value:c.mix || '', ph:'카드를 누르면 그 글이 들어가요. 고쳐 써도 돼요', max:C.max, cls:'cnew', label:'✏️ AI의 답을 참고해서 새로 쓰기', showLabel:true, q:'AI의 답을 참고해서 새로 쓰기' })}`,
+    act: actHTML({ go:{ long:'이걸로 할래요', short:'다음' } }) });
+  const inp = bindInput('fn', C.max, v => { c.mix = v; c.pick = 'mix'; C.set(S, v || c.mine); }, true);
+  $$('.ccard', anEl).forEach(b => b.onclick = () => {
+    $$('.ccard', anEl).forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', String(on)); });
+    inp.value = val(b.dataset.v) || ''; inp.dispatchEvent(new Event('input'));
+    if (FINE) try { inp.focus({ preventScroll:true }); } catch (e) {}
+  });
+  extraValid = () => !!(c.mix || '').trim();
+  $('#nextBtn').onclick = next; updateNext();
 }
 function cmpSummary(S){
   const list = Object.keys(CMP).map(k => S.cmp && S.cmp[k]).filter(c => c && c.mine && c.pick);
@@ -2673,29 +2787,58 @@ function cmpSummary(S){
   const n = p => list.filter(c => (p === 'r' ? /^r/.test(c.pick) : c.pick === p)).length;
   return `<span class="pcx"> · 리니와 같이 생각한 곳 ${list.length}: 내 생각 ${n('mine')} · 리니 생각 ${n('r')} · 섞음 ${n('mix')}</span>`;
 }
-/* 11-14 한 줄 → 자세한 부탁(5-6학년과 같은 화면): 왼쪽은 처음 쓴 한 줄 '…만들어 줘', 오른쪽은 지금까지 상상으로 채운 부탁 요약. 확인하고 넘어간다 */
+/* 11-15 쉬운 판 '한 줄 → 기획'(휴먼쌤 "그냥 단순히 부탁했다면 1줄로만 끝낫을 것을 이렇게 구체적으로 생각해서 기획을 하니까 600자 가까이 자세한게 나왔다라는 페이지로 시작하고"):
+   왼쪽은 그냥 부탁했다면 쓸 한 줄, 오른쪽은 지금까지 정한 것으로 자세해진 부탁(요약)과 글자 수. 이어서 묶음마다 한 쪽씩 점검한다(rChk) */
+/* 11-15 둘째 판(휴먼쌤 "점검 첫페이지에서 이건 UI가 너무 이상해 좀 더 잘보이게"): 위아래 두 줄로 견준다.
+   위 = 그냥 부탁하면(한 줄 · 짧은 막대 · 글자 수), 아래 = 기획해서 부탁하면(긴 막대 · 글자 수 + 정한 것 두 칸 목록) */
+function upHTML(one, len, rows, label, firstLabel){
+  const pct = Math.max(3, Math.round(one.length / Math.max(len, 1) * 100));
+  return `<div class="upv">
+    <div class="upa"><span class="upk">📝 ${esc(firstLabel || '그냥 부탁하면')}</span><span class="upq">“${esc(one)}”</span><span class="upbar" aria-hidden="true"><i style="width:${pct}%"></i></span><b>${one.length}자</b></div>
+    <div class="upb"><div class="uph"><span class="upk">✨ ${esc(label)}</span><span class="upbar" aria-hidden="true"><i style="width:100%"></i></span><b>${len.toLocaleString('ko-KR')}자</b></div>
+      <ul class="upgrid">${rows.map(([ic, k, v]) => `<li><i aria-hidden="true">${ic}</i><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></li>`).join('')}</ul></div>
+  </div>`;
+}
 function rUp(st){
-  const h = S.hero, w = S.world, r = S.rule, b = BONES[S.bone];
-  const one = S.seed ? `‘${S.seed}’${josa(S.seed, '을/를')} 만들어 줘.` : '재미있는 게임 하나 만들어 줘.';
-  const nums = [r.lives ? `목숨 ${r.lives}개` : '', r.time ? `${r.time}초` : '', r.point ? `한 개에 ${r.point}점` : ''].filter(Boolean).join(' · ');
+  const h = S.hero, one = oneLine(S), len = promptText(S).length;
   const rows = [
-    ['🎮', '게임', b ? b.name : S.boneText],
+    ['🎮', '게임', kindOf()],
     [h.emoji || '🙂', '주인공', [h.look, h.name ? `‘${h.name}’` : ''].filter(Boolean).join(' ')],
-    ['🌍', '세계', [w.place, w.time].filter(Boolean).join(', ')],
-    ['📖', '이야기', S.story.begin],
-    ['🎯', '모으고 피하기', [r.collect || h.like, r.enemy || h.fear].filter(Boolean).join(' 모으기 · ') + ((r.enemy || h.fear) ? ' 피하기' : '')],
-    ['⭐', '특별 규칙', r.twist],
-    ['🔢', '숫자', nums],
-    ['🎨', '느낌', [(S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · '), S.feel.art].filter(Boolean).join(' · ')],
+    ['🌍', '장소', S.world.place],
+    ['🎯', '모을 것 · 방해꾼', [h.like, h.fear].filter(Boolean).join(' · ')],
+    [ICON[S.rule.power] || '⭐', '아이템', [S.rule.power, S.rule.fx].filter(Boolean).join(' → ')],
+    ['❤️', '빠르기 · 어렵기', [SPEED_LABEL[S.rule.speed] ? SPEED_LABEL[S.rule.speed] + ' 시작' : '', (LEVEL34[S.rule.diff] || {}).label || ''].filter(Boolean).join(' · ')],
+    ['🎨', '기분 · 꾸미기', [(S.feel.mood || []).map(k => (MOOD[k] ? MOOD[k].label : '')).filter(Boolean).join(' · '), S.feel.art].filter(Boolean).join(' · ')],
+    ['🏆', '이겼을 때 말', S.feel.winMsg],
   ].filter(x => x[2]);
-  const len = promptText(S).length;
-  paint({ cls:'up', hd: head(st, '한 줄 부탁이 이렇게 멋지게 자랐어요', '', '한 줄 → 자세한 부탁'),
-    an:`<div class="upwrap">
-      <div class="upl"><small>📝 처음 한 줄</small><b>${esc(one)}</b><em>짧은 ${one.length}자</em></div>
-      <div class="uparr" aria-hidden="true"><span>➜</span><small>내 상상<br>${materialCount(S)}개</small></div>
-      <div class="upr"><small>✨ 지금 내 부탁(요약)</small><ul>${rows.map(([ic, k, v]) => `<li><i aria-hidden="true">${ic}</i><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></li>`).join('')}</ul><em>프롬프트 ${len.toLocaleString('ko-KR')}자</em></div>
-    </div>`,
-    act: act('좋아요! 다음으로', { go:{ long:'좋아요! 다음으로', short:'좋아요!', cls:'sm' } }) });
+  paint({ cls:'up', hd: head(st, S.seed ? `처음 쓴 한 줄이 기획하니까 ${len.toLocaleString('ko-KR')}자로 자랐어요!` : `그냥 부탁하면 한 줄, 기획하니까 ${len.toLocaleString('ko-KR')}자!`, '', '한 줄 → 기획'),
+    an: upHTML(one, len, rows, '기획해서 부탁하면', S.seed ? '처음 쓴 한 줄' : '그냥 부탁하면'),
+    act: act('한 묶음씩 점검하기', { go:{ long:'한 묶음씩 점검하기', short:'점검 <br>하기', cls:'sm' } }) });
+  $('#nextBtn').onclick = next;
+}
+/* 11-15 묶음 점검(휴먼쌤 "부탁, 주인공, 장소 등 하나하나를 단계로 쪼개서 혹시 더 수정할 건 없는지 한페이지별로 점검(체크)하는 단계"):
+   한 쪽에 한 묶음. 읽고 '이대로 좋아요'로 넘기거나 '고쳐 쓰기'로 고친다(고친 글은 S.edits, 프롬프트에 그대로 들어간다) */
+const CHK_Q = { twist:'내가 고른 나만의 특별 규칙이 잘 들어갔나요? 비어 있으면 ‘고쳐 쓰기’로 넣을 수 있어요.', ask:'게임 종류와 게임 이름이 맞나요?', hero:'주인공의 모습 · 이름 · 좋아하는 것 · 무서워하는 것이 맞나요?', world:'게임이 벌어지는 곳이 맞나요?',
+  how:'어떻게 하는 게임인지 내 생각과 같나요?', foe:'방해꾼과 단계가 마음에 드나요?', look:'꾸미는 느낌과 소리, 끝날 때 나오는 말이 마음에 드나요?', must:'AI가 꼭 지켜야 할 약속이에요. 더 넣고 싶은 약속이 있나요?' };
+function editPart(p, i){
+  openSheet(`${i + 1} · ${p.tag} 고쳐 쓰기`, '내 생각과 다르거나 더 넣고 싶은 것을 고쳐 써요', `<div class="fieldblk grow area"><div class="kbq">${esc(p.tag)} 고쳐 쓰기</div><label class="sr-only" for="ed">${esc(p.tag)} 고쳐 쓰기</label><div class="frow"><textarea id="ed" maxlength="600">${esc(p.text)}</textarea><button type="button" class="kbok">확인</button></div></div>
+    <div class="srow"><button type="button" class="ghostb strong" id="eDone">다 고쳤어요</button><button type="button" class="ghostb" id="eReset">처음 글로 되돌리기</button></div>`);
+  $('#sheetBody .kbok').onclick = () => $('#ed').blur();
+  $('#eDone').onclick = () => {
+    const v = $('#ed').value.replace(/\s+/g, ' ').trim(), c = v ? checkText(v) : null;
+    if (c && c.block) return toast(c.msg);
+    if (!S.edits) S.edits = {};
+    if (!v || v === p.auto) delete S.edits[p.k]; else S.edits[p.k] = v;
+    save(); render();
+  };
+  $('#eReset').onclick = () => { if (S.edits) delete S.edits[p.k]; save(); render(); };
+}
+function rChk(st){
+  const parts = partsOf(S), i = Math.max(0, parts.findIndex(x => x.k === st.k)), p = parts[i];
+  paint({ cls:'chk', hd: head(st, `${esc(p.tag)} 묶음을 점검해요`, esc(CHK_Q[p.k] || '내 생각과 같나요?')),   // 11-15: 'weave' 칸 나눔을 쓰지 않는다(상자가 오른쪽으로 치우쳤다)
+    an:`<div class="paper"><header><b>${i + 1} · ${esc(p.tag)}</b>${p.edited ? '<em>내가 고침</em>' : ''}<button type="button" class="editb" id="editBtn">✎ 고쳐 쓰기</button></header><p class="${textSize(p.text)}">${p.text ? esc(p.text) : '아직 비어 있어요. ‘고쳐 쓰기’로 채울 수 있어요.'}</p></div>`,
+    act: actHTML({ go:{ long:'이대로 좋아요', short:'좋아요', cls:'sm' } }) });
+  $('#editBtn').onclick = () => editPart(p, i);
   $('#nextBtn').onclick = next;
 }
 function rTitle(st){
@@ -2783,9 +2926,10 @@ function rMore(st){
   focusIfDesktop(inp);
 }
 function rResult(st){
-  const text = promptText(S);
-  paint({ hd: head(st, esc(S.title || '내 게임'), ''),
-    an:`<div class="grow2"><div class="gbox"><small>처음 한 줄</small><b>${S.seed ? S.seed.length + '자' : '없었어요'}</b></div><span class="garr" aria-hidden="true">→</span><div class="gbox now"><small>지금 프롬프트</small><b>${text.length.toLocaleString('ko-KR')}자</b></div><span class="cnt">내 말로 쓴 칸 ${mineCount(S)}<span class="pcx"> · 내 답 ${materialCount(S)}</span>${cmpSummary(S)}</span></div>
+  /* 쉬운 판: 한 줄과 견주기는 앞의 '한 줄 → 기획' 쪽에서 했으니, 여기는 점검을 마친 프롬프트와 복사만 */
+  const text = promptText(S), parts = partsOf(S), ed = parts.filter(x => x.edited).length;
+  paint({ hd: head(st, `${esc(S.title || '내 게임')} — 프롬프트 완성!`, `${parts.filter(x => x.text).length}묶음을 모두 점검했어요${ed ? ` · 내가 고친 묶음 ${ed}개` : ''} · 모두 ${text.length.toLocaleString('ko-KR')}자`),
+    an:`
       <div class="pv pvall" aria-label="프롬프트 전체" tabindex="0">${partsOf(S).filter(x => x.text).map(x => `<p><span class="ptag">${x.tag}</span>${esc(x.text)}</p>`).join('')}</div>
       <div class="todo3"><span><b>1</b>복사하기</span><em>›</em><span><b>2</b>어른과 함께 AI에 붙여 넣기</span><em>›</em><span><b>3</b>게임을 보고 고치기</span></div>`,
     actCls:'two', act: actHTML({ go:{ long:'프롬프트 복사하기', short:'복사 <br>하기', cls:'sm', key:false }, mid: goBtn({ long:'완료', short:'완료', cls:'sm fin', key:false, id:'finBtn' }) }) });
@@ -2889,7 +3033,7 @@ function rJudge3(st){
 }
 function doneRows(){
   const h = S.hero, who = [h.name, h.look ? '· ' + h.look : ''].filter(Boolean).join(' ');
-  return [['종류', kindOf()], ['주인공', who, h.emoji], ['장소', S.world.place], ['이야기', S.story.begin], ['특별 규칙', S.rule.twist]].filter(r => r[1] || r[2]);
+  return [['종류', kindOf()], ['주인공', who, h.emoji], ['장소', S.world.place], ['모을 것', h.like], ['방해꾼', h.fear]].filter(r => r[1] || r[2]);
 }
 function rDone(st){
   /* 11-12 휴먼쌤: 엔딩은 내 게임을 아주 간단하게 요약하고, 그림으로 저장하는 단추를 아래에 */
@@ -3013,7 +3157,7 @@ function layout(){
   const W = window.innerWidth, H = window.innerHeight;
   if (BOOTED && !PCMODE && isTyping() && Math.abs(W - LAST.w) < 2 && H < LAST.h - 60) return kbUpdate();   // 자판 때문에 창이 줄어든 것: 무대는 그대로
   LAST = { w:W, h:H };
-  const pc = FORCE != null ? FORCE : (FINE && W >= 900 && H >= 500);
+  const pc = FORCE === true;                         // 11-15 "PC도 똑같이": 어느 기기든 같은 꼴(PC 꼴은 ?pc=1 일 때만)
   const changed = pc !== PCMODE; PCMODE = pc;
   document.documentElement.classList.toggle('pc', pc);
   const portrait = !pc && H > W;
@@ -3026,6 +3170,9 @@ function layout(){
   }
   /* 기기마다 화면 비율이 다르다(폰 약 2:1 ~ 태블릿 4:3 · 접는 폰). 무대는 정해 둔 범위 안에서만 늘리고(폰 760~900 × 300~480, PC 1280~1600 × 720~960),
      그보다 넓거나 높으면 가운데 두고 둘레를 비운다. 노치 · 둥근 모서리 · 홈 바(안전 영역)는 비켜서 놓는다. → 어느 기기든 점검한 범위의 화면만 나온다 */
+  /* 11-15 '앱처럼 고정'(결정-기록 11-15): 확대 · 밀림은 막고 PC도 같은 꼴(PC 꼴은 ?pc=1 일 때만).
+     무대를 갤럭시탭 비율 16:10(760×475)으로 못 박던 것은 휴먼쌤 "지금은 비율 고정하니까 너무 이상해"로 거둠 —
+     무대는 다시 위 범위 안에서 화면 모양에 맞춰 늘려 화면을 가득 채운다(갤럭시탭 1280×800에서는 760×475로 꽉 찬다) */
   const L = pc ? { bw:1280, bh:720, mw:1600, mh:960 } : { bw:760, bh:300, mw:900, mh:480 };
   const [it, ir, ib, il] = safeInsets(), SW = Math.max(200, W - il - ir), SH = Math.max(150, H - it - ib);
   const s = Math.min(SW / L.bw, SH / L.bh), lw = Math.min(SW / s, L.mw), lh = Math.min(SH / s, L.mh);
@@ -3044,6 +3191,7 @@ function kbUpdate(){
   const vh = vv ? vv.height : window.innerHeight, top = vv ? vv.offsetTop : 0;
   const open = !PCMODE && isTyping() && vh < LAST.h - 60;
   stageEl.scrollTop = 0; stageEl.scrollLeft = 0;          // 글 칸에 들어갈 때 브라우저가 틀을 밀어 올린 것을 되돌린다
+  if (!open && (window.scrollX || window.scrollY)) window.scrollTo(0, 0);   // 11-15: 자판이 닫히면 창이 밀린 채 남지 않게
   document.documentElement.classList.toggle('kb', open);
   $$('.fieldblk.kbkeep').forEach(f => { if (!open || !f.contains(a)) f.classList.remove('kbkeep'); });
   if (open){
@@ -3058,6 +3206,11 @@ $('#rotBtn').onclick = async () => {
 window.addEventListener('resize', layout);
 window.addEventListener('orientationchange', () => setTimeout(layout, 250));   // 아이폰은 돌린 뒤 크기가 늦게 바뀐다
 stageEl.addEventListener('scroll', () => { if (stageEl.scrollTop || stageEl.scrollLeft){ stageEl.scrollTop = 0; stageEl.scrollLeft = 0; } });
+/* 11-15 앱처럼 고정: 아이폰 사파리는 viewport의 user-scalable=no를 따르지 않으므로 두 손가락 확대(gesture*)와 두 손가락 끌기를 여기서 막는다.
+   창이 밀려 있으면(주소창이 숨거나 자판이 닫힌 뒤) 맨 위로 되돌린다 */
+['gesturestart', 'gesturechange', 'gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive:false }));
+document.addEventListener('touchmove', e => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive:false });
+window.addEventListener('scroll', () => { if (!isTyping() && (window.scrollX || window.scrollY)) window.scrollTo(0, 0); });
 if (window.visualViewport){ visualViewport.addEventListener('resize', kbUpdate); visualViewport.addEventListener('scroll', kbUpdate); }
 document.addEventListener('focusin', () => setTimeout(kbUpdate, 60));
 document.addEventListener('focusout', () => setTimeout(kbUpdate, 60));
@@ -3102,15 +3255,14 @@ function devNext(){
   let st = STEP[S.step];
   if (PCMODE && st.mOnly) st = STEP.start;
   if (st.type === 'done') return toast('마지막 화면이에요.');
-  if (st.type === 'start'){ S = blank(); S.pledge = [1, 1, 1, 1]; return go(PCMODE ? 'seed' : 'goals'); }
+  if (st.type === 'start'){ S = blank(); S.pledge = [1, 1, 1, 1]; return go(PCMODE ? 'seed' : 'pledge'); }
   fillStep(st, false);
   if (st.type === 'check') CK = null;
   save(); next();
 }
 function jumpTo(id){ STEPS.slice(0, idxOf(id)).forEach(s => fillStep(s, true)); if (id === 'check') CK = null; RD = 0; go(id); }
-const JUMPS = [['tintro', '맛보기 안내'], ['t2', '맛보기 · 길 찾기'], ['bone', '만들 놀이 고르기'], ['e_players', '둘 중 하나'], ['hero1', '주인공'], ['hero5', '주인공 인터뷰'], ['world1', '세계'], ['world3', '세계의 색'],
-  ['twist', '만약에 카드'], ['story1', '이야기'], ['feel1', '느낌'], ['rule3', '규칙'], ['lab', '빠르기 실험'], ['rule4', '어렵기'],
-  ['title', '게임 이름'], ['weave', '엮은 글 읽기'], ['result', '프롬프트 완성'], ['done', '엔딩']];
+const JUMPS = [['seed', '한 줄 쓰기'], ['bone', '게임 종류'], ['e_players', '둘 중 하나'], ['hero1', '주인공'], ['hero4', '주인공 인터뷰'], ['world1', '장소'], ['pplay', '한 판 해 보기'], ['feel1', '기분'], ['rule3', '아이템'], ['lab', '빠르기 실험'], ['rule4', '어렵기'], ['msg', '이겼을 때 말'],
+  ['title', '게임 이름'], ['c_title', '리니와 생각하기'], ['up', '한 줄 → 기획'], ['chk_hero', '묶음 점검'], ['result', '프롬프트 완성'], ['done', '엔딩']];
 function openDev(){
   openSheet('시안 도구 — 건너뛰기', '앞의 답은 예시로 채우고 그 화면으로 가요. 이 도구는 시안에만 있어요', `<div class="jumpgrid">${JUMPS.map(([id, l]) => `<button type="button" data-id="${id}">${l}</button>`).join('')}<button type="button" class="danger" data-id="start">처음으로 (쓴 답 지우기)</button></div>`);
   $$('#sheetBody [data-id]').forEach(b => b.onclick = () => { closeSheet(); if (b.dataset.id === 'start'){ S = blank(); save(); render(); } else jumpTo(b.dataset.id); });
@@ -3128,6 +3280,7 @@ $('#devMenu').onclick = openDev;
     if (p.get('dev') !== '1') $('#dev').hidden = true;   // 11-12 휴먼쌤 '시안' 글은 모두 지움: 넘겨 보기 도구는 ?dev=1 일 때만
     if (p.get('pc') === '1') FORCE = true; if (p.get('m') === '1') FORCE = false;
     if (p.get('diag') === '1') DIAG = true;              // 기기 진단 화면(diag.js)
+    if (/^[ab0]$/.test(p.get('labhint') || '')) LABHINT = p.get('labhint') === '0' ? '' : p.get('labhint');
   } catch (e) {}
   if (shot && STEP[shot]){
     SHOT = true; S = deepMerge(blank(), JSON.parse(JSON.stringify(EX))); S.step = shot;
@@ -3147,7 +3300,7 @@ $('#devMenu').onclick = openDev;
    무대는 가려 둔 채 예시 답으로 모든 화면을 차례로 그려 재므로, fit-test.html · devices.html과 같은 잣대를 진짜 기기에서 쓴다.
    쓴 답(이어서 하기)은 건드리지 않는다(SHOT을 켜서 저장을 막는다). 결과는 화면과 window.DIAG(자동 점검 devtest.js가 읽는다)에 남는다.
    진단 화면 자체는 옛 브라우저에서도 보이게 gap · aspect-ratio 없이 짰다(style.css 맨 아래 .diag). */
-const BUILD = "20261115-2146";
+const BUILD = "20261116-0034";
 const dgSleep = ms => new Promise(r => setTimeout(r, ms));
 const dgRace = (p, ms) => Promise.race([p, dgSleep(ms).then(() => undefined)]);
 const dgEX = () => deepMerge(blank(), JSON.parse(JSON.stringify(EX)));

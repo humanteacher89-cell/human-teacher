@@ -13,6 +13,9 @@
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
 body{min-height:100vh;min-height:100dvh;color:var(--ink);font-family:var(--jua);word-break:keep-all;overflow-x:hidden;
   background:radial-gradient(circle at 12px 12px,rgba(27,27,58,.07) 2.2px,transparent 2.6px) 0 0/26px 26px,linear-gradient(var(--y),var(--y2))}
+/* 11-16 휴먼쌤 "스크롤해서 위아래로 움직이게 되어 있어서 앱 같지가 않아": 쪽은 밀리지 않고, 높으면 assets/fit.js가 한 화면에 맞춰 줄인다 */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{min-height:0;touch-action:manipulation}
 a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
 a:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:14px}
 img,svg{display:block}
@@ -87,7 +90,7 @@ a.card.gm:active .btn,a.btn:active{transform:translateY(4px);box-shadow:0 2px 0 
 /* 위 오른쪽 '담벼락' 단추와 창(11-13 휴먼쌤: 학생은 학급 코드, 선생님은 비밀번호) — assets/wall.js */
 .wbtn{margin-left:auto;flex:none;display:inline-flex;align-items:center;min-height:48px;padding:6px 18px;border-radius:16px;background:#fff;border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink);font-family:var(--jua);font-size:19px;color:var(--ink);cursor:pointer}
 .wbtn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
-.wmask{position:fixed;inset:0;background:rgba(27,27,58,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.wmask{position:fixed;inset:0;background:rgba(27,27,58,.55);display:flex;align-items:safe center;justify-content:center;padding:16px;z-index:50;overflow-y:auto;overscroll-behavior:contain}
 .wmask[hidden]{display:none}
 .wbox{position:relative;width:100%;max-width:420px;background:#fff;border:4px solid var(--ink);border-radius:26px;box-shadow:0 8px 0 var(--ink);padding:24px 20px 22px;display:flex;flex-direction:column;gap:14px}
 .wbox h2{font-family:var(--disp);font-weight:400;font-size:30px;line-height:1.2}
@@ -106,6 +109,27 @@ a.card.gm:active .btn,a.btn:active{transform:translateY(4px);box-shadow:0 2px 0 
 .wbox .go{font-family:var(--jua);font-size:22px;padding:12px;border-radius:16px;border:3px solid var(--ink);background:var(--y);color:var(--ink);box-shadow:0 5px 0 var(--ink);cursor:pointer}
 .wbox .go:disabled{opacity:.6;cursor:default}
 
+/* 11-16 폰을 가로로 눕힌 낮은 화면: 한 화면에 넣으면 너무 작아져서(0.4배) 블록을 가로로 놓고 틈을 줄인다 */
+@media(orientation:landscape) and (max-height:520px) and (max-width:959px){
+  .wrap{padding:10px 24px 14px}
+  .home .top{margin-bottom:10px}
+  .sub .top{margin-bottom:24px}
+  .home .hero{text-align:center;margin-top:0}
+  .home h1{font-size:38px}
+  .blocks{flex-direction:row;gap:20px}
+  .home .blocks{margin-top:118px}
+  .peek{--pw:126px;right:auto;left:calc(50% - 63px)}
+  .bw{flex:1;display:flex}
+  .blk{flex:1;flex-direction:column;min-height:118px;padding:14px 12px}
+  .num{font-size:52px}
+  .yr{margin:0;align-self:center;padding:0;font-size:19px}
+  .gblk{margin-top:14px}
+  .gblk .blk{min-height:84px;flex-direction:row}
+  .gblk .num{font-size:44px}
+  .card{margin-top:22px;padding:14px 18px}
+  .row{margin-top:18px}
+  .foot{margin-top:16px}
+}
 @media(min-width:960px){
   .wrap{padding:22px 40px 48px}
   .brand .bw2{width:245px;height:60px}   /* PC: 로고를 조금 크게 */
