@@ -1147,6 +1147,9 @@ html:not(.pc) .oxr{padding:1px 4px 1px 10px;border-radius:10px}
 html:not(.pc) .oxq{font-size:13.5px}
 html:not(.pc) .oxb button{font-size:13px;padding:2px 8px}
 
+/* 11-16 프롬프트 완성: 차례 줄 끝 밑줄 '복사하기'(예비) */
+.todo3 .tdcopy{margin-left:auto;border:0;background:none;padding:0 4px;font:inherit;color:var(--blue);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
 </style>
 </head>
 <body>
@@ -2855,8 +2858,8 @@ function rResult(st){
   const text = promptText(S), parts = partsOf(S), mine = parts.filter(p => p.by === 'self').length, W = S.wall;
   paint({ hd: head(st, `${esc(S.title || '내 게임')} — 프롬프트 완성!`, `내가 직접 쓴 묶음 ${mine}개 · 모두 ${text.length.toLocaleString('ko-KR')}자${W ? ` · ${esc(W.name || '우리 반')} 담벼락에 보냈어요` : ''}`),
     an:`<div class="pv pvall" aria-label="프롬프트 전체" tabindex="0">${parts.filter(x => x.text).map(x => `<p><span class="ptag">${x.tag}</span>${esc(x.text)}</p>`).join('')}</div>
-      <div class="todo3"><span><b>1</b>담벼락에 보내기</span><em>›</em><span><b>2</b>선생님이 AI로 만들기</span><em>›</em><span><b>3</b>담벼락에서 해 보고 돌아와 고치기</span></div>`,
-    actCls:'two', act: actHTML({ go:{ long: W ? '담벼락에서 확인하기' : '우리 반 담벼락에 보내기', short: W ? '확인 <br>하기' : '담벼락에 <br>보내기', cls:'sm', key:false }, mid: goBtn({ long:'복사하기', short:'복사', cls:'sm', key:false, id:'copyBtn' }) }) });
+      <div class="todo3"><span><b>1</b>담벼락에 보내기</span><em>›</em><span><b>2</b>선생님이 AI로 만들기</span><em>›</em><span><b>3</b>담벼락에서 해 보고 돌아와 고치기</span><button type="button" id="copyBtn" class="tdcopy">복사하기</button></div>`,
+    act: actHTML({ go:{ long: W ? '담벼락에서 확인하기' : '우리 반 담벼락에 보내기', short: W ? '확인 <br>하기' : '담벼락에 <br>보내기', cls:'sm', key:false } }) });   // 11-16 휴먼쌤: 복사는 차례 줄 끝 밑줄 글자로(예비)
   $('#copyBtn').onclick = () => copyText(text, '복사했어요!');
   $('#nextBtn').onclick = () => (S.wall ? go('wall') : openSend());
 }
@@ -3381,7 +3384,7 @@ $('#devMenu').onclick = openDev;
    무대는 가려 둔 채 예시 답으로 모든 화면을 차례로 그려 재므로, fit-test.html · devices.html과 같은 잣대를 진짜 기기에서 쓴다.
    쓴 답(이어서 하기)은 건드리지 않는다(SHOT을 켜서 저장을 막는다). 결과는 화면과 window.DIAG(자동 점검 devtest.js가 읽는다)에 남는다.
    진단 화면 자체는 옛 브라우저에서도 보이게 gap · aspect-ratio 없이 짰다(style.css 맨 아래 .diag). */
-const BUILD = "20261116-0122";
+const BUILD = "20261116-1509";
 const dgSleep = ms => new Promise(r => setTimeout(r, ms));
 const dgRace = (p, ms) => Promise.race([p, dgSleep(ms).then(() => undefined)]);
 const dgEX = () => deepMerge(blank(), JSON.parse(JSON.stringify(EX)));
